@@ -20,6 +20,7 @@ npx forgeai init
 | Agent | Role | Core Responsibility |
 |-------|------|-------------------|
 | **Orchestrator** | Project coordinator | Runs the workflow, enforces quality gates, routes tasks |
+| **Codebase Docs** | Documentation | Scans and documents existing codebases — no assumptions |
 | **Analyst** | Requirements | PRDs, user stories, acceptance criteria |
 | **Architect** | System design | Architecture, ADRs, Mermaid diagrams, API design |
 | **Designer** | UX/UI | User flows, screen specs, accessibility |
@@ -49,6 +50,7 @@ Requirements → Architecture → Design → [Tests Written] → Implementation 
 /forge-testing
 /forge-implementation
 /forge-deployment
+/forge-document-codebase # Standalone: scan and document an existing codebase
 ```
 
 **Copilot Chat:**
