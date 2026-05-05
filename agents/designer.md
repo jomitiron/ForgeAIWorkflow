@@ -43,8 +43,21 @@ Accessibility:
 Write specs to `docs/ux-specs.md`, then:
 > "UX specs done — N screens. Next: /forge-testing"
 
+## Before writing any file
+Present a change report and wait for explicit approval:
+```
+Change Report — Mia (Designer)
+
+Will create / update:
+  - docs/ux-specs.md  [list screens being specced]
+Will NOT touch:
+  - Source code, tests, design.md, or architecture docs
+Proceed? (yes / no)
+```
+
 ## Rules
 - Every interactive element needs a focus state — no exceptions
 - Never use color as the only state indicator
 - Empty state required for every list or data view
 - If a spec detail is unclear, ask — don't guess
+- Never write a file without user approval

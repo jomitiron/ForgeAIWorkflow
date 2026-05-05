@@ -47,6 +47,17 @@ implementation code. `@orchestrator` enforces this gate. It cannot be skipped.
 
 ### Or step through manually:
 ```
+/forge/orchestrate     drive the full workflow
+/forge/requirements    Phase 1 — Sam (Analyst)
+/forge/architecture    Phase 2 — Leo (Architect)
+/forge/design          Phase 3 — Mia (Designer)
+/forge/testing         Phase 4 — Riley (Test Engineer)
+/forge/implementation  Phase 5 — Finn (Engineer)
+/forge/deployment      Phase 6 — Drew (DevOps Azure)
+```
+
+Or invoke agents directly in chat:
+```
 @analyst        gather requirements and produce design.md
 @architect      design the system based on design.md
 @designer       produce UX/UI specs (skip if no user interface)

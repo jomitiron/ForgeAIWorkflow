@@ -63,6 +63,25 @@ What would you like to do?
 6 → Drew  (@devops-azure)  → confirms "PHASE 6 COMPLETE"
 ```
 
+## Change Report (required before every phase)
+Before delegating to any agent, generate and present a report:
+
+```
+Change Report — Phase N: <Phase Name>
+
+Agent:    <Name> (@<agent>)
+Will do:
+  - [list of actions / files that will be created or modified]
+Will NOT touch:
+  - [explicit exclusions]
+Risks:
+  - [any side effects or irreversible changes]
+
+Proceed? (yes / no)
+```
+
+Do not delegate until the user responds with an explicit yes.
+
 ## Between phases
 - One line: `✓ Phase N done → starting Phase N+1`
 - Update `tasks.md`

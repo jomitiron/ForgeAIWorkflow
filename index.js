@@ -22,29 +22,70 @@ function collectFiles(src, files = []) {
   return files;
 }
 
+// Removes previously installed ForgeAI files so re-init is always clean.
+function cleanForgeAI(targetDir, setupClaude, setupCopilot) {
+  if (setupClaude) {
+    const agentsDir = path.join(targetDir, '.claude', 'agents');
+    if (fs.existsSync(agentsDir)) fs.rmSync(agentsDir, { recursive: true });
+
+    const commandsDir = path.join(targetDir, '.claude', 'commands');
+    if (fs.existsSync(commandsDir)) {
+      for (const f of fs.readdirSync(commandsDir)) {
+        if (f.startsWith('forge-')) fs.rmSync(path.join(commandsDir, f));
+      }
+    }
+  }
+
+  if (setupCopilot) {
+    const agentsDir = path.join(targetDir, '.github', 'agents');
+    if (fs.existsSync(agentsDir)) fs.rmSync(agentsDir, { recursive: true });
+
+    const promptsDir = path.join(targetDir, '.github', 'prompts');
+    if (fs.existsSync(promptsDir)) {
+      // Remove forge/ subdir (current convention)
+      const forgeDir = path.join(promptsDir, 'forge');
+      if (fs.existsSync(forgeDir)) fs.rmSync(forgeDir, { recursive: true });
+
+      // Remove old flat forge-*.prompt.md files (previous convention)
+      for (const f of fs.readdirSync(promptsDir)) {
+        if (f.startsWith('forge-') && f.endsWith('.prompt.md')) {
+          fs.rmSync(path.join(promptsDir, f));
+        }
+      }
+
+      // Remove empty legacy subdirs left by early versions
+      for (const subdir of ['standalone', 'workflow']) {
+        const p = path.join(promptsDir, subdir);
+        if (fs.existsSync(p) && fs.readdirSync(p).length === 0) {
+          fs.rmdirSync(p);
+        }
+      }
+    }
+  }
+}
+
 // Copies prompts to .claude/commands/ as flat /forge-<name> slash commands:
 //   workflow/01-requirements.prompt.md  →  forge-requirements.md  →  /forge-requirements
-//   standalone/create-prd.prompt.md     →  forge-create-prd.md    →  /forge-create-prd
 function copyPromptsForClaude(src, dest) {
   fs.mkdirSync(dest, { recursive: true });
   for (const file of collectFiles(src)) {
     const base = path.basename(file)
-      .replace(/^\d+-/, '')             // strip "01-", "00-" etc.
-      .replace(/\.prompt\.md$/, '.md'); // .prompt.md → .md
+      .replace(/^\d+-/, '')
+      .replace(/\.prompt\.md$/, '.md');
     fs.copyFileSync(file, path.join(dest, `forge-${base}`));
   }
 }
 
-// Copies prompts to .github/prompts/ as flat /forge-<name> slash commands:
-//   workflow/01-requirements.prompt.md  →  forge-requirements.prompt.md  →  /forge-requirements
-//   standalone/create-prd.prompt.md     →  forge-create-prd.prompt.md    →  /forge-create-prd
-// Copilot requires .prompt.md extension — only the numeric prefix is stripped.
+// Copies prompts to .github/prompts/forge/ for namespaced Copilot slash commands:
+//   workflow/01-requirements.prompt.md  →  forge/requirements.prompt.md  →  /forge/requirements
+// Keeping .prompt.md extension as required by Copilot.
+// Using forge/ subdir instead of forge- prefix — more compatible with Copilot's command parser.
 function copyPromptsForCopilot(src, dest) {
-  fs.mkdirSync(dest, { recursive: true });
+  const forgeDir = path.join(dest, 'forge');
+  fs.mkdirSync(forgeDir, { recursive: true });
   for (const file of collectFiles(src)) {
-    const base = path.basename(file)
-      .replace(/^\d+-/, '');            // strip "01-", "00-" etc. only
-    fs.copyFileSync(file, path.join(dest, `forge-${base}`));
+    const base = path.basename(file).replace(/^\d+-/, '');
+    fs.copyFileSync(file, path.join(forgeDir, base));
   }
 }
 
@@ -87,7 +128,7 @@ function updateGitignore(targetDir, setupClaude, setupCopilot) {
   }
   if (setupCopilot) {
     entries.push('.github/agents/');
-    entries.push('.github/prompts/forge-*.prompt.md');
+    entries.push('.github/prompts/forge/');
   }
 
   fs.appendFileSync(gitignorePath, `\n# ForgeAI\n${entries.join('\n')}\n`, 'utf8');
@@ -121,6 +162,8 @@ async function init(targetDir) {
   const setupClaude = tool === 'claude' || tool === 'both';
   const setupCopilot = tool === 'copilot' || tool === 'both';
 
+  cleanForgeAI(targetDir, setupClaude, setupCopilot);
+
   console.log('');
 
   if (setupClaude) {
@@ -147,7 +190,7 @@ async function init(targetDir) {
     if (ok) console.log('  ✓ .github/copilot-instructions.md created');
 
     copyPromptsForCopilot(PROMPTS_DIR, path.join(targetDir, '.github', 'prompts'));
-    console.log('  ✓ Slash commands → .github/prompts/ (/forge-orchestrate, /forge-requirements, ...)');
+    console.log('  ✓ Slash commands → .github/prompts/forge/ (/forge/orchestrate, /forge/requirements, ...)');
   }
 
   if (updateGitignore(targetDir, setupClaude, setupCopilot)) {
@@ -156,8 +199,8 @@ async function init(targetDir) {
 
   console.log('\n  ForgeAI initialized.\n');
   console.log('  Agents: Max · Sage · Sam · Leo · Mia · Finn · Riley · Drew\n');
-  console.log('  Workflow:  /forge-orchestrate');
-  console.log('  Standalone: invoke any agent directly\n');
+  console.log('  Claude:  /forge-orchestrate  /forge-requirements  ...');
+  console.log('  Copilot: /forge/orchestrate  /forge/requirements  ...\n');
 }
 
 const [,, command, targetDir = process.cwd()] = process.argv;
@@ -170,6 +213,6 @@ if (command === 'init') {
 } else {
   console.log('\n  ForgeAI — AI-First Engineering Workflow');
   console.log('\n  Usage:');
-  console.log('    npx forgeai init             Initialize in current directory');
-  console.log('    npx forgeai init <path>      Initialize in specific directory\n');
+  console.log('    npx forgeai-workflow init             Initialize in current directory');
+  console.log('    npx forgeai-workflow init <path>      Initialize in specific directory\n');
 }

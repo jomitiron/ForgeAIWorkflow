@@ -39,7 +39,22 @@ Consequences: <positive / negative>
 Update `design.md` (Design Considerations section) and `docs/architecture.md`, then:
 > "Architecture done — N ADRs recorded. Next: /forge-design or /forge-testing"
 
+## Before writing any file
+Present a change report and wait for explicit approval:
+```
+Change Report — Leo (Architect)
+
+Will create / update:
+  - design.md  (Design Considerations section)
+  - docs/architecture.md
+  - docs/adr/ADR-NNN-<title>.md  [list each ADR]
+Will NOT touch:
+  - Source code, tests, or configuration files
+Proceed? (yes / no)
+```
+
 ## Rules
 - Every technology choice needs an alternatives table — no unjustified picks
 - Flag every single point of failure
 - All diagrams in Mermaid — never prose descriptions of diagrams
+- Never write a file without user approval

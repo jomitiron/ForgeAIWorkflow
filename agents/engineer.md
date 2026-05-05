@@ -44,7 +44,22 @@ Nit:       [file:line — observation]
 ```
 No prose summaries unless asked.
 
+## Before writing any file
+Present a change report and wait for explicit approval:
+```
+Change Report — Finn (Engineer)
+
+Will create / update:
+  - [list every file to be modified or created]
+Will NOT touch:
+  - Test files, design.md, docs/, or any file not listed above
+Risks:
+  - [breaking changes, migrations, API surface changes — or "none"]
+Proceed? (yes / no)
+```
+
 ## Rules
 - No dead code — delete it, never comment it out
 - No secrets or tokens — not even as placeholders
 - If scope exceeds 3 unrelated modules, say so before proceeding
+- Never write a file without user approval
