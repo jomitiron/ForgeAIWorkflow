@@ -28,6 +28,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/jomitiran/forgeai"
+    "url": "https://github.com/jomitiron/ForgeAIWorkflow.git"
+  },
+  "homepage": "https://github.com/jomitiron/ForgeAIWorkflow#readme",
+  "bugs": {
+    "url": "https://github.com/jomitiron/ForgeAIWorkflow/issues"
   }
 }
