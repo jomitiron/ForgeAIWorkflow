@@ -13,15 +13,16 @@ Satisfy every task with the **smallest possible diff**.
 
 Use `@<agent-name>` in Copilot Chat or `/agent <name>` in Copilot CLI:
 
-| Agent | Purpose |
-|-------|---------|
-| `@orchestrator` | Runs the full workflow end-to-end, enforces TDD quality gates |
-| `@analyst` | Requirements, PRDs, user stories, acceptance criteria |
-| `@architect` | System design, ADRs, Mermaid diagrams, API contracts |
-| `@designer` | UX/UI specs, user flows, component states, accessibility |
-| `@test-engineer` | **Writes failing tests BEFORE implementation — confirms RED** |
-| `@engineer` | Implementation — receives failing tests, makes them pass |
-| `@devops-azure` | CI/CD pipelines, Azure infrastructure, IaC (Bicep/Terraform) |
+| Agent | Name | Purpose |
+|-------|------|---------|
+| `@orchestrator` | **Max** | Runs the full workflow end-to-end, enforces TDD quality gates |
+| `@codebase-docs` | **Sage** | Documents existing codebases — no assumptions |
+| `@analyst` | **Sam** | Requirements, PRDs, user stories, acceptance criteria |
+| `@architect` | **Leo** | System design, ADRs, Mermaid diagrams, API contracts |
+| `@designer` | **Mia** | UX/UI specs, user flows, component states, accessibility |
+| `@test-engineer` | **Riley** | **Writes failing tests BEFORE implementation — confirms RED** |
+| `@engineer` | **Finn** | Implementation — receives failing tests, makes them pass |
+| `@devops-azure` | **Drew** | CI/CD pipelines, Azure infrastructure, IaC (Bicep/Terraform) |
 
 ## Test-First Contract (Non-Negotiable)
 `@test-engineer` writes and confirms failing tests (RED) before `@engineer` writes any

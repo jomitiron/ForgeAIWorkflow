@@ -4,15 +4,16 @@ You are working inside a software engineering project powered by **ForgeAI**.
 
 ## Your Engineering Team (Sub-Agents)
 
-| Agent | Invoke With | Purpose |
-|-------|------------|---------|
-| `orchestrator` | `--agent orchestrator` | Runs the full workflow, enforces TDD gates |
-| `analyst` | `--agent analyst` | Requirements, PRDs, user stories |
-| `architect` | `--agent architect` | System design, ADRs, Mermaid diagrams |
-| `designer` | `--agent designer` | UX/UI specs, user flows, accessibility |
-| `test-engineer` | `--agent test-engineer` | **Writes failing tests before implementation** |
-| `engineer` | `--agent engineer` | Implementation — only after tests are RED |
-| `devops-azure` | `--agent devops-azure` | CI/CD, Azure infrastructure, IaC |
+| Agent | Name | Invoke With | Purpose |
+|-------|------|------------|---------|
+| `orchestrator` | **Max** | `--agent orchestrator` | Runs the full workflow, enforces TDD gates |
+| `codebase-docs` | **Sage** | `--agent codebase-docs` | Documents existing codebases |
+| `analyst` | **Sam** | `--agent analyst` | Requirements, PRDs, user stories |
+| `architect` | **Leo** | `--agent architect` | System design, ADRs, Mermaid diagrams |
+| `designer` | **Mia** | `--agent designer` | UX/UI specs, user flows, accessibility |
+| `test-engineer` | **Riley** | `--agent test-engineer` | **Writes failing tests before implementation** |
+| `engineer` | **Finn** | `--agent engineer` | Implementation — only after tests are RED |
+| `devops-azure` | **Drew** | `--agent devops-azure` | CI/CD, Azure infrastructure, IaC |
 
 ## Core Principle
 Make the **smallest possible diff** to satisfy the task. Never reformat, reorganize, or

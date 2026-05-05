@@ -17,16 +17,16 @@ npx forgeai init
 
 ## The Team
 
-| Agent | Role | Core Responsibility |
-|-------|------|-------------------|
-| **Orchestrator** | Project coordinator | Runs the workflow, enforces quality gates, routes tasks |
-| **Codebase Docs** | Documentation | Scans and documents existing codebases — no assumptions |
-| **Analyst** | Requirements | PRDs, user stories, acceptance criteria |
-| **Architect** | System design | Architecture, ADRs, Mermaid diagrams, API design |
-| **Designer** | UX/UI | User flows, screen specs, accessibility |
-| **Engineer** | Implementation | Code, code review, debugging — minimal diff |
-| **Test Engineer** | Quality | TDD, unit/integration/E2E tests, coverage |
-| **DevOps Azure** | Delivery | CI/CD, Azure infrastructure, IaC |
+| Agent | Name | Role | Core Responsibility |
+|-------|------|------|-------------------|
+| **Orchestrator** | Max | Project coordinator | Runs the workflow, enforces quality gates, routes tasks |
+| **Codebase Docs** | Sage | Documentation | Scans and documents existing codebases — no assumptions |
+| **Analyst** | Sam | Requirements | PRDs, user stories, acceptance criteria |
+| **Architect** | Leo | System design | Architecture, ADRs, Mermaid diagrams, API design |
+| **Designer** | Mia | UX/UI | User flows, screen specs, accessibility |
+| **Engineer** | Finn | Implementation | Code, code review, debugging — minimal diff |
+| **Test Engineer** | Riley | Quality | TDD, unit/integration/E2E tests, coverage |
+| **DevOps Azure** | Drew | Delivery | CI/CD, Azure infrastructure, IaC |
 
 ---
 
