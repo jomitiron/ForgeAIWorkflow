@@ -1,5 +1,5 @@
 {
-  "name": "forgeai",
+  "name": "forgeai-workflow",
   "version": "0.1.0",
   "description": "AI-first agentic engineering workflow for software engineering projects",
   "bin": {

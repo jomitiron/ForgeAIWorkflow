@@ -10,7 +10,7 @@ structured workflow or can be invoked standalone. Built for **Claude Code** and 
 ## Quick Start
 
 ```bash
-npx forgeai init
+npx forgeai-workflow init
 ```
 
 ---
