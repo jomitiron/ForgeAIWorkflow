@@ -13,17 +13,6 @@ function ask(rl, question) {
   return new Promise(resolve => rl.question(question, resolve));
 }
 
-function copyDirRecursive(src, dest) {
-  fs.mkdirSync(dest, { recursive: true });
-  for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    entry.isDirectory()
-      ? copyDirRecursive(srcPath, destPath)
-      : fs.copyFileSync(srcPath, destPath);
-  }
-}
-
 // Walks src recursively and collects all file paths.
 function collectFiles(src, files = []) {
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
@@ -76,6 +65,33 @@ function copyAgentsForCopilot(targetDir) {
     fs.copyFileSync(path.join(AGENTS_DIR, file), path.join(dest, destName));
   }
   return fs.readdirSync(AGENTS_DIR).length;
+}
+
+// Appends a ForgeAI block to .gitignore if the project is a git repo.
+// Skips silently if no .git directory or block already exists.
+function updateGitignore(targetDir, setupClaude, setupCopilot) {
+  if (!fs.existsSync(path.join(targetDir, '.git'))) return false;
+
+  const gitignorePath = path.join(targetDir, '.gitignore');
+  const existing = fs.existsSync(gitignorePath)
+    ? fs.readFileSync(gitignorePath, 'utf8')
+    : '';
+
+  if (existing.includes('# ForgeAI')) return false; // already added
+
+  const entries = [];
+  if (setupClaude) {
+    entries.push('CLAUDE.md');
+    entries.push('.claude/agents/');
+    entries.push('.claude/commands/forge-*.md');
+  }
+  if (setupCopilot) {
+    entries.push('.github/agents/');
+    entries.push('.github/prompts/forge-*.prompt.md');
+  }
+
+  fs.appendFileSync(gitignorePath, `\n# ForgeAI\n${entries.join('\n')}\n`, 'utf8');
+  return true;
 }
 
 function copyTemplate(src, dest) {
@@ -134,12 +150,14 @@ async function init(targetDir) {
     console.log('  ✓ Slash commands → .github/prompts/ (/forge-orchestrate, /forge-requirements, ...)');
   }
 
+  if (updateGitignore(targetDir, setupClaude, setupCopilot)) {
+    console.log('  ✓ ForgeAI files added to .gitignore');
+  }
+
   console.log('\n  ForgeAI initialized.\n');
-  console.log('  Agents available:');
-  console.log('    orchestrator  · analyst    · architect');
-  console.log('    engineer      · test-engineer · designer · devops-azure\n');
-  console.log('  Workflow:  start with /forge-orchestrate  (or /forge-requirements)');
-  console.log('  Standalone: invoke any agent directly for a specific task\n');
+  console.log('  Agents: Max · Sage · Sam · Leo · Mia · Finn · Riley · Drew\n');
+  console.log('  Workflow:  /forge-orchestrate');
+  console.log('  Standalone: invoke any agent directly\n');
 }
 
 const [,, command, targetDir = process.cwd()] = process.argv;
