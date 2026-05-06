@@ -1,6 +1,6 @@
 {
   "name": "forgeai-workflow",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "AI-first agentic engineering workflow for software engineering projects",
   "bin": {
     "forgeai": "./index.js"
