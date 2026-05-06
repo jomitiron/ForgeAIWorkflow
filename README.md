@@ -13,6 +13,13 @@ structured workflow or can be invoked standalone. Built for **Claude Code** and 
 npx forgeai-workflow init
 ```
 
+## How-To Guides
+
+Full walkthroughs with verbatim agent conversations for every scenario:
+
+- [HOWTOClaude.md](HOWTOClaude.md) — Claude Code guide (blog from scratch, existing apps, resuming, standalone agents, QA, health scans)
+- [HOWTOCopilot.md](HOWTOCopilot.md) — GitHub Copilot guide (same scenarios, Copilot-specific commands)
+
 ---
 
 ## The Team
@@ -20,12 +27,13 @@ npx forgeai-workflow init
 | Agent | Name | Role | Core Responsibility |
 |-------|------|------|-------------------|
 | **Orchestrator** | Max | Project coordinator | Runs the workflow, enforces quality gates, routes tasks |
-| **Codebase Docs** | Sage | Documentation | Scans and documents existing codebases — no assumptions |
+| **Codebase Docs** | Sage | Documentation | Scans and documents codebases — no assumptions. Architecture health scans. |
 | **Analyst** | Sam | Requirements | PRDs, user stories, acceptance criteria |
 | **Architect** | Leo | System design | Architecture, ADRs, Mermaid diagrams, API design |
 | **Designer** | Mia | UX/UI | User flows, screen specs, accessibility |
-| **Engineer** | Finn | Implementation | Code, code review, debugging — minimal diff |
-| **Test Engineer** | Riley | Quality | TDD, unit/integration/E2E tests, coverage |
+| **Test Engineer** | Riley | TDD | Writes failing tests BEFORE implementation — confirms RED |
+| **Engineer** | Finn | Implementation | Makes failing tests pass — minimal diff, no test changes |
+| **QA** | Alex | Browser testing | Playwright-driven QA, health scores, bug fix workflow |
 | **DevOps Azure** | Drew | Delivery | CI/CD, Azure infrastructure, IaC |
 
 ---
@@ -105,11 +113,13 @@ CLAUDE.md
 .claude/
 ├── agents/
 │   ├── orchestrator.md
+│   ├── codebase-docs.md
 │   ├── analyst.md
 │   ├── architect.md
 │   ├── designer.md
-│   ├── engineer.md
 │   ├── test-engineer.md
+│   ├── engineer.md
+│   ├── qa.md
 │   └── devops-azure.md
 └── commands/
     ├── forge-orchestrate.md
@@ -118,11 +128,7 @@ CLAUDE.md
     ├── forge-design.md
     ├── forge-testing.md
     ├── forge-implementation.md
-    ├── forge-deployment.md
-    ├── forge-create-prd.md
-    ├── forge-review-architecture.md
-    ├── forge-generate-tasks.md
-    └── forge-process-task-list.md
+    └── forge-deployment.md
 ```
 
 ### GitHub Copilot
@@ -131,24 +137,23 @@ CLAUDE.md
 ├── copilot-instructions.md
 ├── agents/
 │   ├── orchestrator.agent.md
+│   ├── codebase-docs.agent.md
 │   ├── analyst.agent.md
 │   ├── architect.agent.md
 │   ├── designer.agent.md
-│   ├── engineer.agent.md
 │   ├── test-engineer.agent.md
+│   ├── engineer.agent.md
+│   ├── qa.agent.md
 │   └── devops-azure.agent.md
 └── prompts/
-    ├── forge-orchestrate.prompt.md
-    ├── forge-requirements.prompt.md
-    ├── forge-architecture.prompt.md
-    ├── forge-design.prompt.md
-    ├── forge-testing.prompt.md
-    ├── forge-implementation.prompt.md
-    ├── forge-deployment.prompt.md
-    ├── forge-create-prd.prompt.md
-    ├── forge-review-architecture.prompt.md
-    ├── forge-generate-tasks.prompt.md
-    └── forge-process-task-list.prompt.md
+    └── forge/
+        ├── orchestrate.prompt.md
+        ├── requirements.prompt.md
+        ├── architecture.prompt.md
+        ├── design.prompt.md
+        ├── testing.prompt.md
+        ├── implementation.prompt.md
+        └── deployment.prompt.md
 ```
 
 ---
