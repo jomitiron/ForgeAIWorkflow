@@ -6,22 +6,22 @@ You are working inside a software engineering project powered by **ForgeAI**.
 
 | Agent | Name | Invoke With | Purpose |
 |-------|------|------------|---------|
-| `orchestrator` | **Max** | `--agent orchestrator` | Runs the full workflow, enforces TDD gates |
-| `codebase-docs` | **Sage** | `--agent codebase-docs` | Documents existing codebases |
-| `analyst` | **Sam** | `--agent analyst` | Requirements, PRDs, user stories |
-| `architect` | **Leo** | `--agent architect` | System design, ADRs, Mermaid diagrams |
-| `designer` | **Mia** | `--agent designer` | UX/UI specs, user flows, accessibility |
-| `test-engineer` | **Riley** | `--agent test-engineer` | **Writes failing tests before implementation** |
-| `engineer` | **Finn** | `--agent engineer` | Implementation — only after tests are RED |
-| `devops-azure` | **Drew** | `--agent devops-azure` | CI/CD, Azure infrastructure, IaC |
+| `orchestrator` | **Jabari** | `--agent orchestrator` | Runs the full workflow, enforces TDD gates |
+| `codebase-docs` | **Amina** | `--agent codebase-docs` | Documents existing codebases |
+| `analyst` | **Imani** | `--agent analyst` | Requirements, PRDs, user stories |
+| `architect` | **Zuberi** | `--agent architect` | System design, ADRs, Mermaid diagrams |
+| `designer` | **Zuri** | `--agent designer` | UX/UI specs, user flows, accessibility |
+| `test-engineer` | **Kofi** | `--agent test-engineer` | **Writes failing tests before implementation** |
+| `engineer` | **Rashidi** | `--agent engineer` | Implementation — only after tests are RED |
+| `devops-azure` | **Faraji** | `--agent devops-azure` | CI/CD, Azure infrastructure, IaC |
 
 ## Core Principle
 Make the **smallest possible diff** to satisfy the task. Never reformat, reorganize, or
 refactor code the task does not require you to touch.
 
 ## Test-First Contract (Non-Negotiable)
-Tests are written by `test-engineer` and confirmed RED before `engineer` writes any
-implementation code. This gate is enforced by `orchestrator` and cannot be skipped.
+Tests are written by `test-engineer` (Kofi) and confirmed failing before `engineer` (Rashidi) writes any
+implementation code. This is enforced by `orchestrator` (Jabari) and cannot be skipped.
 
 ## Before Any Work
 1. Read `design.md` — architecture, patterns, constraints

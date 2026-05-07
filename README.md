@@ -26,15 +26,15 @@ Full walkthroughs with verbatim agent conversations for every scenario:
 
 | Agent | Name | Role | Core Responsibility |
 |-------|------|------|-------------------|
-| **Orchestrator** | Max | Project coordinator | Runs the workflow, enforces quality gates, routes tasks |
-| **Codebase Docs** | Sage | Documentation | Scans and documents codebases — no assumptions. Architecture health scans. |
-| **Analyst** | Sam | Requirements | PRDs, user stories, acceptance criteria |
-| **Architect** | Leo | System design | Architecture, ADRs, Mermaid diagrams, API design |
-| **Designer** | Mia | UX/UI | User flows, screen specs, accessibility |
-| **Test Engineer** | Riley | TDD | Writes failing tests BEFORE implementation — confirms RED |
-| **Engineer** | Finn | Implementation | Makes failing tests pass — minimal diff, no test changes |
-| **QA** | Alex | Browser testing | Playwright-driven QA, health scores, bug fix workflow |
-| **DevOps Azure** | Drew | Delivery | CI/CD, Azure infrastructure, IaC |
+| **Orchestrator** | Jabari | Project coordinator | Runs the workflow, enforces quality gates, routes tasks |
+| **Codebase Docs** | Amina | Documentation | Scans and documents codebases — no assumptions. Architecture health scans. |
+| **Analyst** | Imani | Requirements | PRDs, user stories, acceptance criteria |
+| **Architect** | Zuberi | System design | Architecture, ADRs, Mermaid diagrams, API design |
+| **Designer** | Zuri | UX/UI | User flows, screen specs, accessibility |
+| **Test Engineer** | Kofi | TDD | Writes failing tests BEFORE implementation — confirms RED |
+| **Engineer** | Rashidi | Implementation | Makes failing tests pass — minimal diff, no test changes |
+| **QA** | Neema | Browser testing | Playwright-driven QA, health scores, bug fix workflow |
+| **DevOps Azure** | Faraji | Delivery | CI/CD, Azure infrastructure, IaC |
 
 ---
 
@@ -94,11 +94,11 @@ ForgeAI enforces TDD through an explicit handoff contract between the Orchestrat
 and Test Engineer:
 
 ```
-1. Orchestrator → Test Engineer   "Write failing tests for [feature]"
-2. Test Engineer → Orchestrator   Confirms tests written + all RED
-3. Orchestrator → Engineer        "Make these tests pass. Do not write tests."
-4. Engineer → Orchestrator        Confirms all tests GREEN
-5. Orchestrator → Engineer        "Refactor if needed. Tests must stay GREEN."
+1. Jabari → Kofi      "Write failing tests for [feature]"
+2. Kofi   → Jabari    "Tests written — all failing" (confirms tests exist and fail)
+3. Jabari → Rashidi   "Make these tests pass. Do not write tests."
+4. Rashidi → Jabari   "Implementation complete — all tests passing"
+5. Jabari → Rashidi   "Refactor if needed. Tests must stay passing."
 ```
 
 Neither the Engineer nor the Orchestrator may skip step 2.

@@ -198,7 +198,7 @@ async function init(targetDir) {
   }
 
   console.log('\n  ForgeAI initialized.\n');
-  console.log('  Agents: Max · Sage · Sam · Leo · Mia · Finn · Riley · Drew\n');
+  console.log('  Agents: Jabari · Amina · Imani · Zuberi · Zuri · Kofi · Rashidi · Neema · Faraji\n');
   console.log('  Claude:  /forge-orchestrate  /forge-requirements  ...');
   console.log('  Copilot: /forge/orchestrate  /forge/requirements  ...\n');
 }

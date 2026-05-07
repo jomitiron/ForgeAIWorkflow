@@ -15,14 +15,14 @@ Use `@<agent-name>` in Copilot Chat or `/agent <name>` in Copilot CLI:
 
 | Agent | Name | Purpose |
 |-------|------|---------|
-| `@orchestrator` | **Max** | Runs the full workflow end-to-end, enforces TDD quality gates |
-| `@codebase-docs` | **Sage** | Documents existing codebases — no assumptions |
-| `@analyst` | **Sam** | Requirements, PRDs, user stories, acceptance criteria |
-| `@architect` | **Leo** | System design, ADRs, Mermaid diagrams, API contracts |
-| `@designer` | **Mia** | UX/UI specs, user flows, component states, accessibility |
-| `@test-engineer` | **Riley** | **Writes failing tests BEFORE implementation — confirms RED** |
-| `@engineer` | **Finn** | Implementation — receives failing tests, makes them pass |
-| `@devops-azure` | **Drew** | CI/CD pipelines, Azure infrastructure, IaC (Bicep/Terraform) |
+| `@orchestrator` | **Jabari** | Runs the full workflow end-to-end, enforces TDD quality gates |
+| `@codebase-docs` | **Amina** | Documents existing codebases — no assumptions |
+| `@analyst` | **Imani** | Requirements, PRDs, user stories, acceptance criteria |
+| `@architect` | **Zuberi** | System design, ADRs, Mermaid diagrams, API contracts |
+| `@designer` | **Zuri** | UX/UI specs, user flows, component states, accessibility |
+| `@test-engineer` | **Kofi** | **Writes failing tests BEFORE implementation — confirms RED** |
+| `@engineer` | **Rashidi** | Implementation — receives failing tests, makes them pass |
+| `@devops-azure` | **Faraji** | CI/CD pipelines, Azure infrastructure, IaC (Bicep/Terraform) |
 
 ## Test-First Contract (Non-Negotiable)
 `@test-engineer` writes and confirms failing tests (RED) before `@engineer` writes any
@@ -48,12 +48,12 @@ implementation code. `@orchestrator` enforces this gate. It cannot be skipped.
 ### Or step through manually:
 ```
 /forge/orchestrate     drive the full workflow
-/forge/requirements    Phase 1 — Sam (Analyst)
-/forge/architecture    Phase 2 — Leo (Architect)
-/forge/design          Phase 3 — Mia (Designer)
-/forge/testing         Phase 4 — Riley (Test Engineer)
-/forge/implementation  Phase 5 — Finn (Engineer)
-/forge/deployment      Phase 6 — Drew (DevOps Azure)
+/forge/requirements    Phase 1 — Imani (Analyst)
+/forge/architecture    Phase 2 — Zuberi (Architect)
+/forge/design          Phase 3 — Zuri (Designer)
+/forge/testing         Phase 4 — Kofi (Test Engineer)
+/forge/implementation  Phase 5 — Rashidi (Engineer)
+/forge/deployment      Phase 6 — Faraji (DevOps Azure)
 ```
 
 Or invoke agents directly in chat:

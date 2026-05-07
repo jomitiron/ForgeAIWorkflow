@@ -1,6 +1,6 @@
 # HOWTOClaude.md — ForgeAI User Guide
 
-> This guide is for Claude Code specifically. All slash commands use `/forge-*` syntax.
+> This guide is for Claude Code specifically. All slash commands use `/forge/*` syntax.
 
 ---
 
@@ -35,14 +35,14 @@ After running `npx forgeai-workflow init`, agent files are installed into your `
 You can also use slash commands to invoke the workflow phases directly:
 
 ```
-/forge-orchestrate
-/forge-requirements
-/forge-architecture
-/forge-design
-/forge-testing
-/forge-implementation
-/forge-deployment
-/forge-document-codebase
+/forge/orchestrate
+/forge/requirements
+/forge/architecture
+/forge/design
+/forge/testing
+/forge/implementation
+/forge/deployment
+/forge/document-codebase
 ```
 
 ### The STOP pattern
@@ -57,14 +57,14 @@ Before any agent writes, modifies, or creates a file, it shows you a Change Repo
 
 ForgeAI enforces four hard gates in the workflow:
 
-| Gate | Cleared by | Required text |
+| Gate | Cleared by | Confirmation text |
 |------|-----------|---------------|
-| Gate 4 | Riley (Test Engineer) | `GATE 4 CLEAR — ALL RED` |
-| Gate 5 | Finn (Engineer) | `GATE 5 CLEAR — ALL GREEN` |
-| Gate QA | Alex (QA) | `GATE QA CLEAR` |
-| Phase 6 | Drew (DevOps Azure) | `PHASE 6 COMPLETE` |
+| Gate 4 | Kofi (Test Engineer) | `✅ Tests written — all failing` |
+| Gate 5 | Rashidi (Engineer) | `✅ Implementation complete — all tests passing` |
+| Gate QA | Neema (QA) | `✅ Browser QA complete` |
+| Phase 6 | Faraji (DevOps Azure) | `✅ Deployed and running` |
 
-No gate can be cleared by assumption. "Should be fine" does not clear a gate. "Looks good" does not clear a gate. Riley must run the tests and confirm they are all failing before Gate 4 clears. Finn must run the tests and confirm they all pass before Gate 5 clears.
+No gate can be cleared by assumption. "Should be fine" does not clear a gate. "Looks good" does not clear a gate. Kofi must run the tests and confirm they are all failing before Gate 4 clears. Rashidi must run the tests and confirm they all pass before Gate 5 clears.
 
 ---
 
@@ -72,15 +72,15 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **Setup:** You have an empty repository. You want to build Inkwell, a personal blogging platform with React, Node/Express, and PostgreSQL. Features: write, edit, and delete posts; categories; author login; public reading view.
 
-### Phase 0 — Max Scans and Greets
+### Phase 0 — Jabari Scans and Greets
 
 *You open Claude Code and type the orchestrator's name.*
 
 **You:** `@orchestrator`
 
-**Max:**
+**Jabari:**
 
-> 👋 I'm Max, your ForgeAI Orchestrator.
+> 👋 I'm Jabari, your ForgeAI Orchestrator.
 >
 > Mode: New Project
 > design.md:  ✗ not found
@@ -93,29 +93,29 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 >   W · Full workflow from scratch
 >   R · Resume from a specific phase
 >   P · Run one phase only
->   D · Document existing codebase first (Sage)
+>   D · Document existing codebase first (Amina)
 >   S · Show team and workflow status
 >   ? · All options
 
-*Max is waiting. Nothing will happen until you respond.*
+*Jabari is waiting. Nothing will happen until you respond.*
 
 **You:** `W`
 
-**Max:**
+**Jabari:**
 
 > What are we building? One sentence.
 
 **You:** `Inkwell — a personal blog platform. React frontend, Node/Express backend, PostgreSQL.`
 
-### Phase 1 — Requirements (Sam)
+### Phase 1 — Requirements (Imani)
 
-*Max shows a Change Report before handing off to Sam.*
+*Jabari shows a Change Report before handing off to Imani.*
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 1: Requirements
 >
-> Agent:    Sam (@analyst)
+> Agent:    Imani (@analyst)
 > Will do:
 >   - Run requirements Q&A (5 questions)
 >   - Produce design.md
@@ -128,13 +128,13 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `yes`
 
-**Max:** `✓ Handing off to Sam.`
+**Jabari:** `✓ Handing off to Imani.`
 
 ---
 
-**Sam:**
+**Imani:**
 
-> 👋 I'm Sam, your ForgeAI Analyst. I'll turn your idea into clear requirements.
+> 👋 I'm Imani, your ForgeAI Analyst. I'll turn your idea into clear requirements.
 >
 > What would you like to do?
 >   R · Gather requirements for a new feature
@@ -143,33 +143,33 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 >   A · Define acceptance criteria for existing stories
 >   ? · Show all options
 
-*Sam is now running Phase 1 under Max's coordination. Sam will ask five questions, one at a time.*
+*Imani is now running Phase 1 under Jabari's coordination. Imani will ask five questions, one at a time.*
 
-**Sam:** `What are we building? One or two sentences.`
+**Imani:** `What are we building? One or two sentences.`
 
 **You:** `Inkwell is a personal blogging platform. Authors can write, edit, and delete posts; readers can browse by category without logging in.`
 
-**Sam:** `Got it. Who uses it and what problem does it solve?`
+**Imani:** `Got it. Who uses it and what problem does it solve?`
 
 **You:** `Two users: authors who want a clean, distraction-free writing experience, and public readers who want to find and read posts without creating an account.`
 
-**Sam:** `Understood. What does success look like — measurable?`
+**Imani:** `Understood. What does success look like — measurable?`
 
 **You:** `An author can publish a post in under 2 minutes from a blank editor. A reader can reach any post from the homepage in 3 clicks or fewer.`
 
-**Sam:** `Good. Any hard constraints? (tech stack, deadline, compliance, budget)`
+**Imani:** `Good. Any hard constraints? (tech stack, deadline, compliance, budget)`
 
 **You:** `React + Node/Express + PostgreSQL — already decided. No deadline. No compliance requirements. Solo project.`
 
-**Sam:** `Last one: what's explicitly out of scope?`
+**Imani:** `Last one: what's explicitly out of scope?`
 
 **You:** `No comments, no social sharing, no newsletter, no analytics, no multi-author support.`
 
 ---
 
-*Sam summarises before writing anything.*
+*Imani summarises before writing anything.*
 
-**Sam:**
+**Imani:**
 
 > Does this capture it? Anything missing or wrong?
 >
@@ -182,13 +182,13 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `That's right. One addition — authors should be able to upload a cover image for each post.`
 
-**Sam:** `Added. I'll include image upload as a functional requirement with acceptance criteria. Ready to write design.md?`
+**Imani:** `Added. I'll include image upload as a functional requirement with acceptance criteria. Ready to write design.md?`
 
 **You:** `yes`
 
-**Sam:**
+**Imani:**
 
-> Change Report — Sam (Analyst)
+> Change Report — Imani (Analyst)
 >
 > Will create / update:
 >   - design.md  [new]
@@ -199,25 +199,25 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `yes`
 
-*Sam writes design.md.*
+*Imani writes design.md.*
 
-**Sam:**
+**Imani:**
 
 > design.md ready.
 >
-> PHASE 1 COMPLETE
+> ✅ Requirements complete
 
 ---
 
-### Phase 2 — Architecture (Leo)
+### Phase 2 — Architecture (Zuberi)
 
-*Max picks up immediately after Sam's gate message.*
+*Jabari picks up immediately after Imani's gate message.*
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 2: Architecture
 >
-> Agent:    Leo (@architect)
+> Agent:    Zuberi (@architect)
 > Will do:
 >   - Read design.md
 >   - Ask one constraints question
@@ -235,9 +235,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 ---
 
-**Leo:**
+**Zuberi:**
 
-> 👋 I'm Leo, your ForgeAI Architect. I design systems and record the decisions that shape them.
+> 👋 I'm Zuberi, your ForgeAI Architect. I design systems and record the decisions that shape them.
 >
 > What would you like to do?
 >   D · Design the system (reads design.md)
@@ -246,15 +246,15 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 >   R · Review and critique an existing design
 >   ? · Show all options
 
-**Leo:** `Any constraints I should know before designing? (existing stack, team size, cost limits, timeline)`
+**Zuberi:** `Any constraints I should know before designing? (existing stack, team size, cost limits, timeline)`
 
 **You:** `Solo developer. Keeping it simple — no microservices. Want to host cheaply, probably a VPS or small cloud VM. No need for a CDN yet.`
 
 ---
 
-*Leo works through key decisions one at a time.*
+*Zuberi works through key decisions one at a time.*
 
-**Leo:**
+**Zuberi:**
 
 > Decision: How should the API be structured?
 >
@@ -267,7 +267,7 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `A`
 
-**Leo:**
+**Zuberi:**
 
 > Decision: How should authentication work?
 >
@@ -282,9 +282,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 ---
 
-*Leo now produces the diagrams.*
+*Zuberi now produces the diagrams.*
 
-**Leo:**
+**Zuberi:**
 
 > Here's the C4 container diagram — does this look right?
 >
@@ -311,7 +311,7 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `Looks right. Local filesystem for images is fine for MVP.`
 
-**Leo:**
+**Zuberi:**
 
 > Here's the sequence diagram for the primary flow — publishing a post — does this look right?
 >
@@ -338,9 +338,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `That's correct.`
 
-**Leo:**
+**Zuberi:**
 
-> Change Report — Leo (Architect)
+> Change Report — Zuberi (Architect)
 >
 > Will create / update:
 >   - design.md (Design Considerations section)
@@ -356,27 +356,27 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `yes`
 
-*Leo writes the files.*
+*Zuberi writes the files.*
 
-**Leo:**
+**Zuberi:**
 
 > Architecture done — 2 ADRs recorded.
 >
-> PHASE 2 COMPLETE
+> ✅ Architecture complete
 
 ---
 
-### Phase 3 — Design (Mia)
+### Phase 3 — Design (Zuri)
 
-**Max:** `Does this feature have a user interface?`
+**Jabari:** `Does this feature have a user interface?`
 
 **You:** `yes`
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 3: Design
 >
-> Agent:    Mia (@designer)
+> Agent:    Zuri (@designer)
 > Will do:
 >   - Ask about screens and design system
 >   - Spec each screen one at a time
@@ -392,9 +392,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 ---
 
-**Mia:**
+**Zuri:**
 
-> 👋 I'm Mia, your ForgeAI Designer. I'll spec every screen so the engineers know exactly what to build.
+> 👋 I'm Zuri, your ForgeAI Designer. I'll spec every screen so the engineers know exactly what to build.
 >
 > What would you like to do?
 >   S · Spec all screens for a feature
@@ -403,25 +403,25 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 >   A · Accessibility review of an existing spec
 >   ? · Show all options
 
-**Mia:** `How many screens or surfaces does this feature touch? List them briefly.`
+**Zuri:** `How many screens or surfaces does this feature touch? List them briefly.`
 
 **You:** `Three: the login screen, the post list (dashboard for authors / homepage for readers), and the post editor.`
 
-**Mia:** `Is there an existing design system or component library I should follow?`
+**Zuri:** `Is there an existing design system or component library I should follow?`
 
 **You:** `No existing system. Keep it clean and minimal — think classic blog typography. No UI framework constraint.`
 
 ---
 
-*Mia specs each screen one at a time.*
+*Zuri specs each screen one at a time.*
 
-**Mia:**
+**Zuri:**
 
 > What's the primary user action on the Login screen?
 
 **You:** `Enter email and password, submit, land on the author dashboard.`
 
-**Mia:**
+**Zuri:**
 
 > Here's the spec for Login — does this look right before I move on?
 >
@@ -469,11 +469,11 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `That looks right.`
 
-**Mia:** `What's the primary user action on the Post List screen?`
+**Zuri:** `What's the primary user action on the Post List screen?`
 
 **You:** `Authors see their own posts with edit and delete actions. Readers see all published posts filterable by category.`
 
-**Mia:**
+**Zuri:**
 
 > Here's the spec for Post List — does this look right?
 >
@@ -503,15 +503,15 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `Good. Add a search input at the top too — full text search.`
 
-**Mia:** `Added — I'll include a search input component with debounced query state and a "no results" empty state. Does that cover it?`
+**Zuri:** `Added — I'll include a search input component with debounced query state and a "no results" empty state. Does that cover it?`
 
 **You:** `yes`
 
-**Mia:** `What's the primary user action on the Post Editor screen?`
+**Zuri:** `What's the primary user action on the Post Editor screen?`
 
 **You:** `Write or edit a post — title, cover image, category, rich text body — then save as draft or publish.`
 
-**Mia:**
+**Zuri:**
 
 > Here's the spec for Post Editor — does this look right?
 >
@@ -550,9 +550,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `Perfect.`
 
-**Mia:**
+**Zuri:**
 
-> Change Report — Mia (Designer)
+> Change Report — Zuri (Designer)
 >
 > Will create / update:
 >   - docs/ux-specs.md  [screens: Login, Post List, Post Editor]
@@ -563,28 +563,28 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `yes`
 
-*Mia writes docs/ux-specs.md.*
+*Zuri writes docs/ux-specs.md.*
 
-**Mia:**
+**Zuri:**
 
 > UX specs done — 3 screens.
 >
-> PHASE 3 COMPLETE
+> ✅ Design complete
 
 ---
 
-### Phase 4 — Testing (Riley)
+### Phase 4 — Testing (Kofi)
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 4: Testing
 >
-> Agent:    Riley (@test-engineer)
+> Agent:    Kofi (@test-engineer)
 > Will do:
 >   - Read design.md acceptance criteria
 >   - Show proposed test scope
 >   - Write failing tests (unit + integration + E2E)
->   - Run tests to confirm ALL RED
+>   - Run tests to confirm all failing
 > Will NOT touch:
 >   - Implementation code, design.md, or any non-test files
 > Risks:
@@ -596,9 +596,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 ---
 
-**Riley:**
+**Kofi:**
 
-> 👋 I'm Riley, your ForgeAI Test Engineer. Tests come first — always.
+> 👋 I'm Kofi, your ForgeAI Test Engineer. Tests come first — always.
 >
 > What would you like to do?
 >   W · Write failing tests for a feature (RED)
@@ -606,9 +606,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 >   S · Show test scope for a feature
 >   ? · Show all options
 
-*Riley reads design.md and identifies the test scope.*
+*Kofi reads design.md and identifies the test scope.*
 
-**Riley:**
+**Kofi:**
 
 > I'll write tests for:
 >   - `authController.login`                  → unit + integration
@@ -626,9 +626,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `yes`
 
-**Riley:**
+**Kofi:**
 
-> Change Report — Riley (Test Engineer)
+> Change Report — Kofi (Test Engineer)
 >
 > Will create / update:
 >   - tests/unit/authController.test.js
@@ -649,11 +649,11 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `yes`
 
-*Riley writes all test files and runs them.*
+*Kofi writes all test files and runs them.*
 
-**Riley:**
+**Kofi:**
 
-> GATE 4 CLEAR — 34 tests written, ALL RED
+> ✅ Tests written — all failing — 34 tests written
 >
 > Unit:        18  tests/unit/
 > Integration: 10  tests/integration/
@@ -668,22 +668,22 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 > - FR-006 (Image upload)              → TC-015, TC-016
 > - FR-007 (Public reading view)       → TC-017, TC-018
 >
-> Ready for Engineer (Finn).
+> Ready for Engineer (Rashidi).
 
 ---
 
-### Phase 5 — Implementation (Finn)
+### Phase 5 — Implementation (Rashidi)
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 5: Implementation
 >
-> Agent:    Finn (@engineer)
+> Agent:    Rashidi (@engineer)
 > Will do:
 >   - Read all 34 failing tests
 >   - Ask one constraints question
 >   - Implement only what is needed to make tests pass
->   - Run tests to confirm ALL GREEN
+>   - Run tests to confirm all tests passing
 > Will NOT touch:
 >   - Test files, design.md, docs/, or any file not required
 > Risks:
@@ -695,25 +695,25 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 ---
 
-**Finn:**
+**Rashidi:**
 
-> 👋 I'm Finn, your ForgeAI Engineer. I turn failing tests green with the smallest diff possible.
+> 👋 I'm Rashidi, your ForgeAI Engineer. I turn failing tests green with the smallest diff possible.
 >
 > What would you like to do?
->   I · Implement (TDD — requires GATE 4 CLEAR)
+>   I · Implement (TDD — requires confirmed failing tests)
 >   R · Code review
 >   T · Write test + implement from scratch (standalone TDD)
 >   ? · Show all options
 
-*Finn confirms GATE 4 CLEAR and asks one question.*
+*Rashidi confirms failing tests are ready and asks one question.*
 
-**Finn:** `I have 34 failing tests. Any constraints before I start? (approach, patterns, files to avoid)`
+**Rashidi:** `I have 34 failing tests. Any constraints before I start? (approach, patterns, files to avoid)`
 
 **You:** `Use async/await throughout. Middleware in separate files. No ORM — raw pg queries only.`
 
-**Finn:**
+**Rashidi:**
 
-> Change Report — Finn (Engineer)
+> Change Report — Rashidi (Engineer)
 >
 > Will create / update:
 >   - src/controllers/authController.js
@@ -738,27 +738,27 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `yes`
 
-*Finn implements and runs the tests.*
+*Rashidi implements and runs the tests.*
 
-**Finn:**
+**Rashidi:**
 
-> GATE 5 CLEAR — ALL GREEN
+> ✅ Implementation complete — all tests passing
 > 34 passing, 0 failing
 > Files changed: src/controllers/ (4 files), src/middleware/ (2 files), src/routes/index.js, src/db/ (3 files), src/app.js, src/index.js
 
 ---
 
-### Phase 5.5 — QA (Alex)
+### Phase 5.5 — QA (Neema)
 
-**Max:** `Would you like QA testing before deployment?`
+**Jabari:** `Would you like QA testing before deployment?`
 
 **You:** `yes`
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 5.5: QA
 >
-> Agent:    Alex (@qa)
+> Agent:    Neema (@qa)
 > Will do:
 >   - Check Playwright is installed
 >   - Run Standard QA (all routes, interactive elements, mobile viewports)
@@ -776,9 +776,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 ---
 
-**Alex:**
+**Neema:**
 
-> 👋 I'm Alex, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
+> 👋 I'm Neema, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
 >
 > What would you like to do?
 >   Q · Quick — smoke test (homepage + top 5 routes, ~1 min)
@@ -789,9 +789,9 @@ No gate can be cleared by assumption. "Should be fine" does not clear a gate. "L
 
 **You:** `S`
 
-*Alex finds the running app on port 3000 and begins exploration.*
+*Neema finds the running app on port 3000 and begins exploration.*
 
-**Alex:**
+**Neema:**
 
 > App found: http://localhost:3000
 > Setting up report: .qa/report-20260506-143022.md
@@ -818,13 +818,13 @@ const fs = require('fs');
 "
 ```
 
-**Alex:** `Does the app require login to test? (yes / no)`
+**Neema:** `Does the app require login to test? (yes / no)`
 
 **You:** `yes — test@inkwell.dev / testpass123`
 
-*Alex writes and runs an auth script, saves session cookies, then checks each route systematically.*
+*Neema writes and runs an auth script, saves session cookies, then checks each route systematically.*
 
-**Alex:**
+**Neema:**
 
 > Exploration complete. 2 bugs found.
 >
@@ -846,7 +846,7 @@ const fs = require('fs');
 > Evidence: .qa/screenshots/dashboard-delete-confirm.png
 > Steps:    1. Log in as author  2. Go to /dashboard  3. Click delete icon on any post  4. Browser native dialog appears instead of inline confirm
 
-**Alex:**
+**Neema:**
 
 > Health Score — Inkwell
 >
@@ -865,17 +865,17 @@ const fs = require('fs');
 >
 > Ship readiness: ⚠️ SHIP WITH CAUTION
 
-*Alex offers to fix Bug 1 (high severity).*
+*Neema offers to fix Bug 1 (high severity).*
 
-**Alex:**
+**Neema:**
 
 > Fix Bug 1 — Upload progress indicator missing? (yes / skip)
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
-> Change Report — Alex (QA)
+> Change Report — Neema (QA)
 >
 > Bug:    Cover image upload shows no progress during upload
 > Will fix:
@@ -890,11 +890,11 @@ const fs = require('fs');
 
 **You:** `yes`
 
-*Alex applies the fix, re-runs the page-check for /editor/new, confirms the progress bar appears.*
+*Neema applies the fix, re-runs the page-check for /editor/new, confirms the progress bar appears.*
 
-**Alex:**
+**Neema:**
 
-> GATE QA CLEAR
+> ✅ Browser QA complete
 >
 > Health score: 91/100  (86 → 91 after fixes)
 > Bugs found:   2 total  (0 critical, 1 high, 1 medium)
@@ -902,17 +902,17 @@ const fs = require('fs');
 > Remaining:    1 medium item — inline delete confirm (noted in report)
 > Report:       .qa/report-20260506-143022.md
 >
-> Ready for deployment. Next: `/forge-deployment`
+> Ready for deployment. Next: `/forge/deployment`
 
 ---
 
-### Phase 6 — Deployment (Drew)
+### Phase 6 — Deployment (Faraji)
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 6: Deployment
 >
-> Agent:    Drew (@devops-azure)
+> Agent:    Faraji (@devops-azure)
 > Will do:
 >   - Ask about target environment and existing pipelines
 >   - Show infrastructure plan
@@ -930,9 +930,9 @@ const fs = require('fs');
 
 ---
 
-**Drew:**
+**Faraji:**
 
-> 👋 I'm Drew, your ForgeAI DevOps Engineer. I get your code running in Azure — safely.
+> 👋 I'm Faraji, your ForgeAI DevOps Engineer. I get your code running in Azure — safely.
 >
 > What would you like to do?
 >   P · Create or update a CI/CD pipeline
@@ -941,19 +941,19 @@ const fs = require('fs');
 >   M · Set up monitoring and alerts
 >   ? · Show all options
 
-**Drew:** `Is there an existing pipeline? (yes / no — if yes, I'll extend it rather than replace)`
+**Faraji:** `Is there an existing pipeline? (yes / no — if yes, I'll extend it rather than replace)`
 
 **You:** `No existing pipeline. Starting from scratch.`
 
-**Drew:** `What environments does this pipeline need?`
+**Faraji:** `What environments does this pipeline need?`
 
 **You:** `Dev and prod. No staging for now.`
 
-**Drew:** `Any existing service connections or Azure subscriptions to use?`
+**Faraji:** `Any existing service connections or Azure subscriptions to use?`
 
 **You:** `Yes — subscription ID is in the environment as AZURE_SUBSCRIPTION_ID. No existing service connections.`
 
-**Drew:**
+**Faraji:**
 
 > I'll create / update:
 >   - Pipeline: build (lint + test + Docker build) + CD (deploy to Container Apps)
@@ -964,7 +964,7 @@ const fs = require('fs');
 
 **You:** `yes`
 
-**Drew:**
+**Faraji:**
 
 > Security checklist:
 >   [x] No secrets in pipeline YAML
@@ -977,9 +977,9 @@ const fs = require('fs');
 
 **You:** `yes`
 
-**Drew:**
+**Faraji:**
 
-> Change Report — Drew (DevOps Azure)
+> Change Report — Faraji (DevOps Azure)
 >
 > Will create / update:
 >   - .github/workflows/ci-cd.yml
@@ -999,17 +999,17 @@ const fs = require('fs');
 
 **You:** `yes`
 
-*Drew creates the files, provisions the infrastructure, and deploys.*
+*Faraji creates the files, provisions the infrastructure, and deploys.*
 
-**Drew:**
+**Faraji:**
 
-> PHASE 6 COMPLETE
+> ✅ Deployed and running
 > Environment: dev
 > Health: PASSED
 > App Insights: https://portal.azure.com/#resource/subscriptions/.../inkwell-insights
 > Pipeline: https://github.com/yourname/inkwell/actions
 
-**Max:**
+**Jabari:**
 
 > FORGEAI WORKFLOW COMPLETE
 >
@@ -1017,8 +1017,8 @@ const fs = require('fs');
 > ✓ Phase 1 — Requirements  (design.md)
 > ✓ Phase 2 — Architecture  (docs/architecture.md, 2 ADRs)
 > ✓ Phase 3 — Design        (docs/ux-specs.md, 3 screens)
-> ✓ Phase 4 — Testing       (34 tests, ALL RED → Gate 4 cleared)
-> ✓ Phase 5 — Implementation (34 tests, ALL GREEN → Gate 5 cleared)
+> ✓ Phase 4 — Testing       (34 tests, all failing → Gate 4 cleared)
+> ✓ Phase 5 — Implementation (34 tests, all tests passing → Gate 5 cleared)
 > ✓ Phase 5.5 — QA          (91/100 → Gate QA cleared)
 > ✓ Phase 6 — Deployment    (dev deployed to Azure Container Apps)
 
@@ -1070,38 +1070,38 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 *Now open Claude Code in the project folder.*
 
-### Phase 0 — Max Detects an Existing Codebase
+### Phase 0 — Jabari Detects an Existing Codebase
 
 **You:** `@orchestrator`
 
-**Max:**
+**Jabari:**
 
-> 👋 I'm Max, your ForgeAI Orchestrator.
+> 👋 I'm Jabari, your ForgeAI Orchestrator.
 >
 > Mode: Existing Codebase
 > design.md:  ✗ not found
 > tasks.md:   ✗ not found
 > Docs:       ✗ not found
 >
-> I can see an existing project with no documentation. Sage should document it first — that gives every agent the full picture.
+> I can see an existing project with no documentation. Amina should document it first — that gives every agent the full picture.
 >
 > What would you like to do?
 >   W · Full workflow from scratch
 >   R · Resume from a specific phase
 >   P · Run one phase only
->   D · Document existing codebase first (Sage)
+>   D · Document existing codebase first (Amina)
 >   S · Show team and workflow status
 >   ? · All options
 
 **You:** `D`
 
-### Phase 0 — Sage Documents the Codebase
+### Phase 0 — Amina Documents the Codebase
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 0: Codebase Documentation
 >
-> Agent:    Sage (@codebase-docs)
+> Agent:    Amina (@codebase-docs)
 > Will do:
 >   - Silently scan the existing codebase
 >   - Run full documentation sequence (audience, scope, clarifying questions)
@@ -1117,9 +1117,9 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 ---
 
-**Sage:**
+**Amina:**
 
-> 👋 I'm Sage, your ForgeAI Codebase Docs Engineer.
+> 👋 I'm Amina, your ForgeAI Codebase Docs Engineer.
 >
 > Codebase scan complete.
 > Tech stack:    Node 20 / Express 5 (backend) · React 18 / Vite (frontend) · PostgreSQL 16
@@ -1136,13 +1136,13 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `D`
 
-**Sage:** `Would you like a deep scan? I'll read every file before asking questions — takes a moment but produces more accurate docs. (yes / no)`
+**Amina:** `Would you like a deep scan? I'll read every file before asking questions — takes a moment but produces more accurate docs. (yes / no)`
 
 **You:** `yes`
 
-*Sage reads all files silently, then asks the audience and scope questions one at a time.*
+*Amina reads all files silently, then asks the audience and scope questions one at a time.*
 
-**Sage:** `Who is the primary audience for these docs?`
+**Amina:** `Who is the primary audience for these docs?`
 `  1. New engineers joining the team`
 `  2. External developers consuming an API`
 `  3. Ops / DevOps running the system`
@@ -1150,30 +1150,30 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `1 — new engineers joining the team.`
 
-**Sage:** `What level of documentation do you need?`
+**Amina:** `What level of documentation do you need?`
 `  1. High-level only — architecture, setup, key concepts`
 `  2. Component-level — each module/service documented`
 `  3. Full depth — architecture + components + public API reference`
 
 **You:** `2 — component-level.`
 
-**Sage:** `What do new team members always ask about or get wrong?`
+**Amina:** `What do new team members always ask about or get wrong?`
 
 **You:** `They always get confused about the task/project relationship — tasks belong to projects, but a task can be linked to multiple projects via a junction table. People assume it's a simple one-to-many.`
 
-**Sage:** `Is there code that is deprecated, experimental, or should be ignored?`
+**Amina:** `Is there code that is deprecated, experimental, or should be ignored?`
 
 **You:** `Yes — the server/legacy-import/ folder. It was a one-time data migration script. Ignore it.`
 
-**Sage:** `Are there naming decisions or structures that look odd but are intentional?`
+**Amina:** `Are there naming decisions or structures that look odd but are intentional?`
 
 **You:** `The client uses "workspace" in some component names but "project" everywhere else in the codebase. They mean the same thing — it's a historical accident from a rebrand we never fully finished.`
 
 ---
 
-*Sage surfaces clarifying questions from the deep scan.*
+*Amina surfaces clarifying questions from the deep scan.*
 
-**Sage:**
+**Amina:**
 
 > I have 3 questions before I start writing. Let's go through them:
 >
@@ -1183,9 +1183,9 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `1. By design — it's intentional that role check and ownership check are combined so the caller never forgets either. 2. The 11 unused functions are dead code from a feature we removed — they can be ignored in docs. 3. The metadata column is a leftover — we meant to add custom fields but never did. Flag it as technical debt.`
 
-*Sage confirms the documentation plan.*
+*Amina confirms the documentation plan.*
 
-**Sage:**
+**Amina:**
 
 > Here's what I'll document:
 >
@@ -1204,17 +1204,17 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `Proceed with all.`
 
-*Sage shows each document before saving.*
+*Amina shows each document before saving.*
 
-**Sage:** `Here's docs/architecture.md — does this look right before I save it?`
+**Amina:** `Here's docs/architecture.md — does this look right before I save it?`
 
-*(Sage displays the full architecture.md content including Mermaid diagrams for system context and data flow.)*
+*(Amina displays the full architecture.md content including Mermaid diagrams for system context and data flow.)*
 
 **You:** `Looks good.`
 
-*Sage continues through each document, showing and confirming before saving.*
+*Amina continues through each document, showing and confirming before saving.*
 
-**Sage:**
+**Amina:**
 
 > Documentation complete.
 >
@@ -1233,21 +1233,21 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 > Recommended next steps:
 > - Add these docs to your PR template checklist
 > - Review quarterly — docs go stale
-> - Run `/forge-requirements` to plan new features on this documented base
+> - Run `/forge/requirements` to plan new features on this documented base
 
 ---
 
 ### Feature Planning — Global Search
 
-**Max:** `Ready to plan the search feature now?`
+**Jabari:** `Ready to plan the search feature now?`
 
 **You:** `yes`
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 1: Requirements
 >
-> Agent:    Sam (@analyst)
+> Agent:    Imani (@analyst)
 > Will do:
 >   - Run requirements Q&A for the global search feature
 >   - Produce design.md
@@ -1260,37 +1260,37 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `yes`
 
-#### Phase 1 — Sam (Requirements for Search)
+#### Phase 1 — Imani (Requirements for Search)
 
-*Sam runs the same five-question Q&A pattern as in Scenario 1, adapted to the search feature.*
+*Imani runs the same five-question Q&A pattern as in Scenario 1, adapted to the search feature.*
 
-**Sam:** `What are we building? One or two sentences.`
+**Imani:** `What are we building? One or two sentences.`
 
 **You:** `Global search across tasks and projects — a user types in a search bar and gets instant results from both task titles/descriptions and project names.`
 
-**Sam:** `Who uses it and what problem does it solve?`
+**Imani:** `Who uses it and what problem does it solve?`
 
 **You:** `All authenticated users. The problem: TaskFlow has hundreds of tasks across dozens of projects and there's no way to find anything without clicking through project by project.`
 
-**Sam:** `What does success look like — measurable?`
+**Imani:** `What does success look like — measurable?`
 
 **You:** `Search results appear within 300 ms. Results are accurate — no phantom results for tasks the user can't see. Users can reach any result in one click.`
 
-**Sam:** `Any hard constraints?`
+**Imani:** `Any hard constraints?`
 
 **You:** `Must use PostgreSQL full-text search — no Elasticsearch or external service. Must respect existing permission model — users must not see tasks they don't have access to.`
 
-**Sam:** `What's explicitly out of scope?`
+**Imani:** `What's explicitly out of scope?`
 
 **You:** `No search history, no saved searches, no search within a specific project (global only), no filtering by date or assignee in this iteration.`
 
-*Sam summarises, user confirms, Sam shows Change Report, user says yes, Sam writes design.md and says PHASE 1 COMPLETE.*
+*Imani summarises, user confirms, Imani shows Change Report, user says yes, Imani writes design.md and says ✅ Requirements complete.*
 
-#### Phase 2 — Leo (Architecture for Search)
+#### Phase 2 — Zuberi (Architecture for Search)
 
-*Max shows Change Report for Leo. User says yes. Leo greets, asks constraints question, walks through one key decision (PostgreSQL full-text search vs trigram index vs external search), produces C4 context showing where the search API slot fits, and a sequence diagram for the search request flow. Leo shows Change Report, user says yes, Leo writes docs and says PHASE 2 COMPLETE.*
+*Jabari shows Change Report for Zuberi. User says yes. Zuberi greets, asks constraints question, walks through one key decision (PostgreSQL full-text search vs trigram index vs external search), produces C4 context showing where the search API slot fits, and a sequence diagram for the search request flow. Zuberi shows Change Report, user says yes, Zuberi writes docs and says ✅ Architecture complete.*
 
-*From this point the workflow continues identically to Scenario 1 — Phase 3 (Mia specs the search results UI), Phase 4 (Riley writes failing tests for the search endpoint and the results component), Phase 5 (Finn implements), Phase 5.5 (Alex QA), Phase 6 (Drew deploys) — each with the same STOP-wait-Change Report-confirm pattern shown in full in Scenario 1.*
+*From this point the workflow continues identically to Scenario 1 — Phase 3 (Zuri specs the search results UI), Phase 4 (Kofi writes failing tests for the search endpoint and the results component, confirms all failing), Phase 5 (Rashidi implements until all tests passing), Phase 5.5 (Neema QA), Phase 6 (Faraji deploys) — each with the same STOP-wait-Change Report-confirm pattern shown in full in Scenario 1.*
 
 ---
 
@@ -1300,9 +1300,9 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `@orchestrator`
 
-**Max:**
+**Jabari:**
 
-> 👋 I'm Max, your ForgeAI Orchestrator.
+> 👋 I'm Jabari, your ForgeAI Orchestrator.
 >
 > Mode: Existing Codebase
 > design.md:  ✓ found
@@ -1313,36 +1313,36 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 >   W · Full workflow from scratch
 >   R · Resume from a specific phase
 >   P · Run one phase only
->   D · Document existing codebase first (Sage)
+>   D · Document existing codebase first (Amina)
 >   S · Show team and workflow status
 >   ? · All options
 
 **You:** `R`
 
-**Max:** `Which phase? (1 Requirements / 2 Architecture / 3 Design / 4 Testing / 5 Implementation / 5.5 QA / 6 Deployment)`
+**Jabari:** `Which phase? (1 Requirements / 2 Architecture / 3 Design / 4 Testing / 5 Implementation / 5.5 QA / 6 Deployment)`
 
 **You:** `4 — testing`
 
-*Max checks prerequisites before proceeding.*
+*Jabari checks prerequisites before proceeding.*
 
-**Max:**
+**Jabari:**
 
 > Checking prerequisites for Phase 4...
 >
-> ✓ design.md found — Riley can read acceptance criteria
+> ✓ design.md found — Kofi can read acceptance criteria
 > ✓ docs/architecture.md found — test scope is informed by architecture
-> ✗ GATE 4 not yet cleared (no tests written)
+> ✗ Tests not yet written
 >
-> Ready to hand off to Riley.
+> Ready to hand off to Kofi.
 >
 > Change Report — Phase 4: Testing
 >
-> Agent:    Riley (@test-engineer)
+> Agent:    Kofi (@test-engineer)
 > Will do:
 >   - Read design.md acceptance criteria
 >   - Show proposed test scope
 >   - Write failing tests (unit + integration + E2E)
->   - Run tests to confirm ALL RED
+>   - Run tests to confirm all failing
 > Will NOT touch:
 >   - Implementation code, design.md, or any non-test files
 > Risks:
@@ -1352,19 +1352,19 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `yes`
 
-*Riley greets, reads design.md, proposes test scope, shows Change Report, writes tests, runs them, and says GATE 4 CLEAR — ALL RED. The workflow continues from Phase 5 exactly as shown in Scenario 1.*
+*Kofi greets, reads design.md, proposes test scope, shows Change Report, writes tests, runs them, and confirms all failing. The workflow continues from Phase 5 exactly as shown in Scenario 1.*
 
 ---
 
 ## Scenario 4: Standalone — Documenting an Existing Codebase
 
-**Setup:** You have a legacy Node.js REST API with no documentation. No ForgeAI workflow is running — you just want Sage to document the codebase.
+**Setup:** You have a legacy Node.js REST API with no documentation. No ForgeAI workflow is running — you just want Amina to document the codebase.
 
 **You:** `@codebase-docs`
 
-**Sage:**
+**Amina:**
 
-> 👋 I'm Sage, your ForgeAI Codebase Docs Engineer.
+> 👋 I'm Amina, your ForgeAI Codebase Docs Engineer.
 >
 > Codebase scan complete.
 > Tech stack:    Node 14 / Express 4 · MongoDB (Mongoose)
@@ -1381,9 +1381,9 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `D`
 
-*Sage asks audience and scope questions one at a time.*
+*Amina asks audience and scope questions one at a time.*
 
-**Sage:** `Who is the primary audience for these docs?`
+**Amina:** `Who is the primary audience for these docs?`
 `  1. New engineers joining the team`
 `  2. External developers consuming an API`
 `  3. Ops / DevOps running the system`
@@ -1391,30 +1391,30 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `2 — external developers consuming the API.`
 
-**Sage:** `What level of documentation do you need?`
+**Amina:** `What level of documentation do you need?`
 `  1. High-level only — architecture, setup, key concepts`
 `  2. Component-level — each module/service documented`
 `  3. Full depth — architecture + components + public API reference`
 
 **You:** `3 — full depth.`
 
-**Sage:** `What do new team members always ask about or get wrong?`
+**Amina:** `What do new team members always ask about or get wrong?`
 
 **You:** `Authentication. We use API keys in the header, not Bearer tokens — people always try Bearer first and get a 403.`
 
-**Sage:** `Is there code that is deprecated, experimental, or should be ignored?`
+**Amina:** `Is there code that is deprecated, experimental, or should be ignored?`
 
 **You:** `The src/webhooks/ folder — it was built for a feature that never launched. Don't document it.`
 
-**Sage:** `Are there naming decisions or structures that look odd but are intentional?`
+**Amina:** `Are there naming decisions or structures that look odd but are intentional?`
 
 **You:** `The src/resolvers/ folder is misleadingly named — it's not GraphQL resolvers, it's business logic handlers. Historical naming from before we added Express.`
 
 ---
 
-*Sage surfaces three clarifying questions from the scan.*
+*Amina surfaces three clarifying questions from the scan.*
 
-**Sage:**
+**Amina:**
 
 > I have 3 questions before I start writing. Let's go through them:
 >
@@ -1424,9 +1424,9 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `1. Rate limiting is active in production — SKIP_RATE_LIMIT is only set in local dev. 2. Audit logging is abandoned — document it as technical debt to remove. 3. Document the missing validation as a known gap — it's a real security concern.`
 
-*Sage confirms the documentation plan.*
+*Amina confirms the documentation plan.*
 
-**Sage:**
+**Amina:**
 
 > Here's what I'll document:
 >
@@ -1447,9 +1447,9 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 ---
 
-*Sage shows architecture.md before saving.*
+*Amina shows architecture.md before saving.*
 
-**Sage:**
+**Amina:**
 
 > Here's docs/architecture.md — does this look right before I save it?
 >
@@ -1489,25 +1489,25 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `Looks right. Add a note that rate limiting is active in production — local dev bypasses it with SKIP_RATE_LIMIT.`
 
-*Sage applies the correction and asks again before saving.*
+*Amina applies the correction and asks again before saving.*
 
-**Sage:** `Updated. Here's the revised architecture.md with the rate limiting note — does this look right now?`
+**Amina:** `Updated. Here's the revised architecture.md with the rate limiting note — does this look right now?`
 
-*(Sage shows the updated version.)*
+*(Amina shows the updated version.)*
 
 **You:** `yes`
 
-*Sage saves architecture.md and continues through each document, showing and confirming before each save.*
+*Amina saves architecture.md and continues through each document, showing and confirming before each save.*
 
-**Sage:** `Here's docs/conventions.md — does this look right before I save it?`
+**Amina:** `Here's docs/conventions.md — does this look right before I save it?`
 
-*(Sage shows conventions.md, highlighting the resolvers naming, API key authentication pattern, and rate limiting bypass convention.)*
+*(Amina shows conventions.md, highlighting the resolvers naming, API key authentication pattern, and rate limiting bypass convention.)*
 
 **You:** `yes`
 
 *This continues for setup.md, testing.md, dependencies.md, api-reference.md, components/resolvers.md, and components/auth.md — each shown and confirmed before saving.*
 
-**Sage:**
+**Amina:**
 
 > Documentation complete.
 >
@@ -1526,21 +1526,21 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 > Recommended next steps:
 > - Add these docs to your PR template checklist
 > - Review quarterly — docs go stale
-> - Run `/forge-requirements` to plan new features on this documented base
+> - Run `/forge/requirements` to plan new features on this documented base
 
 ---
 
 ## Scenario 5: QA on a Deployed Feature
 
-**Setup:** The Inkwell search feature is live in the dev environment. GATE 5 is cleared. You want to run QA standalone before signing off.
+**Setup:** The Inkwell search feature is live in the dev environment. Implementation is complete and all tests are passing. You want to run QA standalone before signing off.
 
 **You:** `@qa`
 
-*Alex silently checks for Playwright before greeting.*
+*Neema silently checks for Playwright before greeting.*
 
-**Alex:**
+**Neema:**
 
-> 👋 I'm Alex, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
+> 👋 I'm Neema, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
 >
 > What would you like to do?
 >   Q · Quick — smoke test (homepage + top 5 routes, ~1 min)
@@ -1551,7 +1551,7 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **You:** `S`
 
-*Alex checks for GATE 5 CLEAR, finds it in tasks.md, then locates the running app.*
+*Neema checks that implementation is complete, finds confirmation in tasks.md, then locates the running app.*
 
 ```bash
 for port in 3000 4000 5173 5000 8080 8000; do
@@ -1564,17 +1564,17 @@ done || echo "APP: not found"
 APP: http://localhost:3000
 ```
 
-**Alex:**
+**Neema:**
 
 > App found: http://localhost:3000
 > Setting up report directory and report file...
 > Reading design.md for FR coverage guidance...
 
-**Alex:** `Does the app require login to test? (yes / no)`
+**Neema:** `Does the app require login to test? (yes / no)`
 
 **You:** `yes — test@inkwell.dev / testpass123`
 
-*Alex writes and runs the authentication script.*
+*Neema writes and runs the authentication script.*
 
 ```bash
 node -e "
@@ -1599,7 +1599,7 @@ const { chromium } = require('playwright');
 AUTH: ok — cookies saved to .qa/session.json
 ```
 
-*Alex runs the orientation script.*
+*Neema runs the orientation script.*
 
 ```bash
 node -e "
@@ -1640,7 +1640,7 @@ const fs = require('fs');
 }
 ```
 
-*Alex runs page-check scripts for each route discovered.*
+*Neema runs page-check scripts for each route discovered.*
 
 ```bash
 node -e "
@@ -1680,7 +1680,7 @@ const fs = require('fs');
 }
 ```
 
-**Alex:**
+**Neema:**
 
 > 2 bugs found.
 >
@@ -1702,7 +1702,7 @@ const fs = require('fs');
 > Evidence: .qa/screenshots/search.png
 > Steps:    1. Navigate to /search  2. Inspect the search input element  3. `aria-label` attribute is absent
 
-**Alex:**
+**Neema:**
 
 > Health Score — Inkwell
 >
@@ -1721,13 +1721,13 @@ const fs = require('fs');
 >
 > Ship readiness: 🔴 DO NOT SHIP
 
-**Alex:** `Fix Bug 1 — Search API returns 500 on query? (yes / skip)`
+**Neema:** `Fix Bug 1 — Search API returns 500 on query? (yes / skip)`
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
-> Change Report — Alex (QA)
+> Change Report — Neema (QA)
 >
 > Bug:    Search API returns 500; results renderer crashes on undefined highlight property
 > Will fix:
@@ -1742,7 +1742,7 @@ const fs = require('fs');
 
 **You:** `yes`
 
-*Alex reads the controller, finds the bug (a missing `ILIKE` parameter in the PostgreSQL full-text query causing a binding error), fixes it, re-runs the page-check script for /search.*
+*Neema reads the controller, finds the bug (a missing `ILIKE` parameter in the PostgreSQL full-text query causing a binding error), fixes it, re-runs the page-check script for /search.*
 
 ```bash
 node -e "
@@ -1771,9 +1771,9 @@ const fs = require('fs');
 }
 ```
 
-**Alex:**
+**Neema:**
 
-> GATE QA CLEAR
+> ✅ Browser QA complete
 >
 > Health score: 87/100  (64 → 87 after fixes)
 > Bugs found:   2 total  (1 critical, 0 high, 1 medium)
@@ -1781,7 +1781,7 @@ const fs = require('fs');
 > Remaining:    1 medium item — missing aria-label on search input (noted in report)
 > Report:       .qa/report-20260506-161544.md
 >
-> Ready for deployment. Next: `/forge-deployment`
+> Ready for deployment. Next: `/forge/deployment`
 
 ---
 
@@ -1791,9 +1791,9 @@ const fs = require('fs');
 
 **You:** `@codebase-docs`
 
-**Sage:**
+**Amina:**
 
-> 👋 I'm Sage, your ForgeAI Codebase Docs Engineer.
+> 👋 I'm Amina, your ForgeAI Codebase Docs Engineer.
 >
 > Codebase scan complete.
 > Tech stack:    Node 18 / Express 4 · React 17 · PostgreSQL 14
@@ -1810,9 +1810,9 @@ const fs = require('fs');
 
 **You:** `H`
 
-*Sage scans silently — reading import graphs, file sizes, function lengths, and dependency patterns.*
+*Amina scans silently — reading import graphs, file sizes, function lengths, and dependency patterns.*
 
-**Sage:**
+**Amina:**
 
 > Architecture Health Scan — [your-app]
 > Scanned: 187 files / 31 modules
@@ -1843,7 +1843,7 @@ const fs = require('fs');
 
 **You:** `Dig deeper into the auth module.`
 
-**Sage:**
+**Amina:**
 
 > Deeper analysis — `server/middleware/auth.js`
 >
@@ -1899,36 +1899,36 @@ const fs = require('fs');
 
 | Agent | Name | Invoke in Claude Code | When to use |
 |-------|------|-----------------------|-------------|
-| Orchestrator | Max | `@orchestrator` | Starting or resuming the full workflow |
-| Codebase Docs | Sage | `@codebase-docs` | Documenting existing code; architecture health scans |
-| Analyst | Sam | `@analyst` | Requirements, PRDs, user stories |
-| Architect | Leo | `@architect` | System design, ADRs, Mermaid diagrams |
-| Designer | Mia | `@designer` | UX/UI screen specs, user flows |
-| Test Engineer | Riley | `@test-engineer` | Writing failing tests (RED) before implementation |
-| Engineer | Finn | `@engineer` | Implementation — only after GATE 4 CLEAR |
-| QA | Alex | `@qa` | Browser testing via Playwright after GATE 5 CLEAR |
-| DevOps Azure | Drew | `@devops-azure` | CI/CD, Azure infrastructure, deployment |
+| Orchestrator | Jabari | `@orchestrator` | Starting or resuming the full workflow |
+| Codebase Docs | Amina | `@codebase-docs` | Documenting existing code; architecture health scans |
+| Analyst | Imani | `@analyst` | Requirements, PRDs, user stories |
+| Architect | Zuberi | `@architect` | System design, ADRs, Mermaid diagrams |
+| Designer | Zuri | `@designer` | UX/UI screen specs, user flows |
+| Test Engineer | Kofi | `@test-engineer` | Writing failing tests before implementation |
+| Engineer | Rashidi | `@engineer` | Implementation — only after tests are written and failing |
+| QA | Neema | `@qa` | Browser testing via Playwright after all tests pass |
+| DevOps Azure | Faraji | `@devops-azure` | CI/CD, Azure infrastructure, deployment |
 
 ### Slash Commands
 
 | Command | What it does |
 |---------|-------------|
-| `/forge-orchestrate` | Start or resume the full ForgeAI workflow with Max |
-| `/forge-requirements` | Run Phase 1 — requirements Q&A and design.md |
-| `/forge-architecture` | Run Phase 2 — system design, ADRs, diagrams |
-| `/forge-design` | Run Phase 3 — UX/UI screen specs |
-| `/forge-testing` | Run Phase 4 — write failing tests (RED) |
-| `/forge-implementation` | Run Phase 5 — implement to make tests pass (GREEN) |
-| `/forge-deployment` | Run Phase 6 — CI/CD and Azure deployment |
-| `/forge-document-codebase` | Standalone — document an existing codebase with Sage |
+| `/forge/orchestrate` | Start or resume the full ForgeAI workflow with Jabari |
+| `/forge/requirements` | Run Phase 1 — requirements Q&A and design.md |
+| `/forge/architecture` | Run Phase 2 — system design, ADRs, diagrams |
+| `/forge/design` | Run Phase 3 — UX/UI screen specs |
+| `/forge/testing` | Run Phase 4 — write failing tests |
+| `/forge/implementation` | Run Phase 5 — implement to make tests pass |
+| `/forge/deployment` | Run Phase 6 — CI/CD and Azure deployment |
+| `/forge/document-codebase` | Standalone — document an existing codebase with Amina |
 
 ### Gate Cheat Sheet
 
-| Gate | Who clears it | What must happen | Exact text |
+| Gate | Who clears it | What must happen | Confirmation |
 |------|--------------|-----------------|------------|
-| Gate 4 | Riley | ALL tests written and confirmed failing | `GATE 4 CLEAR — ALL RED` |
-| Gate 5 | Finn | ALL tests passing, 0 failing | `GATE 5 CLEAR — ALL GREEN` |
-| Gate QA | Alex | All critical and high bugs resolved | `GATE QA CLEAR` |
-| Phase 6 | Drew | Deployment completed and healthy | `PHASE 6 COMPLETE` |
+| Gate 4 | Kofi | All tests written and confirmed failing | `✅ Tests written — all failing` |
+| Gate 5 | Rashidi | All tests passing, 0 failing | `✅ Implementation complete — all tests passing` |
+| Gate QA | Neema | All critical and high bugs resolved | `✅ Browser QA complete` |
+| Phase 6 | Faraji | Deployment completed and healthy | `✅ Deployed and running` |
 
-No gate is cleared by assumption, estimation, or optimism. Each gate requires the exact confirmation text above.
+No gate is cleared by assumption, estimation, or optimism. Each gate requires the confirmation above.

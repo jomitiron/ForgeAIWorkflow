@@ -57,23 +57,23 @@ In the Copilot Chat input box, type the agent's handle preceded by `@`:
 
 Copilot may show agent name suggestions as you type — you can click them in the sidebar or finish typing and press Enter. Either way, the agent scans the project silently, then greets you.
 
-> **Copilot difference:** In Claude Code, agents are invoked as sub-agents or via `/forge-*` slash commands. In Copilot, the primary way to invoke an agent is `@agent-name` in the Chat panel. Slash commands are available as a secondary option (see below).
+> **Copilot difference:** In Claude Code, agents are invoked as sub-agents or via `/forge/*` slash commands. In Copilot, the primary way to invoke an agent is `@agent-name` in the Chat panel. Slash commands are available as a secondary option (see below).
 
 ### Using Slash Commands
 
 ForgeAI also registers prompt files as Copilot slash commands. Use these to jump directly to a phase without going through the Orchestrator:
 
 ```
-/forge/orchestrate       — full workflow, Max drives
-/forge/requirements      — Sam gathers requirements
-/forge/architecture      — Leo designs the system
-/forge/design            — Mia specs the UI
-/forge/testing           — Riley writes failing tests
-/forge/implementation    — Finn implements against tests
-/forge/deployment        — Drew deploys to Azure
+/forge/orchestrate       — full workflow, Jabari drives
+/forge/requirements      — Imani gathers requirements
+/forge/architecture      — Zuberi designs the system
+/forge/design            — Zuri specs the UI
+/forge/testing           — Kofi writes failing tests
+/forge/implementation    — Rashidi implements against tests
+/forge/deployment        — Faraji deploys to Azure
 ```
 
-> **Critical Copilot difference:** In Copilot, slash commands use a path-style format with a forward slash: `/forge/requirements`. They are NOT written as `/forge-requirements` (with a dash). The dash format is the Claude Code convention. Using the wrong format in Copilot will produce no result or an error.
+> **Note on slash command format:** ForgeAI slash commands use a path-style format with a forward slash: `/forge/requirements`. Both Claude Code and Copilot use this format.
 
 ### Where Files Are Installed
 
@@ -138,13 +138,13 @@ Gates are hard checkpoints that prevent the next phase from starting until the c
 
 | Gate message | Meaning | Who says it |
 |---|---|---|
-| `PHASE 1 COMPLETE` | Requirements approved, design.md written | Sam |
-| `PHASE 2 COMPLETE` | Architecture done, ADRs written | Leo |
-| `PHASE 3 COMPLETE` | UX specs written for all screens | Mia |
-| `GATE 4 CLEAR — ALL RED` | Tests written, all failing | Riley |
-| `GATE 5 CLEAR — ALL GREEN` | All tests passing | Finn |
-| `GATE QA CLEAR` | All critical/high bugs resolved | Alex |
-| `PHASE 6 COMPLETE` | Deployed, smoke tests passed | Drew |
+| `✅ Requirements complete` | Requirements approved, design.md written | Imani |
+| `✅ Architecture complete` | Architecture done, ADRs written | Zuberi |
+| `✅ Design complete` | UX specs written for all screens | Zuri |
+| `✅ Tests written — all failing` | Tests written, all failing | Kofi |
+| `✅ Implementation complete — all tests passing` | All tests passing | Rashidi |
+| `✅ Browser QA complete` | All critical/high bugs resolved | Neema |
+| `✅ Deployed and running` | Deployed, smoke tests passed | Faraji |
 
 "Should be fine", "probably passing", or "looks good" does not clear any gate. The Orchestrator will name the blocker and ask how to proceed.
 
@@ -162,11 +162,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 ### Phase 0 — Orchestrator Greets
 
-*Max silently checks the repository before saying anything — no source code, no design.md, no tasks.md, no docs.*
+*Jabari silently checks the repository before saying anything — no source code, no design.md, no tasks.md, no docs.*
 
-**Max:**
+**Jabari:**
 
-> 👋 I'm Max, your ForgeAI Orchestrator.
+> 👋 I'm Jabari, your ForgeAI Orchestrator.
 >
 > Mode: New Project
 > design.md:  ✗ not found
@@ -179,25 +179,25 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 >   W · Full workflow from scratch
 >   R · Resume from a specific phase
 >   P · Run one phase only
->   D · Document existing codebase first (Sage)
+>   D · Document existing codebase first (Amina)
 >   S · Show team and workflow status
 >   ? · All options
 
-*Max stops here. He will not do anything until you respond.*
+*Jabari stops here. He will not do anything until you respond.*
 
 **You:** `W`
 
-**Max:**
+**Jabari:**
 
 > What are we building? One sentence.
 
 **You:** `Inkwell — a personal blogging platform`
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 1: Requirements
 >
-> Agent:    Sam (@analyst)
+> Agent:    Imani (@analyst)
 > Will do:
 >   - Ask you 5 questions about Inkwell
 >   - Write design.md with requirements, user stories, and acceptance criteria
@@ -212,13 +212,13 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 ---
 
-### Phase 1 — Requirements (Sam)
+### Phase 1 — Requirements (Imani)
 
-*Max hands off to Sam. In Copilot, this means Sam's instructions take effect for the next turn. Sam scans silently and picks up the project name from context.*
+*Jabari hands off to Imani. In Copilot, this means Imani's instructions take effect for the next turn. Imani scans silently and picks up the project name from context.*
 
-**Sam:**
+**Imani:**
 
-> 👋 I'm Sam, your ForgeAI Analyst. I'll turn your idea into clear requirements.
+> 👋 I'm Imani, your ForgeAI Analyst. I'll turn your idea into clear requirements.
 >
 > What would you like to do?
 >   R · Gather requirements for a new feature
@@ -227,43 +227,43 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 >   A · Define acceptance criteria for existing stories
 >   ? · Show all options
 
-*Because Max already confirmed this is a new project called Inkwell, Sam recognises the intent.*
+*Because Jabari already confirmed this is a new project called Inkwell, Imani recognises the intent.*
 
 **You:** `P`
 
-**Sam:**
+**Imani:**
 
 > What are we building? One or two sentences.
 
 **You:** `Inkwell is a personal blogging platform. Authors can write, edit, and delete posts, organize them into categories, and log in. Readers browse and read posts publicly without logging in.`
 
-**Sam:**
+**Imani:**
 
 > Who uses it and what problem does it solve?
 
 **You:** `Two users: the author (one person) who needs a clean writing and publishing tool, and public readers who want to read articles without signing up for anything.`
 
-**Sam:**
+**Imani:**
 
 > What does success look like — measurable?
 
 **You:** `Author can publish a new post in under 2 minutes. Pages load in under 1 second. Zero reader sign-up friction.`
 
-**Sam:**
+**Imani:**
 
 > Any hard constraints? (tech stack, deadline, compliance, budget)
 
 **You:** `React frontend, Node/Express backend, PostgreSQL. No deadline. No compliance requirements. Hosting budget under $20/month.`
 
-**Sam:**
+**Imani:**
 
 > What's explicitly out of scope?
 
 **You:** `Comments, likes, social sharing, multiple authors, RSS feed, email newsletters.`
 
-*Sam has all he needs. He summarises what he captured.*
+*Imani has all he needs. He summarises what he captured.*
 
-**Sam:**
+**Imani:**
 
 > Here's what I've captured:
 >
@@ -278,11 +278,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `That's it. Add a rich text editor for writing.`
 
-**Sam:**
+**Imani:**
 
 > Noted — rich text editor for the post authoring screen.
 >
-> Change Report — Sam (Analyst)
+> Change Report — Imani (Analyst)
 >
 > Will create / update:
 >   - design.md  [new]
@@ -293,23 +293,23 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Sam writes design.md. The file contains the overview, goals, user stories table, functional requirements table with GIVEN/WHEN/THEN acceptance criteria, non-functional requirements, non-goals, and open questions.*
+*Imani writes design.md. The file contains the overview, goals, user stories table, functional requirements table with GIVEN/WHEN/THEN acceptance criteria, non-functional requirements, non-goals, and open questions.*
 
-**Sam:**
+**Imani:**
 
 > design.md ready.
 >
-> PHASE 1 COMPLETE
+> ✅ Requirements complete
 
-*Max picks up the gate signal.*
+*Jabari picks up the gate signal.*
 
-**Max:**
+**Jabari:**
 
 > ✓ Phase 1 done — starting Phase 2
 >
 > Change Report — Phase 2: Architecture
 >
-> Agent:    Leo (@architect)
+> Agent:    Zuberi (@architect)
 > Will do:
 >   - Read design.md
 >   - Present 2 key architectural decisions with options
@@ -326,13 +326,13 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 ---
 
-### Phase 2 — Architecture (Leo)
+### Phase 2 — Architecture (Zuberi)
 
-*Leo scans design.md silently, then greets.*
+*Zuberi scans design.md silently, then greets.*
 
-**Leo:**
+**Zuberi:**
 
-> 👋 I'm Leo, your ForgeAI Architect. I design systems and record the decisions that shape them.
+> 👋 I'm Zuberi, your ForgeAI Architect. I design systems and record the decisions that shape them.
 >
 > What would you like to do?
 >   D · Design the system (reads design.md)
@@ -343,15 +343,15 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `D`
 
-**Leo:**
+**Zuberi:**
 
 > Any constraints I should know before designing? (existing stack, team size, cost limits, timeline)
 
 **You:** `Single developer. Hosting budget $20/month — so no Kubernetes, no managed containers. Keep it simple.`
 
-*Leo identifies the two decisions that shape everything else.*
+*Zuberi identifies the two decisions that shape everything else.*
 
-**Leo:**
+**Zuberi:**
 
 > Decision 1: Frontend hosting strategy
 >
@@ -369,7 +369,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `A`
 
-**Leo:**
+**Zuberi:**
 
 > Decision 2: API and database topology
 >
@@ -387,9 +387,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `A`
 
-*Leo draws the diagrams.*
+*Zuberi draws the diagrams.*
 
-**Leo:**
+**Zuberi:**
 
 > Here's the C4 container diagram:
 >
@@ -416,7 +416,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-**Leo:**
+**Zuberi:**
 
 > Here's the sequence diagram for publishing a post:
 >
@@ -441,11 +441,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Leo shows the Change Report.*
+*Zuberi shows the Change Report.*
 
-**Leo:**
+**Zuberi:**
 
-> Change Report — Leo (Architect)
+> Change Report — Zuberi (Architect)
 >
 > Will create / update:
 >   - design.md  (Design Considerations section)
@@ -459,33 +459,33 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Leo writes the files.*
+*Zuberi writes the files.*
 
-**Leo:**
+**Zuberi:**
 
 > Architecture done — 2 ADRs recorded.
 >
-> PHASE 2 COMPLETE
+> ✅ Architecture complete
 
-**Max:**
+**Jabari:**
 
 > ✓ Phase 2 done — starting Phase 3
 >
-> Inkwell has a user interface (author dashboard + public reading pages). Should Mia spec the screens?
+> Inkwell has a user interface (author dashboard + public reading pages). Should Zuri spec the screens?
 
 **You:** `yes`
 
 ---
 
-### Phase 3 — UX Design (Mia)
+### Phase 3 — UX Design (Zuri)
 
-*Max shows the Change Report for Phase 3.*
+*Jabari shows the Change Report for Phase 3.*
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 3: Design
 >
-> Agent:    Mia (@designer)
+> Agent:    Zuri (@designer)
 > Will do:
 >   - Spec all screens: Login, Author Dashboard, Post Editor, Public Blog, Post Detail
 >   - Define component states, user flows, error states, accessibility notes
@@ -499,9 +499,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-**Mia:**
+**Zuri:**
 
-> 👋 I'm Mia, your ForgeAI Designer. I'll spec every screen so the engineers know exactly what to build.
+> 👋 I'm Zuri, your ForgeAI Designer. I'll spec every screen so the engineers know exactly what to build.
 >
 > What would you like to do?
 >   S · Spec all screens for a feature
@@ -512,31 +512,31 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `S`
 
-**Mia:**
+**Zuri:**
 
 > How many screens or surfaces does this feature touch? List them briefly.
 
 **You:** `Login screen, Author Dashboard (post list), Post Editor (rich text), Public Blog homepage, Public Post detail page.`
 
-**Mia:**
+**Zuri:**
 
 > Is there an existing design system or component library I should follow?
 
 **You:** `No design system. Keep it minimal — think Substack-like aesthetic.`
 
-*Mia works through each screen, asking the primary action question, showing the spec, and waiting for confirmation. Below is the condensed version of three key screens.*
+*Zuri works through each screen, asking the primary action question, showing the spec, and waiting for confirmation. Below is the condensed version of three key screens.*
 
-**Mia:**
+**Zuri:**
 
 > What's the primary user action on the Login screen?
 
 **You:** `Enter email and password, click Sign In.`
 
-*Mia shows the Login screen spec and asks "Does this look right?" — you confirm. She repeats for the Post Editor and Public Blog Homepage.*
+*Zuri shows the Login screen spec and asks "Does this look right?" — you confirm. She repeats for the Post Editor and Public Blog Homepage.*
 
-**Mia:**
+**Zuri:**
 
-> Change Report — Mia (Designer)
+> Change Report — Zuri (Designer)
 >
 > Will create / update:
 >   - docs/ux-specs.md  [screens: Login, Author Dashboard, Post Editor, Public Blog, Post Detail]
@@ -547,21 +547,21 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Mia writes docs/ux-specs.md.*
+*Zuri writes docs/ux-specs.md.*
 
-**Mia:**
+**Zuri:**
 
 > UX specs done — 5 screens.
 >
-> PHASE 3 COMPLETE
+> ✅ Design complete
 
-**Max:**
+**Jabari:**
 
 > ✓ Phase 3 done — starting Phase 4
 >
 > Change Report — Phase 4: Testing
 >
-> Agent:    Riley (@test-engineer)
+> Agent:    Kofi (@test-engineer)
 > Will do:
 >   - Read design.md acceptance criteria
 >   - Write failing tests (unit + integration + E2E) for all FRs
@@ -577,11 +577,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 ---
 
-### Phase 4 — Testing (Riley)
+### Phase 4 — Testing (Kofi)
 
-**Riley:**
+**Kofi:**
 
-> 👋 I'm Riley, your ForgeAI Test Engineer. Tests come first — always.
+> 👋 I'm Kofi, your ForgeAI Test Engineer. Tests come first — always.
 >
 > What would you like to do?
 >   W · Write failing tests for a feature (RED)
@@ -591,15 +591,15 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `W`
 
-**Riley:**
+**Kofi:**
 
 > Which feature or component?
 
 **You:** `All of Inkwell — posts CRUD, categories, auth, public reading.`
 
-*Riley reads design.md and shows the proposed test scope.*
+*Kofi reads design.md and shows the proposed test scope.*
 
-**Riley:**
+**Kofi:**
 
 > I'll write tests for:
 >   - POST /api/posts         → integration (create post)
@@ -619,9 +619,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-**Riley:**
+**Kofi:**
 
-> Change Report — Riley (Test Engineer)
+> Change Report — Kofi (Test Engineer)
 >
 > Will create / update:
 >   - tests/unit/post-service.test.js
@@ -640,11 +640,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Riley writes all test files. Tests import modules that do not yet exist, so they fail immediately.*
+*Kofi writes all test files. Tests import modules that do not yet exist, so they fail immediately.*
 
-**Riley:**
+**Kofi:**
 
-> GATE 4 CLEAR — 24 tests written, ALL RED
+> ✅ Tests written — all failing — 24 tests written
 >
 > Unit:        8   tests/unit/
 > Integration: 12  tests/integration/
@@ -658,15 +658,15 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 > - FR-005 (categories)   → TC-010, TC-011
 > - FR-006 (public read)  → TC-012 (E2E)
 >
-> Ready for Engineer (Finn).
+> Ready for Engineer (Rashidi).
 
-**Max:**
+**Jabari:**
 
-> ✓ Phase 4 done — GATE 4 CLEAR
+> ✓ Phase 4 done — tests confirmed failing
 >
 > Change Report — Phase 5: Implementation
 >
-> Agent:    Finn (@engineer)
+> Agent:    Rashidi (@engineer)
 > Will do:
 >   - Read the 24 failing tests
 >   - Implement source code to make all tests pass
@@ -682,31 +682,31 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 ---
 
-### Phase 5 — Implementation (Finn)
+### Phase 5 — Implementation (Rashidi)
 
-**Finn:**
+**Rashidi:**
 
-> 👋 I'm Finn, your ForgeAI Engineer. I turn failing tests green with the smallest diff possible.
+> 👋 I'm Rashidi, your ForgeAI Engineer. I turn failing tests green with the smallest diff possible.
 >
 > What would you like to do?
->   I · Implement (TDD — requires GATE 4 CLEAR)
+>   I · Implement (TDD — requires confirmed failing tests)
 >   R · Code review
 >   T · Write test + implement from scratch (standalone TDD)
 >   ? · Show all options
 
 **You:** `I`
 
-*Finn checks for GATE 4 CLEAR — found in context.*
+*Rashidi checks that failing tests are confirmed — found in context.*
 
-**Finn:**
+**Rashidi:**
 
 > I have 24 failing tests. Any constraints before I start? (approach, patterns, files to avoid)
 
 **You:** `Use Express Router pattern. Prisma for ORM. Separate routes, controllers, and services.`
 
-**Finn:**
+**Rashidi:**
 
-> Change Report — Finn (Engineer)
+> Change Report — Rashidi (Engineer)
 >
 > Will create / update:
 >   - src/app.js
@@ -730,31 +730,31 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Finn implements all source files. Each file is minimal — only what the tests require.*
+*Rashidi implements all source files. Each file is minimal — only what the tests require.*
 
-**Finn:**
+**Rashidi:**
 
-> GATE 5 CLEAR — ALL GREEN
+> ✅ Implementation complete — all tests passing
 > 24 passing, 0 failing
 > Files changed: src/app.js, src/routes/*.js, src/controllers/*.js, src/services/*.js, src/middleware/auth.middleware.js, src/db/schema.prisma, src/db/client.js
 
-**Max:**
+**Jabari:**
 
-> ✓ Phase 5 done — GATE 5 CLEAR
+> ✓ Phase 5 done — all tests passing
 >
-> Would you like Alex to run a QA pass on the running app before we deploy?
+> Would you like Neema to run a QA pass on the running app before we deploy?
 
 **You:** `yes`
 
 ---
 
-### Phase 5.5 — QA (Alex)
+### Phase 5.5 — QA (Neema)
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 5.5: QA
 >
-> Agent:    Alex (@qa)
+> Agent:    Neema (@qa)
 > Will do:
 >   - Standard tier: systematic exploration of all Inkwell routes
 >   - Playwright scripts for each page
@@ -770,9 +770,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
-> 👋 I'm Alex, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
+> 👋 I'm Neema, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
 >
 > What would you like to do?
 >   Q · Quick — smoke test (homepage + top 5 routes, ~1 min)
@@ -783,19 +783,19 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `S`
 
-*Alex checks for GATE 5 CLEAR — found. Asks for the URL.*
+*Neema checks that implementation is complete — confirmed. Asks for the URL.*
 
-**Alex:**
+**Neema:**
 
 > What's the app URL?
 
 **You:** `http://localhost:3000`
 
-*Alex runs the orientation script, finds the app, maps all routes, then runs page-check scripts for each route. Screenshots land in `.qa/screenshots/`.*
+*Neema runs the orientation script, finds the app, maps all routes, then runs page-check scripts for each route. Screenshots land in `.qa/screenshots/`.*
 
-*After exploring all routes, Alex documents findings.*
+*After exploring all routes, Neema documents findings.*
 
-**Alex:**
+**Neema:**
 
 > QA exploration complete. Here's what I found:
 >
@@ -840,9 +840,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
-> Change Report — Alex (QA)
+> Change Report — Neema (QA)
 >
 > Bug:    Empty title causes 500 with stack trace
 > Will fix:
@@ -856,9 +856,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Alex applies the fix, re-runs the page-check script for the post editor route, takes an after screenshot.*
+*Neema applies the fix, re-runs the page-check script for the post editor route, takes an after screenshot.*
 
-**Alex:**
+**Neema:**
 
 > Bug 1 fixed and verified. Re-run shows 400 with "Title is required" — no stack trace.
 >
@@ -866,9 +866,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `skip`
 
-**Alex:**
+**Neema:**
 
-> GATE QA CLEAR
+> ✅ Browser QA complete
 >
 > Health score: 84/100  (79.5 → 84 after fix)
 > Bugs found:   2 total  (0 critical, 1 high, 1 medium)
@@ -878,13 +878,13 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 >
 > Ready for deployment. Next: `/forge/deployment`
 
-**Max:**
+**Jabari:**
 
-> ✓ Phase 5.5 done — GATE QA CLEAR
+> ✓ Phase 5.5 done — browser QA complete
 >
 > Change Report — Phase 6: Deployment
 >
-> Agent:    Drew (@devops-azure)
+> Agent:    Faraji (@devops-azure)
 > Will do:
 >   - Create GitHub Actions CI/CD pipeline
 >   - Provision Azure Static Web Apps (frontend) + App Service (API) + Azure Database for PostgreSQL
@@ -901,11 +901,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 ---
 
-### Phase 6 — Deployment (Drew)
+### Phase 6 — Deployment (Faraji)
 
-**Drew:**
+**Faraji:**
 
-> 👋 I'm Drew, your ForgeAI DevOps Engineer. I get your code running in Azure — safely.
+> 👋 I'm Faraji, your ForgeAI DevOps Engineer. I get your code running in Azure — safely.
 >
 > What would you like to do?
 >   P · Create or update a CI/CD pipeline
@@ -916,27 +916,27 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `P`
 
-*Drew checks for GATE 5 CLEAR and GATE QA CLEAR — both found.*
+*Faraji checks that all tests pass and QA is complete — both confirmed.*
 
-**Drew:**
+**Faraji:**
 
 > Is there an existing pipeline? (yes / no — if yes, I'll extend it rather than replace)
 
 **You:** `No existing pipeline.`
 
-**Drew:**
+**Faraji:**
 
 > What environments does this pipeline need? (dev / staging / prod)
 
 **You:** `staging and prod`
 
-**Drew:**
+**Faraji:**
 
 > Any existing service connections or Azure subscriptions to use?
 
 **You:** `Yes — subscription ID: sub-12345. Service connection: inkwell-azure.`
 
-**Drew:**
+**Faraji:**
 
 > I'll create / update:
 >   - Pipeline: CI (lint → test → build) + CD (staging deploy → prod approve → prod deploy)
@@ -947,11 +947,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Drew shows the Change Report, then produces the pipeline YAML, Bicep infrastructure files, and deployment configuration.*
+*Faraji shows the Change Report, then produces the pipeline YAML, Bicep infrastructure files, and deployment configuration.*
 
-**Drew:**
+**Faraji:**
 
-> Change Report — Drew (DevOps Azure)
+> Change Report — Faraji (DevOps Azure)
 >
 > Will create / update:
 >   - .github/workflows/inkwell-ci-cd.yml
@@ -970,9 +970,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Drew runs the security checklist.*
+*Faraji runs the security checklist.*
 
-**Drew:**
+**Faraji:**
 
 > Security checklist:
 >   [x] No secrets in pipeline YAML
@@ -985,17 +985,17 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Drew provisions infrastructure, deploys, runs smoke tests.*
+*Faraji provisions infrastructure, deploys, runs smoke tests.*
 
-**Drew:**
+**Faraji:**
 
-> PHASE 6 COMPLETE
+> ✅ Deployed and running
 > Environment: production
 > Health: PASSED
 > App Insights: https://portal.azure.com/#resource/inkwell-insights
 > Pipeline: https://github.com/you/inkwell/actions/runs/12345
 
-**Max:**
+**Jabari:**
 
 > FORGEAI WORKFLOW COMPLETE
 >
@@ -1010,7 +1010,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 >   Phase 5.5 — health score 84/100, 1 bug fixed
 >   Phase 6 — deployed to staging + prod
 >
-> The docs, tests, and infrastructure are all in version control. Sage can document the codebase any time.
+> The docs, tests, and infrastructure are all in version control. Amina can document the codebase any time.
 
 ---
 
@@ -1051,34 +1051,34 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 > **Copilot note:** After `npx forgeai-workflow init`, the agent files are now in `.github/agents/`. Copilot reads these automatically — no restart required. If agents do not appear, reload the VS Code window with `Ctrl+Shift+P` → "Developer: Reload Window".
 
-*Max silently scans TaskFlow. He finds source code, no design.md, no tasks.md, no docs folder.*
+*Jabari silently scans TaskFlow. He finds source code, no design.md, no tasks.md, no docs folder.*
 
-**Max:**
+**Jabari:**
 
-> 👋 I'm Max, your ForgeAI Orchestrator.
+> 👋 I'm Jabari, your ForgeAI Orchestrator.
 >
 > Mode: Existing Codebase
 > design.md:  ✗ not found
 > tasks.md:   ✗ not found
 > Docs:       ✗ not found
 >
-> I can see an existing project with no documentation. Sage should document it first — that gives every agent the full picture.
+> I can see an existing project with no documentation. Amina should document it first — that gives every agent the full picture.
 >
 > What would you like to do?
 >   W · Full workflow from scratch
 >   R · Resume from a specific phase
 >   P · Run one phase only
->   D · Document existing codebase first (Sage)
+>   D · Document existing codebase first (Amina)
 >   S · Show team and workflow status
 >   ? · All options
 
 **You:** `D`
 
-**Max:**
+**Jabari:**
 
 > Change Report — Phase 0: Codebase Documentation
 >
-> Agent:    Sage (@codebase-docs)
+> Agent:    Amina (@codebase-docs)
 > Will do:
 >   - Scan the full TaskFlow codebase
 >   - Ask 5 scoping questions
@@ -1094,13 +1094,13 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 ---
 
-### Phase 0 — Codebase Documentation (Sage)
+### Phase 0 — Codebase Documentation (Amina)
 
-*Sage silently scans TaskFlow. He finds the folder structure, package.json, entry points, no CI/CD, no test folder.*
+*Amina silently scans TaskFlow. He finds the folder structure, package.json, entry points, no CI/CD, no test folder.*
 
-**Sage:**
+**Amina:**
 
-> 👋 I'm Sage, your ForgeAI Codebase Docs Engineer.
+> 👋 I'm Amina, your ForgeAI Codebase Docs Engineer.
 >
 > Codebase scan complete.
 > Tech stack:    Node.js, React, Express, MongoDB
@@ -1117,9 +1117,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `D`
 
-*Sage runs the Documentation Sequence — five questions, one at a time.*
+*Amina runs the Documentation Sequence — five questions, one at a time.*
 
-**Sage:**
+**Amina:**
 
 > Who is the primary audience for these docs?
 >   1. New engineers joining the team
@@ -1129,7 +1129,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `1 — new engineers`
 
-**Sage:**
+**Amina:**
 
 > What level of documentation do you need?
 >   1. High-level only — architecture, setup, key concepts
@@ -1138,35 +1138,35 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `2 — component level`
 
-**Sage:**
+**Amina:**
 
 > What do new team members always ask about or get wrong?
 
 **You:** `They always ask why we use MongoDB instead of PostgreSQL, and they get confused about the task status state machine — it has 6 states and the transitions aren't obvious.`
 
-**Sage:**
+**Amina:**
 
 > Is there code that is deprecated, experimental, or should be ignored?
 
 **You:** `Yes — the server/legacy-import/ folder. It was used for a one-time data migration and should never be touched.`
 
-**Sage:**
+**Amina:**
 
 > Are there naming decisions or structures that look odd but are intentional?
 
 **You:** `The 'projects' folder in the client contains both the project list view and the Kanban board — it looks like it should be split but it's intentional because they share a lot of state.`
 
-*Sage scans component relationships and finds an ambiguous module.*
+*Amina scans component relationships and finds an ambiguous module.*
 
-**Sage:**
+**Amina:**
 
 > `server/utils/transformer.js` appears to format API responses. Is that accurate, or is its actual purpose different?
 
 **You:** `It does two things — it formats responses AND sanitizes user input before DB writes. The name is misleading.`
 
-*Sage confirms the doc plan.*
+*Amina confirms the doc plan.*
 
-**Sage:**
+**Amina:**
 
 > Here's what I'll document:
 >
@@ -1185,9 +1185,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `Proceed.`
 
-**Sage:**
+**Amina:**
 
-> Change Report — Sage (Codebase Docs)
+> Change Report — Amina (Codebase Docs)
 >
 > Will create / update:
 >   - docs/architecture.md
@@ -1205,9 +1205,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `yes`
 
-*Sage writes each file, showing it before saving and asking "Does this look right?" before moving on. Once all eight files are written:*
+*Amina writes each file, showing it before saving and asking "Does this look right?" before moving on. Once all eight files are written:*
 
-**Sage:**
+**Amina:**
 
 > Documentation complete.
 >
@@ -1226,7 +1226,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 > - Review quarterly — docs go stale
 > - Run `/forge/requirements` to plan new features on this documented base
 
-**Max:**
+**Jabari:**
 
 > ✓ Phase 0 done — TaskFlow is documented.
 >
@@ -1234,7 +1234,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `Global search — across projects, tasks, and comments.`
 
-**Max:**
+**Jabari:**
 
 > Sounds like a new feature starting at Phase 1. Shall I proceed with requirements?
 
@@ -1244,59 +1244,59 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 ### Phases 1–2 — Requirements and Architecture (Verbatim)
 
-*Phase 1 proceeds exactly as in Scenario 1 — Sam asks five questions about the search feature. The verbatim answers:*
+*Phase 1 proceeds exactly as in Scenario 1 — Imani asks five questions about the search feature. The verbatim answers:*
 
-**Sam:** `What are we building? One or two sentences.`
+**Imani:** `What are we building? One or two sentences.`
 
 **You:** `Global search for TaskFlow. Users type a query and see matching results across projects, task titles, task descriptions, and comments — in real time as they type.`
 
-**Sam:** `Who uses it and what problem does it solve?`
+**Imani:** `Who uses it and what problem does it solve?`
 
 **You:** `All TaskFlow users. Problem: users can't find things when they have many projects. They're currently scrolling Kanban boards to find tasks by name.`
 
-**Sam:** `What does success look like — measurable?`
+**Imani:** `What does success look like — measurable?`
 
 **You:** `Search results appear in under 300ms as the user types. Results include the matching text with the query term highlighted. No more than 20 results per query.`
 
-**Sam:** `Any hard constraints? (tech stack, deadline, compliance, budget)`
+**Imani:** `Any hard constraints? (tech stack, deadline, compliance, budget)`
 
 **You:** `Must use existing MongoDB. No Elasticsearch — too expensive. No deadline.`
 
-**Sam:** `What's explicitly out of scope?`
+**Imani:** `What's explicitly out of scope?`
 
 **You:** `Saved searches, search history, filtering by date, searching file attachments.`
 
-*Sam writes design.md for the search feature. PHASE 1 COMPLETE.*
+*Imani writes design.md for the search feature. ✅ Requirements complete.*
 
-*Phase 2 proceeds — Leo reads design.md and the existing docs/architecture.md. He presents one key decision (MongoDB text index vs regex search) and draws diagrams. PHASE 2 COMPLETE.*
+*Phase 2 proceeds — Zuberi reads design.md and the existing docs/architecture.md. He presents one key decision (MongoDB text index vs regex search) and draws diagrams. ✅ Architecture complete.*
 
 ---
 
 ### Phases 3–6 — Summary
 
-*Because global search touches server-side API and client-side UI, Mia specs two screens: the Search Results overlay and the empty-results state. PHASE 3 COMPLETE.*
+*Because global search touches server-side API and client-side UI, Zuri specs two screens: the Search Results overlay and the empty-results state. ✅ Design complete.*
 
-*Riley writes failing tests for the search endpoint, the text-index behaviour, and the client-side SearchBar component. GATE 4 CLEAR — ALL RED.*
+*Kofi writes failing tests for the search endpoint, the text-index behaviour, and the client-side SearchBar component. ✅ Tests written — all failing.*
 
-*Finn implements the MongoDB text index, the `/api/search` endpoint, and the SearchBar React component. GATE 5 CLEAR — ALL GREEN.*
+*Rashidi implements the MongoDB text index, the `/api/search` endpoint, and the SearchBar React component. ✅ Implementation complete — all tests passing.*
 
-*Alex runs a Standard QA pass. No critical or high bugs found. Health score: 91/100. GATE QA CLEAR.*
+*Neema runs a Standard QA pass. No critical or high bugs found. Health score: 91/100. ✅ Browser QA complete.*
 
-*Drew extends the existing pipeline with a search-specific smoke test. PHASE 6 COMPLETE.*
+*Faraji extends the existing pipeline with a search-specific smoke test. ✅ Deployed and running.*
 
 ---
 
 ## Scenario 3 — Resuming an Interrupted Workflow
 
-**Setup:** You started a ForgeAI workflow for a new feature last week. You completed Phases 1 and 2 (design.md and architecture docs exist). You were interrupted before Phase 3. You want to resume from Phase 4 (testing) — UX is straightforward enough that you are skipping Mia.
+**Setup:** You started a ForgeAI workflow for a new feature last week. You completed Phases 1 and 2 (design.md and architecture docs exist). You were interrupted before Phase 3. You want to resume from Phase 4 (testing) — UX is straightforward enough that you are skipping Zuri.
 
 Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
-*Max silently scans the project. He finds design.md, docs/architecture.md, docs/adr/, no test files, no implementation files.*
+*Jabari silently scans the project. He finds design.md, docs/architecture.md, docs/adr/, no test files, no implementation files.*
 
-**Max:**
+**Jabari:**
 
-> 👋 I'm Max, your ForgeAI Orchestrator.
+> 👋 I'm Jabari, your ForgeAI Orchestrator.
 >
 > Mode: Existing Codebase
 > design.md:  ✓ found
@@ -1307,13 +1307,13 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 >   W · Full workflow from scratch
 >   R · Resume from a specific phase
 >   P · Run one phase only
->   D · Document existing codebase first (Sage)
+>   D · Document existing codebase first (Amina)
 >   S · Show team and workflow status
 >   ? · All options
 
 **You:** `R`
 
-**Max:**
+**Jabari:**
 
 > Which phase?
 >   1 Requirements
@@ -1326,15 +1326,15 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `4`
 
-*Max checks: design.md found, architecture docs found — prerequisites for Phase 4 are present.*
+*Jabari checks: design.md found, architecture docs found — prerequisites for Phase 4 are present.*
 
-**Max:**
+**Jabari:**
 
 > design.md and architecture docs confirmed.
 >
 > Change Report — Phase 4: Testing
 >
-> Agent:    Riley (@test-engineer)
+> Agent:    Kofi (@test-engineer)
 > Will do:
 >   - Read design.md acceptance criteria
 >   - Write failing tests for all FRs (unit + integration + E2E)
@@ -1348,9 +1348,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **You:** `yes`
 
-*The workflow resumes from Phase 4 exactly as normal — Riley greets, writes tests, clears GATE 4. The workflow then proceeds through Phases 5, 5.5, and 6.*
+*The workflow resumes from Phase 4 exactly as normal — Kofi greets, writes tests, and confirms all failing. The workflow then proceeds through Phases 5, 5.5, and 6.*
 
-> **Copilot note:** When you resume a workflow, Max reads the project's existing files to determine state. He does not rely on conversation history from previous sessions — he re-scans every time. This means resuming always works, even after closing VS Code.
+> **Copilot note:** When you resume a workflow, Jabari reads the project's existing files to determine state. He does not rely on conversation history from previous sessions — he re-scans every time. This means resuming always works, even after closing VS Code.
 
 ---
 
@@ -1360,11 +1360,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs` and press Enter.
 
-*Sage silently scans the codebase — folder structure, entry points, tech stack, existing docs, tests, CI/CD.*
+*Amina silently scans the codebase — folder structure, entry points, tech stack, existing docs, tests, CI/CD.*
 
-**Sage:**
+**Amina:**
 
-> 👋 I'm Sage, your ForgeAI Codebase Docs Engineer.
+> 👋 I'm Amina, your ForgeAI Codebase Docs Engineer.
 >
 > Codebase scan complete.
 > Tech stack:    TypeScript, Next.js, Prisma, PostgreSQL
@@ -1381,39 +1381,39 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs` and press Enter
 
 **You:** `D`
 
-*Sage runs the full Documentation Sequence — five scoping questions, architecture scan, clarifying questions, doc plan confirmation, then writes each file.*
+*Amina runs the full Documentation Sequence — five scoping questions, architecture scan, clarifying questions, doc plan confirmation, then writes each file.*
 
-**Sage:** `Who is the primary audience for these docs?`
+**Amina:** `Who is the primary audience for these docs?`
 
 **You:** `4 — all of the above`
 
-**Sage:** `What level of documentation do you need?`
+**Amina:** `What level of documentation do you need?`
 
 **You:** `3 — full depth`
 
-**Sage:** `What do new team members always ask about or get wrong?`
+**Amina:** `What do new team members always ask about or get wrong?`
 
 **You:** `They always ask why we have two authentication flows — one for the web app and one for the API. The web app uses NextAuth, the API uses short-lived JWTs issued by a separate token endpoint. It confuses everyone.`
 
-**Sage:** `Is there code that is deprecated, experimental, or should be ignored?`
+**Amina:** `Is there code that is deprecated, experimental, or should be ignored?`
 
 **You:** `src/lib/legacy-cache.ts — it's from a failed Redis experiment. Will be deleted next sprint.`
 
-**Sage:** `Are there naming decisions or structures that look odd but are intentional?`
+**Amina:** `Are there naming decisions or structures that look odd but are intentional?`
 
 **You:** `The src/app/(auth)/ route group — the parentheses are Next.js syntax for a layout group that doesn't add to the URL path. New engineers always think it's a bug.`
 
-*Sage scans the component relationships. In the scan, it finds an ambiguous file.*
+*Amina scans the component relationships. In the scan, it finds an ambiguous file.*
 
-**Sage:**
+**Amina:**
 
 > `src/lib/data.ts` contains functions named `fetchUser`, `fetchProject`, and `fetchDashboard`. These appear to be server-side data fetching functions for Next.js Server Components. Is that accurate, or do they also run on the client?
 
 **You:** `Server-side only. They use Prisma directly and can never run on the client.`
 
-*Sage surfaces clarifying questions in a batch.*
+*Amina surfaces clarifying questions in a batch.*
 
-**Sage:**
+**Amina:**
 
 > I have 3 questions before I start writing. Let's go through them:
 >
@@ -1423,9 +1423,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs` and press Enter
 
 **You:** `1. They're general-purpose — formatting, date math, string manipulation. 2. Intentional — we know it should be split but haven't done it. 3. The TODOs at line 44 are real — pagination isn't implemented. Line 87 is stale — that feature shipped.`
 
-*Sage confirms the doc plan.*
+*Amina confirms the doc plan.*
 
-**Sage:**
+**Amina:**
 
 > Here's what I'll document:
 >
@@ -1445,9 +1445,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs` and press Enter
 
 **You:** `Proceed.`
 
-**Sage:**
+**Amina:**
 
-> Change Report — Sage (Codebase Docs)
+> Change Report — Amina (Codebase Docs)
 >
 > Will create / update:
 >   - docs/architecture.md
@@ -1466,9 +1466,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs` and press Enter
 
 **You:** `yes`
 
-*Sage writes each document one at a time, showing each to you before saving. After the final file:*
+*Amina writes each document one at a time, showing each to you before saving. After the final file:*
 
-**Sage:**
+**Amina:**
 
 > Documentation complete.
 >
@@ -1496,11 +1496,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs` and press Enter
 
 Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
-*Alex silently detects Playwright before greeting.*
+*Neema silently detects Playwright before greeting.*
 
-**Alex:**
+**Neema:**
 
-> 👋 I'm Alex, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
+> 👋 I'm Neema, your ForgeAI QA Engineer. I test what's built so nothing ships broken.
 >
 > What would you like to do?
 >   Q · Quick — smoke test (homepage + top 5 routes, ~1 min)
@@ -1511,19 +1511,19 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `S`
 
-*Alex checks for GATE 5 CLEAR. It is found in tasks.md.*
+*Neema checks that implementation is complete. It is confirmed in tasks.md.*
 
-**Alex:**
+**Neema:**
 
 > What's the app URL?
 
 **You:** `http://localhost:4000`
 
-*Alex runs the discovery script. The app is reachable at port 4000.*
+*Neema runs the discovery script. The app is reachable at port 4000.*
 
-*Alex runs the orientation script. Finds: title "TaskFlow", landing at `/login`, console shows zero errors, 12 navigation links.*
+*Neema runs the orientation script. Finds: title "TaskFlow", landing at `/login`, console shows zero errors, 12 navigation links.*
 
-**Alex:**
+**Neema:**
 
 > Orientation complete.
 > App: TaskFlow at http://localhost:4000
@@ -1534,23 +1534,23 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
 > What are the test credentials? (username only — I'll keep the password redacted in the report)
 
 **You:** `Username: qa-test@taskflow.app`
 
-*Alex writes and runs the Playwright auth script. Cookies are saved to `.qa/session.json`.*
+*Neema writes and runs the Playwright auth script. Cookies are saved to `.qa/session.json`.*
 
-**Alex:**
+**Neema:**
 
 > AUTH: ok — cookies saved to .qa/session.json
 >
 > Starting Standard tier — I'll test all routes: /dashboard, /projects, /projects/:id, /profile, /profile/edit, /settings
 
-*Alex runs a page-check script for each route. For each one: screenshot taken, console errors checked, network failures checked, links enumerated. After all routes:*
+*Neema runs a page-check script for each route. For each one: screenshot taken, console errors checked, network failures checked, links enumerated. After all routes:*
 
-**Alex:**
+**Neema:**
 
 > Exploration complete. Here's what I found:
 >
@@ -1602,15 +1602,15 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 >
 > Ship readiness: ⚠️ SHIP WITH CAUTION
 
-**Alex:**
+**Neema:**
 
 > Fix Bug 1 (critical — large upload unhandled rejection)? (yes / skip)
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
-> Change Report — Alex (QA)
+> Change Report — Neema (QA)
 >
 > Bug:    Large profile photo upload causes unhandled promise rejection and infinite spinner
 > Will fix:
@@ -1625,9 +1625,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `yes`
 
-*Alex applies the fix, re-runs the profile-edit page-check script, takes a new screenshot showing the validation error.*
+*Neema applies the fix, re-runs the profile-edit page-check script, takes a new screenshot showing the validation error.*
 
-**Alex:**
+**Neema:**
 
 > Bug 1 fixed and verified. Re-run shows "Photo must be under 2MB" at correct timing — no spinner.
 >
@@ -1635,9 +1635,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
-> Change Report — Alex (QA)
+> Change Report — Neema (QA)
 >
 > Bug:    Ampersand in display name renders as HTML entity
 > Will fix:
@@ -1651,9 +1651,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `yes`
 
-*Alex applies the fix, re-runs the profile page-check, verifies the display name renders correctly.*
+*Neema applies the fix, re-runs the profile page-check, verifies the display name renders correctly.*
 
-**Alex:**
+**Neema:**
 
 > Bug 2 fixed and verified.
 >
@@ -1661,9 +1661,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `yes`
 
-**Alex:**
+**Neema:**
 
-> Change Report — Alex (QA)
+> Change Report — Neema (QA)
 >
 > Bug:    Toggle switches on /settings have no visible focus ring
 > Will fix:
@@ -1677,9 +1677,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `yes`
 
-*Alex applies the CSS fix, re-runs the settings page-check.*
+*Neema applies the CSS fix, re-runs the settings page-check.*
 
-**Alex:**
+**Neema:**
 
 > Bug 3 fixed and verified.
 >
@@ -1687,9 +1687,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 **You:** `skip`
 
-**Alex:**
+**Neema:**
 
-> GATE QA CLEAR
+> ✅ Browser QA complete
 >
 > Health score: 93/100  (79.5 → 93 after fixes)
 > Bugs found:   4 total  (1 critical, 1 high, 1 medium, 1 cosmetic)
@@ -1707,11 +1707,11 @@ Open VS Code. Open the Copilot Chat panel. Type `@qa` and press Enter.
 
 Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 
-*Sage silently scans the codebase.*
+*Amina silently scans the codebase.*
 
-**Sage:**
+**Amina:**
 
-> 👋 I'm Sage, your ForgeAI Codebase Docs Engineer.
+> 👋 I'm Amina, your ForgeAI Codebase Docs Engineer.
 >
 > Codebase scan complete.
 > Tech stack:    Python, FastAPI, SQLAlchemy, React
@@ -1728,9 +1728,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 
 **You:** `H`
 
-*Sage runs the Architecture Health Scan. He checks for tight coupling, shallow modules, unclear boundaries, and agent-unfriendly structure across the entire codebase.*
+*Amina runs the Architecture Health Scan. He checks for tight coupling, shallow modules, unclear boundaries, and agent-unfriendly structure across the entire codebase.*
 
-**Sage:**
+**Amina:**
 
 > Architecture Health Scan — TaskFlow Backend
 > Scanned: 87 files / 14 modules
@@ -1749,14 +1749,14 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 >
 >   - `backend/api/routes.py` contains 3 functions over 120 lines each (`create_project`, `update_project_members`, `generate_report`). Deeply nested conditionals (5 levels in `generate_report`) make the logic unreadable and untestable.
 >
->   - `frontend/src/components/Dashboard/index.tsx` — 480 lines. Mixes layout, data fetching, filtering logic, and three distinct sub-views in one file. Mia cannot spec a change to one sub-view without understanding all 480 lines.
+>   - `frontend/src/components/Dashboard/index.tsx` — 480 lines. Mixes layout, data fetching, filtering logic, and three distinct sub-views in one file. Zuri cannot spec a change to one sub-view without understanding all 480 lines.
 >
 >   - `frontend/src/utils.ts` — 15 functions, all under 8 lines, each wrapping a single standard library call. Pure pass-throughs with no added logic — these functions add indirection without value.
 >
 > 🟢 Healthy areas
 >
 >   - `backend/models/` — SQLAlchemy models are clean, single-responsibility, and well-named. Each model file contains exactly one model class.
->   - `frontend/src/components/ProjectCard/` — small, focused component with co-located test. Clear inputs and outputs. Easy for Finn to modify without side effects.
+>   - `frontend/src/components/ProjectCard/` — small, focused component with co-located test. Clear inputs and outputs. Easy for Rashidi to modify without side effects.
 >   - `frontend/src/hooks/` — custom hooks are well-scoped. Each hook does one thing and is independently testable.
 >   - `.github/workflows/ci.yml` — CI pipeline is clean, runs lint + test + build in correct order, no secrets in YAML.
 >
@@ -1766,15 +1766,15 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 >
 >   2. **Break the circular dependency between service modules** — Introduce a thin `domain/` layer with pure Python dataclasses and no imports from services. Services depend only on `domain/` objects and the DB session — never on each other directly. Expected benefit: each service becomes independently unit-testable, import order is deterministic.
 >
->   3. **Split `Dashboard/index.tsx` by view** — Extract `ProjectListView`, `ActivityFeedView`, and `QuickActionsView` into separate component files. Keep `Dashboard/index.tsx` as a layout-only coordinator. Expected benefit: Mia can spec one view without reading the others; Finn can implement one view without risk to the others.
+>   3. **Split `Dashboard/index.tsx` by view** — Extract `ProjectListView`, `ActivityFeedView`, and `QuickActionsView` into separate component files. Keep `Dashboard/index.tsx` as a layout-only coordinator. Expected benefit: Zuri can spec one view without reading the others; Rashidi can implement one view without risk to the others.
 >
 > Want me to dig deeper into any of these areas?
 
-*Sage stops here and waits. He will not recommend code changes unless you ask.*
+*Amina stops here and waits. He will not recommend code changes unless you ask.*
 
 **You:** `Tell me more about fixing the circular dependency.`
 
-**Sage:**
+**Amina:**
 
 > The circular dependency chain is: `project_service.py` imports `user_service.py` (to look up project members), `user_service.py` imports `task_service.py` (to count tasks per user), and `task_service.py` imports `project_service.py` (to validate the project exists before creating a task).
 >
@@ -1783,13 +1783,13 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 > - Instead of `task_service.py` importing `project_service.py` to validate a project, pass the project ID in and do the validation with a direct DB query or a shared repository function in a new `backend/repositories/` layer.
 > - Instead of `user_service.py` importing `task_service.py`, expose a task count query as a repository function that both services call independently.
 >
-> This does not require a big-bang refactor — it can be done one import at a time. Would you like me to document the proposed dependency structure in `docs/architecture.md`, or would you prefer to take this to Leo for a formal ADR?
+> This does not require a big-bang refactor — it can be done one import at a time. Would you like me to document the proposed dependency structure in `docs/architecture.md`, or would you prefer to take this to Zuberi for a formal ADR?
 
 **You:** `Add it to architecture.md.`
 
-**Sage:**
+**Amina:**
 
-> Change Report — Sage (Codebase Docs)
+> Change Report — Amina (Codebase Docs)
 >
 > Will create / update:
 >   - docs/architecture.md  (add "Circular Dependency — Current State + Proposed Fix" section)
@@ -1800,9 +1800,9 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 
 **You:** `yes`
 
-*Sage updates docs/architecture.md with a Mermaid dependency diagram showing the current circular state and a second diagram showing the proposed repository-layer fix.*
+*Amina updates docs/architecture.md with a Mermaid dependency diagram showing the current circular state and a second diagram showing the proposed repository-layer fix.*
 
-**Sage:**
+**Amina:**
 
 > docs/architecture.md updated.
 >
@@ -1816,43 +1816,43 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 
 | Handle | Name | Role | When to invoke |
 |---|---|---|---|
-| `@orchestrator` | Max | Workflow coordinator | Starting or resuming any workflow |
-| `@codebase-docs` | Sage | Documentation + health scans | Undocumented codebases, architecture review |
-| `@analyst` | Sam | Requirements, PRDs | New feature scoping |
-| `@architect` | Leo | System design, ADRs, diagrams | Architecture decisions |
-| `@designer` | Mia | UX/UI screen specs | Features with a user interface |
-| `@test-engineer` | Riley | TDD — writes failing tests | Before any implementation begins |
-| `@engineer` | Finn | Implementation | After GATE 4 CLEAR only |
-| `@qa` | Alex | Browser testing via Playwright | After GATE 5 CLEAR |
-| `@devops-azure` | Drew | CI/CD, Azure infrastructure | After GATE 5 CLEAR or GATE QA CLEAR |
+| `@orchestrator` | Jabari | Workflow coordinator | Starting or resuming any workflow |
+| `@codebase-docs` | Amina | Documentation + health scans | Undocumented codebases, architecture review |
+| `@analyst` | Imani | Requirements, PRDs | New feature scoping |
+| `@architect` | Zuberi | System design, ADRs, diagrams | Architecture decisions |
+| `@designer` | Zuri | UX/UI screen specs | Features with a user interface |
+| `@test-engineer` | Kofi | TDD — writes failing tests | Before any implementation begins |
+| `@engineer` | Rashidi | Implementation | After tests are confirmed failing |
+| `@qa` | Neema | Browser testing via Playwright | After all tests pass |
+| `@devops-azure` | Faraji | CI/CD, Azure infrastructure | After all tests pass and QA is complete |
 
 ### Copilot Slash Commands
 
 | Command | What it does |
 |---|---|
-| `/forge/orchestrate` | Full workflow — Max drives |
-| `/forge/requirements` | Phase 1 — Sam gathers requirements |
-| `/forge/architecture` | Phase 2 — Leo designs the system |
-| `/forge/design` | Phase 3 — Mia specs the UI |
-| `/forge/testing` | Phase 4 — Riley writes failing tests |
-| `/forge/implementation` | Phase 5 — Finn implements |
-| `/forge/deployment` | Phase 6 — Drew deploys to Azure |
+| `/forge/orchestrate` | Full workflow — Jabari drives |
+| `/forge/requirements` | Phase 1 — Imani gathers requirements |
+| `/forge/architecture` | Phase 2 — Zuberi designs the system |
+| `/forge/design` | Phase 3 — Zuri specs the UI |
+| `/forge/testing` | Phase 4 — Kofi writes failing tests |
+| `/forge/implementation` | Phase 5 — Rashidi implements |
+| `/forge/deployment` | Phase 6 — Faraji deploys to Azure |
 
-> **Reminder:** Always `/forge/requirements` not `/forge-requirements`. The Copilot format uses a path separator (`/`), not a dash. The dash format is Claude Code only.
+> **Reminder:** Always use `/forge/requirements` (path separator). Both Claude Code and Copilot use this format.
 
 ### Gate Messages — Exact Text
 
-| Gate | Exact text | Who produces it |
+| Gate | Confirmation | Who produces it |
 |---|---|---|
-| Phase 1 complete | `PHASE 1 COMPLETE` | Sam |
-| Phase 2 complete | `PHASE 2 COMPLETE` | Leo |
-| Phase 3 complete | `PHASE 3 COMPLETE` | Mia |
-| Gate 4 — tests RED | `GATE 4 CLEAR — ALL RED` | Riley |
-| Gate 5 — tests GREEN | `GATE 5 CLEAR — ALL GREEN` | Finn |
-| QA cleared | `GATE QA CLEAR` | Alex |
-| Phase 6 complete | `PHASE 6 COMPLETE` | Drew |
+| Phase 1 complete | `✅ Requirements complete` | Imani |
+| Phase 2 complete | `✅ Architecture complete` | Zuberi |
+| Phase 3 complete | `✅ Design complete` | Zuri |
+| Gate 4 — tests failing | `✅ Tests written — all failing` | Kofi |
+| Gate 5 — tests passing | `✅ Implementation complete — all tests passing` | Rashidi |
+| QA cleared | `✅ Browser QA complete` | Neema |
+| Phase 6 complete | `✅ Deployed and running` | Faraji |
 
-No paraphrasing. No "all tests are basically passing". The exact text must appear for the Orchestrator to proceed.
+No paraphrasing. No "all tests are basically passing". The confirmation text must appear for the Orchestrator to proceed.
 
 ### Copilot vs Claude Code — Key Differences
 
@@ -1861,22 +1861,22 @@ No paraphrasing. No "all tests are basically passing". The exact text must appea
 | Agent files | `.claude/agents/` | `.github/agents/` |
 | Prompt / command files | `.claude/commands/` | `.github/prompts/forge/` |
 | Global instructions | `CLAUDE.md` | `.github/copilot-instructions.md` |
-| Slash command format | `/forge-requirements` | `/forge/requirements` |
-| Agent invocation | `/forge-orchestrate` or `claude --agent` | `@orchestrator` in Chat panel |
+| Slash command format | `/forge/requirements` | `/forge/requirements` |
+| Agent invocation | `/forge/orchestrate` or `@orchestrator` | `@orchestrator` in Chat panel |
 | Where agents work | Terminal + editor | Copilot Chat panel only — NOT inline suggestions |
 | Session state | Persists in Claude session | Re-scanned from files every session |
 
 ### Workflow Phase Sequence
 
 ```
-0   → Sage  (@codebase-docs)  optional — undocumented existing codebases
-1   → Sam   (@analyst)        → PHASE 1 COMPLETE
-2   → Leo   (@architect)      → PHASE 2 COMPLETE
-3   → Mia   (@designer)       → PHASE 3 COMPLETE       optional — ask Max
-4   → Riley (@test-engineer)  → GATE 4 CLEAR — ALL RED
-5   → Finn  (@engineer)       → GATE 5 CLEAR — ALL GREEN
-5.5 → Alex  (@qa)             → GATE QA CLEAR           recommended — ask Max
-6   → Drew  (@devops-azure)   → PHASE 6 COMPLETE
+0   → Amina  (@codebase-docs)  optional — undocumented existing codebases
+1   → Imani   (@analyst)        → ✅ Requirements complete
+2   → Zuberi   (@architect)      → ✅ Architecture complete
+3   → Zuri   (@designer)       → ✅ Design complete              optional — ask Jabari
+4   → Kofi (@test-engineer)  → ✅ Tests written — all failing
+5   → Rashidi  (@engineer)       → ✅ Implementation complete — all tests passing
+5.5 → Neema  (@qa)             → ✅ Browser QA complete          recommended — ask Jabari
+6   → Faraji  (@devops-azure)   → ✅ Deployed and running
 ```
 
 ### Rules Every Agent Follows
