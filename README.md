@@ -26,12 +26,12 @@ Full walkthroughs with verbatim agent conversations for every scenario:
 
 | Agent | Name | Role | Core Responsibility |
 |-------|------|------|-------------------|
-| **Orchestrator** | Jabari | Project coordinator | Runs the workflow, enforces quality gates, routes tasks |
+| **Orchestrator** | Jabari | Project coordinator | Runs the workflow, enforces quality checkpoints, routes tasks |
 | **Codebase Docs** | Amina | Documentation | Scans and documents codebases — no assumptions. Architecture health scans. |
 | **Analyst** | Imani | Requirements | PRDs, user stories, acceptance criteria |
 | **Architect** | Zuberi | System design | Architecture, ADRs, Mermaid diagrams, API design |
 | **Designer** | Zuri | UX/UI | User flows, screen specs, accessibility |
-| **Test Engineer** | Kofi | TDD | Writes failing tests BEFORE implementation — confirms RED |
+| **Test Engineer** | Kofi | TDD | Writes failing tests BEFORE implementation — confirms all tests are failing |
 | **Engineer** | Rashidi | Implementation | Makes failing tests pass — minimal diff, no test changes |
 | **QA** | Neema | Browser testing | Playwright-driven QA, health scores, bug fix workflow |
 | **DevOps Azure** | Faraji | Delivery | CI/CD, Azure infrastructure, IaC |
@@ -41,67 +41,81 @@ Full walkthroughs with verbatim agent conversations for every scenario:
 ## Two Paths
 
 ### Prescribed Workflow
-The Orchestrator guides you through the full engineering lifecycle with hard quality gates.
-The **Test Engineer must write and confirm failing tests before the Engineer writes any
-implementation code** — this is a non-negotiable gate.
+Jabari (Orchestrator) guides you through the full engineering lifecycle with hard quality checkpoints.
+**Kofi (Test Engineer) must write and confirm all tests are failing before Rashidi (Engineer) writes
+any implementation code** — this is non-negotiable.
 
 ```
-Requirements → Architecture → Design → [Tests Written] → Implementation → [Tests Pass] → Deploy
+Requirements → Architecture → Design → [Tests Failing] → Implementation → [Tests Passing] → QA → Deploy
 ```
 
-**Claude Code / Copilot:**
+**Claude Code:**
 ```
-/forge-orchestrate       # Let the Orchestrator drive everything
-/forge-requirements
-/forge-architecture
-/forge-design
-/forge-testing
-/forge-implementation
-/forge-deployment
+/forge-orchestrate       # Let Jabari (Orchestrator) drive everything
+/forge-requirements      # Imani (Analyst)
+/forge-architecture      # Zuberi (Architect)
+/forge-design            # Zuri (Designer)
+/forge-testing           # Kofi (Test Engineer)
+/forge-implementation    # Rashidi (Engineer)
+/forge-deployment        # Faraji (DevOps Azure)
 /forge-document-codebase # Standalone: scan and document an existing codebase
 ```
 
-**Copilot Chat:**
+**GitHub Copilot:**
 ```
-@orchestrator start the ForgeAI workflow
+/forge/orchestrate       # Let Jabari (Orchestrator) drive everything
+/forge/requirements      # Imani (Analyst)
+/forge/architecture      # Zuberi (Architect)
+/forge/design            # Zuri (Designer)
+/forge/testing           # Kofi (Test Engineer)
+/forge/implementation    # Rashidi (Engineer)
+/forge/deployment        # Faraji (DevOps Azure)
 ```
 
 ### Standalone
 Invoke any agent directly for a specific task:
 
-**Claude Code (sub-agents):**
+**Claude Code:**
 ```
-claude --agent analyst        "write a PRD for a user authentication feature"
-claude --agent architect      "design the database schema for multi-tenancy"
-claude --agent test-engineer  "write tests for the auth module before I implement it"
-claude --agent engineer       "implement the login endpoint — tests already exist"
-claude --agent devops-azure   "create a CI/CD pipeline for this Node.js app"
+@orchestrator
+@analyst
+@architect
+@designer
+@test-engineer
+@engineer
+@qa
+@devops-azure
+@codebase-docs
 ```
 
 **Copilot Chat:**
 ```
-@analyst write a PRD for user authentication
-@architect review the current system design and produce ADRs
-@test-engineer write failing tests for the payment module
-@engineer implement the payment module so all tests pass
+@orchestrator   start the ForgeAI workflow
+@analyst        write a PRD for user authentication
+@architect      review the current system design and produce ADRs
+@designer       spec the UI for the login flow
+@test-engineer  write failing tests for the payment module
+@engineer       implement the payment module so all tests pass
+@qa             run a full browser QA pass on the current build
+@devops-azure   create a CI/CD pipeline for this Node.js app
 ```
 
 ---
 
 ## Test-First Contract
 
-ForgeAI enforces TDD through an explicit handoff contract between the Orchestrator
-and Test Engineer:
+ForgeAI enforces TDD through an explicit handoff contract:
 
 ```
-1. Jabari → Kofi      "Write failing tests for [feature]"
-2. Kofi   → Jabari    "Tests written — all failing" (confirms tests exist and fail)
-3. Jabari → Rashidi   "Make these tests pass. Do not write tests."
-4. Rashidi → Jabari   "Implementation complete — all tests passing"
-5. Jabari → Rashidi   "Refactor if needed. Tests must stay passing."
+1. Jabari (Orchestrator) → Kofi (Test Engineer)    "Write failing tests for [feature]"
+2. Kofi (Test Engineer)  → Jabari (Orchestrator)   "Tests written — all failing"
+3. Jabari (Orchestrator) → Rashidi (Engineer)      "Make these tests pass. Do not write tests."
+4. Rashidi (Engineer)    → Jabari (Orchestrator)   "Implementation complete — all tests passing"
+5. Jabari (Orchestrator) → Neema (QA)              "Browser-test the feature"
+6. Neema (QA)            → Jabari (Orchestrator)   "Browser QA complete"
 ```
 
-Neither the Engineer nor the Orchestrator may skip step 2.
+Neither Rashidi (Engineer) nor Jabari (Orchestrator) may skip step 2.
 
 ---
 
@@ -160,9 +174,9 @@ CLAUDE.md
 
 ## Core Principles
 
-1. **Orchestrator owns the workflow** — agents do not self-assign tasks or skip gates
+1. **Orchestrator owns the workflow** — agents do not self-assign tasks or skip checkpoints
 2. **Test-first is non-negotiable** — no implementation without confirmed failing tests
-3. **Smallest possible diff** — Engineer never reformats or refactors unrelated code
+3. **Smallest possible diff** — Rashidi (Engineer) never reformats or refactors unrelated code
 4. **Design.md is the source of truth** — all agents read it before acting
 5. **Explicit over implicit** — every handoff has a written confirmation message
 

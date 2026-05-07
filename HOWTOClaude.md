@@ -1,6 +1,6 @@
 # HOWTOClaude.md — ForgeAI User Guide
 
-> This guide is for Claude Code specifically. All slash commands use `/forge/*` syntax.
+> This guide is for Claude Code specifically. All slash commands use `/forge-*` syntax (e.g. `/forge-orchestrate`, `/forge-requirements`).
 
 ---
 
@@ -35,14 +35,14 @@ After running `npx forgeai-workflow init`, agent files are installed into your `
 You can also use slash commands to invoke the workflow phases directly:
 
 ```
-/forge/orchestrate
-/forge/requirements
-/forge/architecture
-/forge/design
-/forge/testing
-/forge/implementation
-/forge/deployment
-/forge/document-codebase
+/forge-orchestrate
+/forge-requirements
+/forge-architecture
+/forge-design
+/forge-testing
+/forge-implementation
+/forge-deployment
+/forge-document-codebase
 ```
 
 ### The STOP pattern
@@ -57,14 +57,14 @@ Before any agent writes, modifies, or creates a file, it shows you a Change Repo
 
 ForgeAI enforces four hard gates in the workflow:
 
-| Gate | Cleared by | Confirmation text |
-|------|-----------|---------------|
-| Gate 4 | Kofi (Test Engineer) | `✅ Tests written — all failing` |
-| Gate 5 | Rashidi (Engineer) | `✅ Implementation complete — all tests passing` |
-| Gate QA | Neema (QA) | `✅ Browser QA complete` |
-| Phase 6 | Faraji (DevOps Azure) | `✅ Deployed and running` |
+| Checkpoint | Confirmed by | Confirmation message |
+|------------|-------------|---------------------|
+| Tests written | Kofi (Test Engineer) | `✅ Tests written — all failing` |
+| Implementation done | Rashidi (Engineer) | `✅ Implementation complete — all tests passing` |
+| Browser QA done | Neema (QA) | `✅ Browser QA complete` |
+| Deployed | Faraji (DevOps Azure) | `✅ Deployed and running` |
 
-No gate can be cleared by assumption. "Should be fine" does not clear a gate. "Looks good" does not clear a gate. Kofi must run the tests and confirm they are all failing before Gate 4 clears. Rashidi must run the tests and confirm they all pass before Gate 5 clears.
+No checkpoint can be cleared by assumption. "Should be fine" does not clear a checkpoint. "Looks good" does not clear a checkpoint. Kofi must run the tests and confirm they are all failing before the Tests written checkpoint clears. Rashidi must run the tests and confirm they all pass before the Implementation done checkpoint clears.
 
 ---
 
@@ -902,7 +902,7 @@ const fs = require('fs');
 > Remaining:    1 medium item — inline delete confirm (noted in report)
 > Report:       .qa/report-20260506-143022.md
 >
-> Ready for deployment. Next: `/forge/deployment`
+> Ready for deployment. Next: `/forge-deployment`
 
 ---
 
@@ -1017,9 +1017,9 @@ const fs = require('fs');
 > ✓ Phase 1 — Requirements  (design.md)
 > ✓ Phase 2 — Architecture  (docs/architecture.md, 2 ADRs)
 > ✓ Phase 3 — Design        (docs/ux-specs.md, 3 screens)
-> ✓ Phase 4 — Testing       (34 tests, all failing → Gate 4 cleared)
-> ✓ Phase 5 — Implementation (34 tests, all tests passing → Gate 5 cleared)
-> ✓ Phase 5.5 — QA          (91/100 → Gate QA cleared)
+> ✓ Phase 4 — Testing       (34 tests, all failing → Tests written checkpoint cleared)
+> ✓ Phase 5 — Implementation (34 tests, all tests passing → Implementation done checkpoint cleared)
+> ✓ Phase 5.5 — QA          (91/100 → Browser QA done checkpoint cleared)
 > ✓ Phase 6 — Deployment    (dev deployed to Azure Container Apps)
 
 ---
@@ -1233,7 +1233,7 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 > Recommended next steps:
 > - Add these docs to your PR template checklist
 > - Review quarterly — docs go stale
-> - Run `/forge/requirements` to plan new features on this documented base
+> - Run `/forge-requirements` to plan new features on this documented base
 
 ---
 
@@ -1526,7 +1526,7 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 > Recommended next steps:
 > - Add these docs to your PR template checklist
 > - Review quarterly — docs go stale
-> - Run `/forge/requirements` to plan new features on this documented base
+> - Run `/forge-requirements` to plan new features on this documented base
 
 ---
 
@@ -1781,7 +1781,7 @@ const fs = require('fs');
 > Remaining:    1 medium item — missing aria-label on search input (noted in report)
 > Report:       .qa/report-20260506-161544.md
 >
-> Ready for deployment. Next: `/forge/deployment`
+> Ready for deployment. Next: `/forge-deployment`
 
 ---
 
@@ -1913,22 +1913,22 @@ const fs = require('fs');
 
 | Command | What it does |
 |---------|-------------|
-| `/forge/orchestrate` | Start or resume the full ForgeAI workflow with Jabari |
-| `/forge/requirements` | Run Phase 1 — requirements Q&A and design.md |
-| `/forge/architecture` | Run Phase 2 — system design, ADRs, diagrams |
-| `/forge/design` | Run Phase 3 — UX/UI screen specs |
-| `/forge/testing` | Run Phase 4 — write failing tests |
-| `/forge/implementation` | Run Phase 5 — implement to make tests pass |
-| `/forge/deployment` | Run Phase 6 — CI/CD and Azure deployment |
-| `/forge/document-codebase` | Standalone — document an existing codebase with Amina |
+| `/forge-orchestrate` | Start or resume the full ForgeAI workflow with Jabari |
+| `/forge-requirements` | Run Phase 1 — requirements Q&A and design.md |
+| `/forge-architecture` | Run Phase 2 — system design, ADRs, diagrams |
+| `/forge-design` | Run Phase 3 — UX/UI screen specs |
+| `/forge-testing` | Run Phase 4 — write failing tests |
+| `/forge-implementation` | Run Phase 5 — implement to make tests pass |
+| `/forge-deployment` | Run Phase 6 — CI/CD and Azure deployment |
+| `/forge-document-codebase` | Standalone — document an existing codebase with Amina |
 
-### Gate Cheat Sheet
+### Checkpoint Cheat Sheet
 
-| Gate | Who clears it | What must happen | Confirmation |
-|------|--------------|-----------------|------------|
-| Gate 4 | Kofi | All tests written and confirmed failing | `✅ Tests written — all failing` |
-| Gate 5 | Rashidi | All tests passing, 0 failing | `✅ Implementation complete — all tests passing` |
-| Gate QA | Neema | All critical and high bugs resolved | `✅ Browser QA complete` |
-| Phase 6 | Faraji | Deployment completed and healthy | `✅ Deployed and running` |
+| Checkpoint | Who clears it | What must happen | Confirmation |
+|------------|--------------|-----------------|------------|
+| Tests written | Kofi | All tests written and confirmed failing | `✅ Tests written — all failing` |
+| Implementation done | Rashidi | All tests passing, 0 failing | `✅ Implementation complete — all tests passing` |
+| Browser QA done | Neema | All critical and high bugs resolved | `✅ Browser QA complete` |
+| Deployed | Faraji | Deployment completed and healthy | `✅ Deployed and running` |
 
-No gate is cleared by assumption, estimation, or optimism. Each gate requires the confirmation above.
+No checkpoint is cleared by assumption, estimation, or optimism. Each checkpoint requires the confirmation above.

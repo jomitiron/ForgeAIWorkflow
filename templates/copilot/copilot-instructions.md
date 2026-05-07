@@ -11,22 +11,23 @@ Satisfy every task with the **smallest possible diff**.
 
 ## Your Engineering Team
 
-Use `@<agent-name>` in Copilot Chat or `/agent <name>` in Copilot CLI:
+Use `@<agent-name>` in Copilot Chat or `/forge/<name>` as a slash command:
 
 | Agent | Name | Purpose |
 |-------|------|---------|
-| `@orchestrator` | **Jabari** | Runs the full workflow end-to-end, enforces TDD quality gates |
+| `@orchestrator` | **Jabari** | Runs the full workflow end-to-end, enforces quality checkpoints |
 | `@codebase-docs` | **Amina** | Documents existing codebases — no assumptions |
 | `@analyst` | **Imani** | Requirements, PRDs, user stories, acceptance criteria |
 | `@architect` | **Zuberi** | System design, ADRs, Mermaid diagrams, API contracts |
 | `@designer` | **Zuri** | UX/UI specs, user flows, component states, accessibility |
-| `@test-engineer` | **Kofi** | **Writes failing tests BEFORE implementation — confirms RED** |
+| `@test-engineer` | **Kofi** | **Writes failing tests BEFORE implementation — confirms all failing** |
 | `@engineer` | **Rashidi** | Implementation — receives failing tests, makes them pass |
+| `@qa` | **Neema** | Browser testing — Playwright QA, health scores, bug fix workflow |
 | `@devops-azure` | **Faraji** | CI/CD pipelines, Azure infrastructure, IaC (Bicep/Terraform) |
 
 ## Test-First Contract (Non-Negotiable)
-`@test-engineer` writes and confirms failing tests (RED) before `@engineer` writes any
-implementation code. `@orchestrator` enforces this gate. It cannot be skipped.
+Kofi (Test Engineer) writes and confirms all tests are failing before Rashidi (Engineer) writes any
+implementation code. Jabari (Orchestrator) enforces this checkpoint. It cannot be skipped.
 
 ## Before ANY Work
 1. Read `design.md` — architecture, patterns, constraints
@@ -40,20 +41,20 @@ implementation code. `@orchestrator` enforces this gate. It cannot be skipped.
 
 ## Workflow (Prescribed Path)
 
-### Let the Orchestrator drive everything:
+### Let Jabari (Orchestrator) drive everything:
 ```
 @orchestrator start the ForgeAI engineering workflow for [feature/project]
 ```
 
-### Or step through manually:
+### Or step through manually with slash commands:
 ```
-/forge/orchestrate     drive the full workflow
-/forge/requirements    Phase 1 — Imani (Analyst)
-/forge/architecture    Phase 2 — Zuberi (Architect)
-/forge/design          Phase 3 — Zuri (Designer)
-/forge/testing         Phase 4 — Kofi (Test Engineer)
-/forge/implementation  Phase 5 — Rashidi (Engineer)
-/forge/deployment      Phase 6 — Faraji (DevOps Azure)
+/forge/orchestrate     — Jabari (Orchestrator): drive the full workflow
+/forge/requirements    — Imani (Analyst)
+/forge/architecture    — Zuberi (Architect)
+/forge/design          — Zuri (Designer)
+/forge/testing         — Kofi (Test Engineer)
+/forge/implementation  — Rashidi (Engineer)
+/forge/deployment      — Faraji (DevOps Azure)
 ```
 
 Or invoke agents directly in chat:
@@ -61,7 +62,8 @@ Or invoke agents directly in chat:
 @analyst        gather requirements and produce design.md
 @architect      design the system based on design.md
 @designer       produce UX/UI specs (skip if no user interface)
-@test-engineer  write failing tests for [feature] — confirm RED
-@engineer       make the failing tests pass — confirm GREEN
+@test-engineer  write failing tests for [feature] — confirm all failing
+@engineer       make the failing tests pass — confirm all passing
+@qa             browser-test the feature and produce a health score
 @devops-azure   deploy to Azure
 ```

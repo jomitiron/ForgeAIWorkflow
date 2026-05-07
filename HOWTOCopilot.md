@@ -57,7 +57,7 @@ In the Copilot Chat input box, type the agent's handle preceded by `@`:
 
 Copilot may show agent name suggestions as you type — you can click them in the sidebar or finish typing and press Enter. Either way, the agent scans the project silently, then greets you.
 
-> **Copilot difference:** In Claude Code, agents are invoked as sub-agents or via `/forge/*` slash commands. In Copilot, the primary way to invoke an agent is `@agent-name` in the Chat panel. Slash commands are available as a secondary option (see below).
+> **Copilot difference:** In Claude Code, agents are invoked as sub-agents or via `/forge-*` slash commands (e.g. `/forge-requirements`). In Copilot, the primary way to invoke an agent is `@agent-name` in the Chat panel. Slash commands are available as a secondary option (see below).
 
 ### Using Slash Commands
 
@@ -73,7 +73,7 @@ ForgeAI also registers prompt files as Copilot slash commands. Use these to jump
 /forge/deployment        — Faraji deploys to Azure
 ```
 
-> **Note on slash command format:** ForgeAI slash commands use a path-style format with a forward slash: `/forge/requirements`. Both Claude Code and Copilot use this format.
+> **Note on slash command format:** Copilot and Claude Code use different formats for ForgeAI slash commands. Copilot uses a path-style format with a forward slash: `/forge/requirements`. Claude Code uses a hyphen-prefixed format: `/forge-requirements`. The commands above are Copilot-only. If you are using Claude Code, use `/forge-requirements`, `/forge-architecture`, etc.
 
 ### Where Files Are Installed
 
@@ -1838,7 +1838,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@codebase-docs`.
 | `/forge/implementation` | Phase 5 — Rashidi implements |
 | `/forge/deployment` | Phase 6 — Faraji deploys to Azure |
 
-> **Reminder:** Always use `/forge/requirements` (path separator). Both Claude Code and Copilot use this format.
+> **Reminder:** These are Copilot slash commands and use the path-style format `/forge/requirements`. In Claude Code, the equivalent command is `/forge-requirements` (hyphen prefix). The formats are not interchangeable.
 
 ### Gate Messages — Exact Text
 
@@ -1861,8 +1861,8 @@ No paraphrasing. No "all tests are basically passing". The confirmation text mus
 | Agent files | `.claude/agents/` | `.github/agents/` |
 | Prompt / command files | `.claude/commands/` | `.github/prompts/forge/` |
 | Global instructions | `CLAUDE.md` | `.github/copilot-instructions.md` |
-| Slash command format | `/forge/requirements` | `/forge/requirements` |
-| Agent invocation | `/forge/orchestrate` or `@orchestrator` | `@orchestrator` in Chat panel |
+| Slash command format | `/forge-requirements` (hyphen prefix) | `/forge/requirements` (path style) |
+| Agent invocation | `/forge-orchestrate` or sub-agent | `@orchestrator` in Chat panel |
 | Where agents work | Terminal + editor | Copilot Chat panel only — NOT inline suggestions |
 | Session state | Persists in Claude session | Re-scanned from files every session |
 

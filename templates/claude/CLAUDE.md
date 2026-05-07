@@ -6,22 +6,23 @@ You are working inside a software engineering project powered by **ForgeAI**.
 
 | Agent | Name | Invoke With | Purpose |
 |-------|------|------------|---------|
-| `orchestrator` | **Jabari** | `--agent orchestrator` | Runs the full workflow, enforces TDD gates |
-| `codebase-docs` | **Amina** | `--agent codebase-docs` | Documents existing codebases |
-| `analyst` | **Imani** | `--agent analyst` | Requirements, PRDs, user stories |
-| `architect` | **Zuberi** | `--agent architect` | System design, ADRs, Mermaid diagrams |
-| `designer` | **Zuri** | `--agent designer` | UX/UI specs, user flows, accessibility |
-| `test-engineer` | **Kofi** | `--agent test-engineer` | **Writes failing tests before implementation** |
-| `engineer` | **Rashidi** | `--agent engineer` | Implementation — only after tests are RED |
-| `devops-azure` | **Faraji** | `--agent devops-azure` | CI/CD, Azure infrastructure, IaC |
+| `orchestrator` | **Jabari** | `@orchestrator` | Runs the full workflow, enforces quality checkpoints |
+| `codebase-docs` | **Amina** | `@codebase-docs` | Documents existing codebases |
+| `analyst` | **Imani** | `@analyst` | Requirements, PRDs, user stories |
+| `architect` | **Zuberi** | `@architect` | System design, ADRs, Mermaid diagrams |
+| `designer` | **Zuri** | `@designer` | UX/UI specs, user flows, accessibility |
+| `test-engineer` | **Kofi** | `@test-engineer` | **Writes failing tests before implementation** |
+| `engineer` | **Rashidi** | `@engineer` | Implementation — only after Kofi (Test Engineer) confirms all tests failing |
+| `qa` | **Neema** | `@qa` | Browser testing — Playwright QA, health scores, bug fixes |
+| `devops-azure` | **Faraji** | `@devops-azure` | CI/CD, Azure infrastructure, IaC |
 
 ## Core Principle
 Make the **smallest possible diff** to satisfy the task. Never reformat, reorganize, or
 refactor code the task does not require you to touch.
 
 ## Test-First Contract (Non-Negotiable)
-Tests are written by `test-engineer` (Kofi) and confirmed failing before `engineer` (Rashidi) writes any
-implementation code. This is enforced by `orchestrator` (Jabari) and cannot be skipped.
+Kofi (Test Engineer) writes and confirms all tests are failing before Rashidi (Engineer) writes any
+implementation code. This is enforced by Jabari (Orchestrator) and cannot be skipped.
 
 ## Before Any Work
 1. Read `design.md` — architecture, patterns, constraints
@@ -37,17 +38,18 @@ implementation code. This is enforced by `orchestrator` (Jabari) and cannot be s
 
 ### Full Workflow (new project or feature)
 ```
-/workflow:requirements   → Analyst: gather requirements → design.md
-/workflow:architecture   → Architect: system design
-/workflow:design         → Designer: UX/UI specs (skip if no UI)
-/workflow:testing        → Test Engineer: write failing tests (RED)
-/workflow:implementation → Engineer: make tests pass (GREEN)
-/workflow:deployment     → DevOps: deploy to Azure
+/forge-orchestrate       — Jabari (Orchestrator): drive the full workflow
+/forge-requirements      — Imani (Analyst): gather requirements → design.md
+/forge-architecture      — Zuberi (Architect): system design
+/forge-design            — Zuri (Designer): UX/UI specs (skip if no UI)
+/forge-testing           — Kofi (Test Engineer): write failing tests
+/forge-implementation    — Rashidi (Engineer): make tests pass
+/forge-deployment        — Faraji (DevOps Azure): deploy to Azure
 ```
 
-Or let the Orchestrator drive everything:
+Or let Jabari (Orchestrator) drive everything:
 ```
-/workflow:orchestrate
+/forge-orchestrate
 ```
 
 ### Standalone
