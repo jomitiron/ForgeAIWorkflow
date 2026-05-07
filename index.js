@@ -72,7 +72,10 @@ function copyPromptsForClaude(src, dest) {
     const base = path.basename(file)
       .replace(/^\d+-/, '')
       .replace(/\.prompt\.md$/, '.md');
-    fs.copyFileSync(file, path.join(dest, `forge-${base}`));
+    // Rewrite "name: forge/x" → "name: forge-x" — Copilot CLI rejects slashes in name fields
+    const content = fs.readFileSync(file, 'utf8')
+      .replace(/^(name:\s*)forge\/(.+)$/m, '$1forge-$2');
+    fs.writeFileSync(path.join(dest, `forge-${base}`), content, 'utf8');
   }
 }
 
