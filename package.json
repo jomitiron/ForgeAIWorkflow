@@ -3,7 +3,7 @@
   "version": "0.1.6",
   "description": "AI-first agentic engineering workflow for software engineering projects",
   "bin": {
-    "forgeai": "./index.js"
+    "forgeai": "./bin/forgeai.js"
   },
   "keywords": [
     "ai",
@@ -27,6 +27,7 @@
   },
   "files": [
     "index.js",
+    "bin/",
     "agents/",
     "templates/",
     "prompts/"
