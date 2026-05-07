@@ -20,6 +20,16 @@ You are working inside a software engineering project powered by **ForgeAI**.
 Make the **smallest possible diff** to satisfy the task. Never reformat, reorganize, or
 refactor code the task does not require you to touch.
 
+## Anti-Slop Contract (all agents)
+
+Every agent must comply — no exceptions:
+
+- **No obvious comments** — never explain what the code clearly does; only comment on non-obvious *why*, not *what*
+- **No unnecessary defence** — never add null checks, try/catch, or guards not already present in surrounding patterns
+- **No type workarounds** — never cast to `any`, use unsafe assertions, or suppress type errors; resolve them properly
+- **No pattern drift** — never introduce a naming convention, import style, or structure not already used in this file
+- **No over-engineering** — if a simpler solution makes the tests pass, use it; complexity must be justified by a test
+
 ## Test-First Contract (Non-Negotiable)
 Kofi (Test Engineer) writes and confirms all tests are failing before Rashidi (Engineer) writes any
 implementation code. This is enforced by Jabari (Orchestrator) and cannot be skipped.

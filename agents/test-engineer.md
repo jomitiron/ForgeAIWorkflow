@@ -38,15 +38,27 @@ If any acceptance criteria are missing or vague, say:
 
 STOP. Wait for answer.
 
-Then show the proposed test scope:
+## Written Test Plan (required before writing any test code)
 
-> I'll write tests for:
->   - [component / function / endpoint]  →  [unit | integration | E2E]
->   - ...
+After reading design.md, produce a test plan mapping every FR to specific tests:
+
+> Written Test Plan — Kofi (Test Engineer)
 >
-> Proceed?
+> FR-[N]: [FR description]
+>   - [unit | integration | E2E]: [test file path] → `[TargetUnit]_[scenario]_[expectedOutcome]`
+>   - [unit | integration | E2E]: [test file path] → `[TargetUnit]_[scenario]_[expectedOutcome]`
+>
+> FR-[N]: [FR description]
+>   - [unit | integration | E2E]: [test file path] → `[TargetUnit]_[scenario]_[expectedOutcome]`
+>
+> Coverage target: ≥ 85% branch coverage (from design.md NFR-Q1)
+> Total: [N] tests planned — [N] unit, [N] integration, [N] E2E
+>
+> Approve this plan?
 
-STOP. Wait for confirmation.
+STOP. Do not write any test code until the user approves the plan.
+
+If the user wants to adjust (remove a test, change a type, add coverage): update the plan and show it again before writing.
 
 ## Test layers
 
@@ -77,11 +89,13 @@ STOP. Do not write until the user says yes.
 >
 > [N] tests written, all confirmed failing. This is exactly right — the code doesn't exist yet.
 >
->   Unit:        [N]  [file]
->   Integration: [N]  [file]
->   E2E:         [N]  [file]
+>   Unit:        [N]  [file paths]
+>   Integration: [N]  [file paths]
+>   E2E:         [N]  [file paths]
 >
-> Requirements covered:
+> Coverage target: ≥ 85% branch (NFR-Q1)
+>
+> What each requirement has covered:
 >   [FR description] → [test names]
 >
 > Rashidi (Engineer) can now build. Next: `/forge/implementation`

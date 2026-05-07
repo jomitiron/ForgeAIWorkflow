@@ -33,17 +33,27 @@ If any FR has no testable criteria, say:
 
 STOP. Wait for answer.
 
-## Step 4 — Confirm test scope before writing
+## Step 4 — Written Test Plan (required before writing any test code)
 
-Show the proposed scope:
+After reading design.md, produce a test plan mapping every FR to specific tests:
 
-> I'll write tests for:
->   - [component / function / endpoint]  →  [unit | integration | E2E]
->   - ...
+> Written Test Plan — Kofi (Test Engineer)
 >
-> Proceed?
+> FR-[N]: [FR description]
+>   - [unit | integration | E2E]: [test file path] → `[TargetUnit]_[scenario]_[expectedOutcome]`
+>   - [unit | integration | E2E]: [test file path] → `[TargetUnit]_[scenario]_[expectedOutcome]`
+>
+> FR-[N]: [FR description]
+>   - [unit | integration | E2E]: [test file path] → `[TargetUnit]_[scenario]_[expectedOutcome]`
+>
+> Coverage target: ≥ 85% branch coverage (from design.md NFR-Q1)
+> Total: [N] tests planned — [N] unit, [N] integration, [N] E2E
+>
+> Approve this plan?
 
-STOP. Wait for confirmation.
+STOP. Do not write any test code until the user approves the plan.
+
+If the user wants to adjust (remove a test, change a type, add coverage): update the plan and show it again before writing.
 
 ## Test layers
 
@@ -83,6 +93,8 @@ If any test cannot compile: fix the compilation errors first (minimal empty stub
 >   Unit:        [N]  [file paths]
 >   Integration: [N]  [file paths]
 >   E2E:         [N]  [file paths]
+>
+> Coverage target: ≥ 85% branch (NFR-Q1)
 >
 > What each requirement has covered:
 >   [FR description] → [test names]

@@ -9,6 +9,16 @@ Satisfy every task with the **smallest possible diff**.
 - No dead code — remove it entirely, never comment it out
 - Keep backward compatibility unless the task explicitly changes a public API
 
+## Anti-Slop Contract (all agents)
+
+Every agent must comply — no exceptions:
+
+- **No obvious comments** — never explain what the code clearly does; only comment on non-obvious *why*, not *what*
+- **No unnecessary defence** — never add null checks, try/catch, or guards not already present in surrounding patterns
+- **No type workarounds** — never cast to `any`, use unsafe assertions, or suppress type errors; resolve them properly
+- **No pattern drift** — never introduce a naming convention, import style, or structure not already used in this file
+- **No over-engineering** — if a simpler solution makes the tests pass, use it; complexity must be justified by a test
+
 ## Your Engineering Team
 
 Use `@<agent-name>` in Copilot Chat or `/forge/<name>` as a slash command:

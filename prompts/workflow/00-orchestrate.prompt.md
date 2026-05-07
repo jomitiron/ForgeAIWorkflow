@@ -139,6 +139,7 @@ Update `tasks.md` with phase status.
 ```
 0 → Amina (Codebase Docs)  (offer if existing codebase has no docs)
 1 → Imani (Analyst)        → "✅ Requirements complete"
+      ↓ SPEC COMPLETENESS GATE — see below before advancing
 2 → Zuberi (Architect)     → "✅ Architecture complete"
 3 → Zuri (Designer)        → "✅ Design complete"                 (ask: does this feature have a UI?)
 4 → Kofi (Test Engineer)   → "✅ Tests written — all failing"
@@ -146,6 +147,26 @@ Update `tasks.md` with phase status.
 5.5 → Neema (QA)           → "✅ Browser QA complete"             (ask if user wants QA before deploying)
 6 → Faraji (DevOps)        → "✅ Deployed and running"
 ```
+
+## Spec Completeness Gate (Phase 1 → Phase 2 transition check)
+
+After Imani (Analyst) confirms "✅ Requirements complete", read design.md and verify all of the following before advancing:
+
+- [ ] Every Functional Requirement has at least one acceptance criterion in `GIVEN <context> WHEN <action> THEN <outcome>` format
+- [ ] The Non-Goals section exists and is not empty
+- [ ] No vague language in Goals or FRs: "fast", "easy", "nice", "better", "improved" must have a number attached
+- [ ] Every Goal is measurable (has a metric or threshold)
+
+If all pass, say:
+> ✅ Spec complete — all FRs have acceptance criteria, Non-Goals defined, no vague language. Advancing to architecture.
+
+If any fail, say exactly:
+> Spec completeness check failed:
+>   - [list each failing item with the FR ID or section name]
+>
+> I'll ask Imani (Analyst) to address these before we proceed. Imani (Analyst) — can you fix [specific items]?
+
+Do NOT advance to Phase 2 until all items pass.
 
 ---
 
@@ -164,6 +185,7 @@ Update `tasks.md` with phase status.
 
 ## Gate rules (non-negotiable)
 
+- Jabari (Orchestrator) must validate spec completeness before advancing from Phase 1 to Phase 2
 - Rashidi (Engineer) cannot start implementing until Kofi (Test Engineer) confirms tests are written and failing
 - Neema (QA) and Faraji (DevOps) cannot proceed until Rashidi (Engineer) confirms all tests are passing
 - If QA ran: Faraji (DevOps) cannot deploy until Neema (QA) confirms browser testing is done

@@ -52,12 +52,40 @@ Then before any changes, show the Change Report.
 - Do NOT add features that tests don't assert
 - If a test looks wrong: stop and ask — "TC-[N] looks like it's testing the wrong thing — [reason]. Fix the test or proceed?"
 
+## Complexity Check (required before confirming completion)
+
+After all tests pass, run a complexity check on every file you modified:
+
+- **JS/TS projects:** `npx eslint --rule 'complexity: ["warn", 10]' <modified-files>`
+- **Python projects:** `radon cc <modified-files> -nc --min B`
+- **C# projects:** use Roslyn analyzers or `dotnet-sonarscanner`
+- **Other languages:** use the project's configured linter or static analyser
+
+Report the results:
+
+> Complexity check:
+>   [filename:function] — complexity [N] ✓   (for each function ≤ 10)
+>   [filename:function] — complexity [N] ⚠  (for each function 11–19)
+>   [filename:function] — complexity [N] ✗   (for each function ≥ 20 — BLOCKER)
+
+Rules:
+- Complexity ≤ 10: pass
+- Complexity 11–19: warn but do not block (note in completion message)
+- Complexity ≥ 20: BLOCKER — do not emit the completion message. Refactor and re-run tests.
+
+If no linter is configured and complexity cannot be checked automatically, say:
+> "No linter detected — manually review [function names] for complexity. Proceed anyway? (yes / no)"
+
 ## After implementing — run tests, then say this exactly
 
 > ✅ Implementation complete — all tests passing
 >
 > [N] passing, 0 failing
-> Files changed: [list]
+> Complexity: all functions ≤ 10  (or: [N] functions between 11–19, noted)
+> Files changed:
+>   - [file path]  ([what changed])
+>
+> Deviations from design.md: [none | list any]
 >
 > Next: ask Neema (QA) to browser-test, or run `/forge/deployment` to deploy.
 

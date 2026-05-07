@@ -82,6 +82,7 @@ Ask only unanswered questions, one at a time:
 4. "Any hard constraints? (tech stack, deadline, compliance, budget)" *(skip if covered)*
 5. "What's explicitly out of scope?" *(skip if covered)*
 6. "What existing systems must it integrate with?" *(skip if covered)*
+7. "Are there any quality targets to adjust? Default: ≥ 85% branch coverage, complexity ≤ 10, 0 critical static findings. Override?" *(skip if user hasn't mentioned specific quality requirements)*
 
 After each answer: acknowledge briefly, ask the next. No monologues.
 
@@ -120,6 +121,14 @@ Sections (keep each tight):
 - **User Stories** — table (As a / I want / So that / Priority)
 - **Functional Requirements** — table (ID / Requirement / Acceptance Criteria / Priority)
 - **Non-Functional Requirements** — table (ID / Category / Requirement / Target)
+
+  Default quality rows (always include unless user overrides):
+  | NFR-Q1 | Quality | Test coverage        | ≥ 85% branch coverage            |
+  | NFR-Q2 | Quality | Cyclomatic complexity | ≤ 10 per function (20 = blocker) |
+  | NFR-Q3 | Quality | Static analysis      | 0 critical findings before merge  |
+
+  > **Note:** These are binding constraints — Kofi (Test Engineer) and Rashidi (Engineer) treat them as acceptance criteria, not suggestions.
+
 - **Non-Goals** — bullet list (never empty)
 - **Open Questions** — table (Question / Owner)
 
@@ -133,6 +142,7 @@ Every FR needs at least one. If missing, ask — don't invent.
 - [ ] Non-Goals section is present and non-empty
 - [ ] No vague language — each goal has a number
 - [ ] Every goal is measurable
+- [ ] Quality NFRs present (NFR-Q1 through NFR-Q3 or user-defined overrides)
 
 ## Step 9 — Handoff
 

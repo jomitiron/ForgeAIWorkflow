@@ -13,6 +13,29 @@ function ask(rl, question) {
   return new Promise(resolve => rl.question(question, resolve));
 }
 
+// Detects build/test/lint/dev commands from package.json scripts if present.
+function detectCommands(targetDir) {
+  const pkgPath = path.join(targetDir, 'package.json');
+  const defaults = {
+    install: 'npm install',
+    dev: 'npm run dev',
+    test: 'npm test',
+    lint: 'npm run lint',
+    build: 'npm run build',
+  };
+  if (!fs.existsSync(pkgPath)) return defaults;
+  try {
+    const scripts = JSON.parse(fs.readFileSync(pkgPath, 'utf8')).scripts || {};
+    return {
+      install: 'npm install',
+      dev: scripts.dev ? 'npm run dev' : scripts.start ? 'npm start' : defaults.dev,
+      test: scripts.test ? 'npm test' : defaults.test,
+      lint: scripts.lint ? 'npm run lint' : scripts.check ? 'npm run check' : defaults.lint,
+      build: scripts.build ? 'npm run build' : defaults.build,
+    };
+  } catch { return defaults; }
+}
+
 // Walks src recursively and collects all file paths.
 function collectFiles(src, files = []) {
   for (const entry of fs.readdirSync(src, { withFileTypes: true })) {
@@ -138,6 +161,26 @@ function updateGitignore(targetDir, setupClaude, setupCopilot) {
   return true;
 }
 
+// Generates AGENTS.md at the project root with detected or default commands.
+function generateAgentsMd(targetDir, setupClaude) {
+  const dest = path.join(targetDir, 'AGENTS.md');
+  if (fs.existsSync(dest)) {
+    console.log('  ⚠  AGENTS.md already exists — skipped');
+    return false;
+  }
+  const cmd = detectCommands(targetDir);
+  const orchestrateCmd = setupClaude ? '/forge-orchestrate' : '/forge/orchestrate';
+  const content = fs.readFileSync(path.join(TEMPLATES_DIR, 'agents', 'AGENTS.md'), 'utf8')
+    .replace('__INSTALL_CMD__', cmd.install)
+    .replace('__DEV_CMD__', cmd.dev)
+    .replace('__TEST_CMD__', cmd.test)
+    .replace('__LINT_CMD__', cmd.lint)
+    .replace('__BUILD_CMD__', cmd.build)
+    .replace('__ORCHESTRATE_CMD__', orchestrateCmd);
+  fs.writeFileSync(dest, content, 'utf8');
+  return true;
+}
+
 function copyTemplate(src, dest) {
   if (fs.existsSync(dest)) {
     console.log(`  ⚠  ${path.basename(dest)} already exists — skipped`);
@@ -194,6 +237,10 @@ async function init(targetDir) {
 
     copyPromptsForCopilot(PROMPTS_DIR, path.join(targetDir, '.github', 'prompts'));
     console.log('  ✓ Slash commands → .github/prompts/forge/ (/forge/orchestrate, /forge/requirements, ...)');
+  }
+
+  if (generateAgentsMd(targetDir, setupClaude)) {
+    console.log('  ✓ AGENTS.md created (cross-tool: Cursor, Codex, Jules, Copilot)');
   }
 
   if (updateGitignore(targetDir, setupClaude, setupCopilot)) {
