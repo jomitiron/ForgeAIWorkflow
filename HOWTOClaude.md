@@ -20,6 +20,16 @@ For installation, see the [README](./README.md).
 
 After running `npx forgeai-workflow init`, agent files are installed into your `.claude/agents/` folder. Claude Code reads these automatically. To invoke an agent, type its `@name` directly in the chat panel — no commands required.
 
+`forgeai init` also creates two files at the project root:
+
+```
+AGENTS.md     ← cross-tool (Cursor, Codex, Jules, Copilot, Claude)
+CLAUDE.md     ← Claude Code workspace instructions
+.claude/
+  agents/
+  commands/
+```
+
 ```
 @orchestrator
 @analyst
@@ -57,14 +67,46 @@ Before any agent writes, modifies, or creates a file, it shows you a Change Repo
 
 ForgeAI enforces four hard gates in the workflow:
 
+> **Spec completeness gate** (Phase 1 → 2): Before architecture starts, Jabari (Orchestrator) validates `design.md` — every FR needs a `GIVEN/WHEN/THEN` criterion, Non-Goals must be non-empty, no vague language. This runs automatically; you do not invoke it manually.
+
 | Checkpoint | Confirmed by | Confirmation message |
 |------------|-------------|---------------------|
+| Spec validated | Jabari (Orchestrator) | `✅ Spec complete — all FRs have acceptance criteria, Non-Goals defined, no vague language` |
 | Tests written | Kofi (Test Engineer) | `✅ Tests written — all failing` |
 | Implementation done | Rashidi (Engineer) | `✅ Implementation complete — all tests passing` |
 | Browser QA done | Neema (QA) | `✅ Browser QA complete` |
 | Deployed | Faraji (DevOps Azure) | `✅ Deployed and running` |
 
 No checkpoint can be cleared by assumption. "Should be fine" does not clear a checkpoint. "Looks good" does not clear a checkpoint. Kofi must run the tests and confirm they are all failing before the Tests written checkpoint clears. Rashidi must run the tests and confirm they all pass before the Implementation done checkpoint clears.
+
+---
+
+## Quality Enforcement
+
+ForgeAI embeds quality constraints at every phase, not just at the end.
+
+### Anti-Slop Contract
+All agents enforce five explicit prohibitions. These live in `CLAUDE.md` and apply to every agent:
+- No comments that explain what the code obviously does
+- No defensive checks (null guards, try/catch) not present in surrounding patterns
+- No type workarounds (`any`, unsafe casts) — resolve type errors properly
+- No patterns not already used in the file being modified
+- No over-engineering: simplest solution that makes tests pass
+
+### Default quality targets
+Imani (Analyst) writes these into `design.md` as binding constraints for Kofi (Test Engineer) and Rashidi (Engineer):
+
+| Target | Default | Override? |
+|--------|---------|-----------|
+| Test coverage | ≥ 85% branch | Yes — tell Imani during requirements |
+| Cyclomatic complexity | ≤ 10 per function (≥ 20 = blocker) | Yes — tell Imani during requirements |
+| Static analysis | 0 critical findings | Yes — tell Imani during requirements |
+
+### Written test plan
+Before Kofi (Test Engineer) writes a single test, they produce a written plan mapping every FR to specific test names. You approve the plan before any code is written.
+
+### Complexity check
+After all tests pass, Rashidi (Engineer) runs a complexity scan on every file they modified. Functions with complexity ≥ 20 block the "Implementation complete" gate.
 
 ---
 
@@ -213,13 +255,32 @@ No checkpoint can be cleared by assumption. "Should be fine" does not clear a ch
 
 > design.md ready.
 >
+> Non-Functional Requirements include:
+>
+> | NFR-Q1 | Quality | Test coverage        | ≥ 85% branch coverage             |
+> | NFR-Q2 | Quality | Cyclomatic complexity | ≤ 10 per function (≥ 20 = blocker) |
+> | NFR-Q3 | Quality | Static analysis      | 0 critical findings before merge   |
+>
+> Quality targets NFR-Q1 through NFR-Q3 are defaults — tell me if you want to adjust any of these.
+>
 > ✅ Requirements complete
+
+---
+
+*Jabari picks up immediately after Imani's gate message and validates the spec before advancing.*
+
+**Jabari:**
+
+> I'll validate the spec before we move to architecture.
+>
+> Checking design.md...
+> ✅ Spec complete — all FRs have acceptance criteria, Non-Goals defined, no vague language. Advancing to architecture.
 
 ---
 
 ### Phase 2 — Architecture (Zuberi)
 
-*Jabari picks up immediately after Imani's gate message.*
+*Jabari shows the Change Report for Phase 2.*
 
 **Jabari:**
 
@@ -634,6 +695,28 @@ No checkpoint can be cleared by assumption. "Should be fine" does not clear a ch
 
 **You:** `yes`
 
+*Before writing any code, Kofi produces a written test plan for your approval.*
+
+**Kofi:**
+
+> Written Test Plan — Kofi (Test Engineer)
+>
+> FR-1: Authors can create and publish posts
+>   - unit: `tests/posts.test.js` → `PostService_createPost_savesToDatabase`
+>   - unit: `tests/posts.test.js` → `PostService_publishPost_setsPublishedFlag`
+>   - integration: `tests/posts.integration.test.js` → `PostsAPI_POST_createPost_returns201`
+>
+> FR-2: Authors can edit existing posts
+>   - unit: `tests/posts.test.js` → `PostService_editPost_updatesContent`
+>   - integration: `tests/posts.integration.test.js` → `PostsAPI_PUT_editPost_returns200`
+>
+> Coverage target: ≥ 85% branch coverage (NFR-Q1)
+> Total: 8 tests planned — 5 unit, 3 integration, 0 E2E
+>
+> Approve this plan?
+
+**You:** `yes`
+
 **Kofi:**
 
 > Change Report — Kofi (Test Engineer)
@@ -750,8 +833,21 @@ No checkpoint can be cleared by assumption. "Should be fine" does not clear a ch
 
 **Rashidi:**
 
+> Running complexity check on modified files...
+>
+> Complexity check:
+>   src/services/postService.js:createPost — complexity 4 ✓
+>   src/services/postService.js:editPost   — complexity 3 ✓
+>   src/routes/posts.js:handleCreate       — complexity 5 ✓
+>   src/routes/posts.js:handleEdit         — complexity 4 ✓
+>
+> All functions ≤ 10. ✓
+
+**Rashidi:**
+
 > ✅ Implementation complete — all tests passing
 > 34 passing, 0 failing
+> Complexity: all functions ≤ 10
 > Files changed: src/controllers/ (4 files), src/middleware/ (2 files), src/routes/index.js, src/db/ (3 files), src/app.js, src/index.js
 
 ---

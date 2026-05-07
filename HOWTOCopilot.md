@@ -80,6 +80,7 @@ ForgeAI also registers prompt files as Copilot slash commands. Use these to jump
 After `npx forgeai-workflow init` (Copilot mode), your project will contain:
 
 ```
+AGENTS.md                          ← cross-tool (Cursor, Codex, Jules, Copilot, Claude)
 .github/
 ├── copilot-instructions.md       — global Copilot workspace instructions
 ├── agents/
@@ -136,9 +137,12 @@ You must say **yes** to proceed. Saying "go ahead", "sure", or "sounds good" als
 
 Gates are hard checkpoints that prevent the next phase from starting until the current one is genuinely complete. The gates are:
 
+> **Spec completeness gate** (Phase 1 → 2): Before architecture starts, Jabari (Orchestrator) validates `design.md` — every FR needs a `GIVEN/WHEN/THEN` criterion, Non-Goals must be non-empty, no vague language. This runs automatically; you do not invoke it manually.
+
 | Gate message | Meaning | Who says it |
 |---|---|---|
 | `✅ Requirements complete` | Requirements approved, design.md written | Imani |
+| `✅ Spec complete — all FRs have acceptance criteria, Non-Goals defined, no vague language` | Spec validated before architecture begins | Jabari (Orchestrator) |
 | `✅ Architecture complete` | Architecture done, ADRs written | Zuberi |
 | `✅ Design complete` | UX specs written for all screens | Zuri |
 | `✅ Tests written — all failing` | Tests written, all failing | Kofi |
@@ -147,6 +151,35 @@ Gates are hard checkpoints that prevent the next phase from starting until the c
 | `✅ Deployed and running` | Deployed, smoke tests passed | Faraji |
 
 "Should be fine", "probably passing", or "looks good" does not clear any gate. The Orchestrator will name the blocker and ask how to proceed.
+
+---
+
+## Quality Enforcement
+
+ForgeAI embeds quality constraints at every phase, not just at the end.
+
+### Anti-Slop Contract
+All agents enforce five explicit prohibitions. These live in `.github/copilot-instructions.md` and apply to every agent:
+- No comments that explain what the code obviously does
+- No defensive checks (null guards, try/catch) not present in surrounding patterns
+- No type workarounds (`any`, unsafe casts) — resolve type errors properly
+- No patterns not already used in the file being modified
+- No over-engineering: simplest solution that makes tests pass
+
+### Default quality targets
+Imani (Analyst) writes these into `design.md` as binding constraints for Kofi (Test Engineer) and Rashidi (Engineer):
+
+| Target | Default | Override? |
+|--------|---------|-----------|
+| Test coverage | ≥ 85% branch | Yes — tell Imani during requirements |
+| Cyclomatic complexity | ≤ 10 per function (≥ 20 = blocker) | Yes — tell Imani during requirements |
+| Static analysis | 0 critical findings | Yes — tell Imani during requirements |
+
+### Written test plan
+Before Kofi (Test Engineer) writes a single test, they produce a written plan mapping every FR to specific test names. You approve the plan before any code is written.
+
+### Complexity check
+After all tests pass, Rashidi (Engineer) runs a complexity scan on every file they modified. Functions with complexity ≥ 20 block the "Implementation complete" gate.
 
 ---
 
@@ -301,15 +334,30 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **You:** `yes`
 
-*Imani writes design.md. The file contains the overview, goals, user stories table, functional requirements table with GIVEN/WHEN/THEN acceptance criteria, non-functional requirements, non-goals, and open questions.*
+*Imani writes design.md. The file contains the overview, goals, user stories table, functional requirements table with GIVEN/WHEN/THEN acceptance criteria, non-functional requirements, non-goals, and open questions. The non-functional requirements section includes three default quality rows:*
+
+```
+| NFR-Q1 | Quality | Test coverage        | ≥ 85% branch coverage             |
+| NFR-Q2 | Quality | Cyclomatic complexity | ≤ 10 per function (≥ 20 = blocker) |
+| NFR-Q3 | Quality | Static analysis      | 0 critical findings before merge   |
+```
 
 **Imani:**
 
 > design.md ready.
 >
+> Quality targets NFR-Q1 through NFR-Q3 are defaults — tell me if you want to adjust any of these.
+>
 > ✅ Requirements complete
 
 *Jabari picks up the gate signal.*
+
+**Jabari:**
+
+> I'll validate the spec before we move to architecture.
+>
+> Checking design.md...
+> ✅ Spec complete — all FRs have acceptance criteria, Non-Goals defined, no vague language. Advancing to architecture.
 
 **Jabari:**
 
@@ -629,6 +677,26 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **Kofi:**
 
+> Written Test Plan — Kofi (Test Engineer)
+>
+> FR-1: Authors can create and publish posts
+>   - unit: `tests/posts.test.js` → `PostService_createPost_savesToDatabase`
+>   - unit: `tests/posts.test.js` → `PostService_publishPost_setsPublishedFlag`
+>   - integration: `tests/posts.integration.test.js` → `PostsAPI_POST_createPost_returns201`
+>
+> FR-2: Authors can edit existing posts
+>   - unit: `tests/posts.test.js` → `PostService_editPost_updatesContent`
+>   - integration: `tests/posts.integration.test.js` → `PostsAPI_PUT_editPost_returns200`
+>
+> Coverage target: ≥ 85% branch coverage (NFR-Q1)
+> Total: 8 tests planned — 5 unit, 3 integration, 0 E2E
+>
+> Approve this plan?
+
+**You:** `yes`
+
+**Kofi:**
+
 > Change Report — Kofi (Test Engineer)
 >
 > Will create / update:
@@ -742,8 +810,21 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **Rashidi:**
 
+> Running complexity check on modified files...
+>
+> Complexity check:
+>   src/services/postService.js:createPost — complexity 4 ✓
+>   src/services/postService.js:editPost   — complexity 3 ✓
+>   src/routes/posts.js:handleCreate       — complexity 5 ✓
+>   src/routes/posts.js:handleEdit         — complexity 4 ✓
+>
+> All functions ≤ 10. ✓
+
+**Rashidi:**
+
 > ✅ Implementation complete — all tests passing
 > 24 passing, 0 failing
+> Complexity: all functions ≤ 10
 > Files changed: src/app.js, src/routes/*.js, src/controllers/*.js, src/services/*.js, src/middleware/auth.middleware.js, src/db/schema.prisma, src/db/client.js
 
 **Jabari:**

@@ -3,7 +3,8 @@
 > AI-first agentic engineering workflow for software engineering projects.
 
 ForgeAI gives your project a team of specialized AI engineering agents that work through a
-structured workflow or can be invoked standalone. Built for **Claude Code** and **GitHub Copilot**.
+structured workflow or can be invoked standalone. Built for **Claude Code** and **GitHub Copilot**,
+with cross-tool support for Cursor, Codex, and Google Jules via `AGENTS.md`.
 
 ---
 
@@ -28,11 +29,11 @@ Full walkthroughs with verbatim agent conversations for every scenario:
 |-------|------|------|-------------------|
 | **Orchestrator** | Jabari | Project coordinator | Runs the workflow, enforces quality checkpoints, routes tasks |
 | **Codebase Docs** | Amina | Documentation | Scans and documents codebases — no assumptions. Architecture health scans. |
-| **Analyst** | Imani | Requirements | PRDs, user stories, acceptance criteria |
+| **Analyst** | Imani | Requirements | PRDs, user stories, acceptance criteria, quality targets |
 | **Architect** | Zuberi | System design | Architecture, ADRs, Mermaid diagrams, API design |
 | **Designer** | Zuri | UX/UI | User flows, screen specs, accessibility |
-| **Test Engineer** | Kofi | TDD | Writes failing tests BEFORE implementation — confirms all tests are failing |
-| **Engineer** | Rashidi | Implementation | Makes failing tests pass — minimal diff, no test changes |
+| **Test Engineer** | Kofi | TDD | Written test plan → failing tests — confirms all failing before handoff |
+| **Engineer** | Rashidi | Implementation | Makes tests pass, runs complexity check — minimal diff |
 | **QA** | Neema | Browser testing | Playwright-driven QA, health scores, bug fix workflow |
 | **DevOps Azure** | Faraji | Delivery | CI/CD, Azure infrastructure, IaC |
 
@@ -46,7 +47,7 @@ Jabari (Orchestrator) guides you through the full engineering lifecycle with har
 any implementation code** — this is non-negotiable.
 
 ```
-Requirements → Architecture → Design → [Tests Failing] → Implementation → [Tests Passing] → QA → Deploy
+Requirements → [Spec check] → Architecture → Design → [Test plan] → Tests → Implementation → [Complexity check] → QA → Deploy
 ```
 
 **Claude Code:**
@@ -119,11 +120,42 @@ Neither Rashidi (Engineer) nor Jabari (Orchestrator) may skip step 2.
 
 ---
 
+## Quality Enforcement
+
+ForgeAI embeds quality constraints at every phase — not just at the end.
+
+**Spec completeness gate** — Before architecture starts, Jabari (Orchestrator) validates `design.md`:
+every FR must have a `GIVEN/WHEN/THEN` acceptance criterion, Non-Goals must be defined, and no vague
+language ("fast", "easy", "better") without a measurable number.
+
+**Default quality targets** — Imani (Analyst) writes these into `design.md` as binding constraints:
+
+| Target | Default |
+|--------|---------|
+| Test coverage | ≥ 85% branch |
+| Cyclomatic complexity | ≤ 10 per function (≥ 20 = blocker) |
+| Static analysis | 0 critical findings before merge |
+
+**Written test plan** — Kofi (Test Engineer) produces a `FR → test type → file → test name` plan
+for every requirement, approved by you before a single test is written.
+
+**Complexity check** — After all tests pass, Rashidi (Engineer) runs a complexity scan on every
+modified file. Functions with complexity ≥ 20 block the completion gate.
+
+**Anti-Slop Contract** — All agents enforce five explicit prohibitions: no obvious comments,
+no unnecessary defensive code, no type workarounds, no pattern drift, no over-engineering.
+
+---
+
 ## What Gets Installed
+
+```
+AGENTS.md                          ← cross-tool (Cursor, Codex, Jules, Copilot, Claude)
+CLAUDE.md                          ← Claude Code workspace instructions
+```
 
 ### Claude Code
 ```
-CLAUDE.md
 .claude/
 ├── agents/
 │   ├── orchestrator.md
@@ -175,10 +207,12 @@ CLAUDE.md
 ## Core Principles
 
 1. **Orchestrator owns the workflow** — agents do not self-assign tasks or skip checkpoints
-2. **Test-first is non-negotiable** — no implementation without confirmed failing tests
+2. **Test-first is non-negotiable** — no implementation without a written, approved test plan and confirmed failing tests
 3. **Smallest possible diff** — Rashidi (Engineer) never reformats or refactors unrelated code
-4. **Design.md is the source of truth** — all agents read it before acting
+4. **Design.md is the source of truth** — all agents read it before acting; quality targets inside it are binding
 5. **Explicit over implicit** — every handoff has a written confirmation message
+6. **Quality is quantified** — coverage, complexity, and static analysis thresholds are set in the spec, enforced by agents
+7. **Anti-slop by default** — explicit prohibitions prevent padding, unnecessary code, and pattern drift
 
 ---
 
