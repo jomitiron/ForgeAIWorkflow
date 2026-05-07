@@ -166,22 +166,30 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 
 **Jabari:**
 
-> 👋 I'm Jabari, your ForgeAI Orchestrator.
+> 👋 I'm **Jabari**, your ForgeAI Orchestrator.
 >
-> Mode: New Project
-> design.md:  ✗ not found
-> tasks.md:   ✗ not found
-> Docs:       ✗ not found
+> I coordinate your AI engineering team from requirements all the way to deployment — making sure the right work happens in the right order, and that nothing ships without every quality checkpoint cleared.
 >
-> No code yet — we'll start from requirements.
+> **Your team:**
+> - **Imani** (Analyst) — turns your idea into a clear, testable spec
+> - **Zuberi** (Architect) — designs the system and records every decision
+> - **Zuri** (Designer) — specs every screen so engineers have zero guesswork
+> - **Kofi** (Test Engineer) — writes failing tests *before* any code is written
+> - **Rashidi** (Engineer) — makes those tests pass, nothing more
+> - **Neema** (QA) — browser-tests the feature before it ships
+> - **Faraji** (DevOps Azure) — gets it running on Azure
+> - **Amina** (Codebase Docs) — documents your codebase and spots structural problems
 >
-> What would you like to do?
->   W · Full workflow from scratch
->   R · Resume from a specific phase
->   P · Run one phase only
->   D · Document existing codebase first (Amina)
->   S · Show team and workflow status
->   ? · All options
+> **The workflow:**
+> 1. Requirements → Imani (Analyst) builds your spec
+> 2. Architecture → Zuberi (Architect) designs the system
+> 3. Design → Zuri (Designer) specs the UI (if there is one)
+> 4. Tests first → Kofi (Test Engineer) writes failing tests — nothing moves until all confirmed failing
+> 5. Build → Rashidi (Engineer) makes them pass — nothing ships until all confirmed passing
+> 5.5 QA → Neema (QA) browser-tests — catches what unit tests miss
+> 6. Deploy → Faraji (DevOps Azure) ships it
+>
+> Looks like a fresh start. What are we building?
 
 *Jabari stops here. He will not do anything until you respond.*
 
@@ -565,7 +573,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 > Will do:
 >   - Read design.md acceptance criteria
 >   - Write failing tests (unit + integration + E2E) for all FRs
->   - Confirm all tests are RED before clearing the gate
+>   - Confirm all tests are failing before proceeding
 > Will NOT touch:
 >   - Implementation code, design.md, or docs
 > Risks:
@@ -584,8 +592,8 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 > 👋 I'm Kofi, your ForgeAI Test Engineer. Tests come first — always.
 >
 > What would you like to do?
->   W · Write failing tests for a feature (RED)
->   V · Validate tests after implementation (GREEN)
+>   W · Write failing tests for a feature (all failing)
+>   V · Validate tests after implementation (all passing)
 >   S · Show test scope for a feature
 >   ? · Show all options
 
@@ -634,7 +642,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 > Will NOT touch:
 >   - Implementation code, design.md, or any non-test files
 > Note:
->   - Tests will fail by design (RED) — this is expected
+>   - Tests will fail by design — this is expected
 >
 > Proceed? (yes / no)
 
@@ -658,7 +666,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 > - FR-005 (categories)   → TC-010, TC-011
 > - FR-006 (public read)  → TC-012 (E2E)
 >
-> Ready for Engineer (Rashidi).
+> Ready for Rashidi (Engineer).
 
 **Jabari:**
 
@@ -1005,8 +1013,8 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator` and press Enter.
 >   Phase 1 — design.md written
 >   Phase 2 — architecture.md + 2 ADRs
 >   Phase 3 — ux-specs.md (5 screens)
->   Phase 4 — 24 tests written, all RED
->   Phase 5 — 24 tests passing, all GREEN
+>   Phase 4 — 24 tests written, all failing
+>   Phase 5 — 24 tests passing, all passing
 >   Phase 5.5 — health score 84/100, 1 bug fixed
 >   Phase 6 — deployed to staging + prod
 >
@@ -1055,22 +1063,30 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **Jabari:**
 
-> 👋 I'm Jabari, your ForgeAI Orchestrator.
+> 👋 I'm **Jabari**, your ForgeAI Orchestrator.
 >
-> Mode: Existing Codebase
-> design.md:  ✗ not found
-> tasks.md:   ✗ not found
-> Docs:       ✗ not found
+> I coordinate your AI engineering team from requirements all the way to deployment — making sure the right work happens in the right order, and that nothing ships without every quality checkpoint cleared.
 >
-> I can see an existing project with no documentation. Amina should document it first — that gives every agent the full picture.
+> **Your team:**
+> - **Imani** (Analyst) — turns your idea into a clear, testable spec
+> - **Zuberi** (Architect) — designs the system and records every decision
+> - **Zuri** (Designer) — specs every screen so engineers have zero guesswork
+> - **Kofi** (Test Engineer) — writes failing tests *before* any code is written
+> - **Rashidi** (Engineer) — makes those tests pass, nothing more
+> - **Neema** (QA) — browser-tests the feature before it ships
+> - **Faraji** (DevOps Azure) — gets it running on Azure
+> - **Amina** (Codebase Docs) — documents your codebase and spots structural problems
 >
-> What would you like to do?
->   W · Full workflow from scratch
->   R · Resume from a specific phase
->   P · Run one phase only
->   D · Document existing codebase first (Amina)
->   S · Show team and workflow status
->   ? · All options
+> **The workflow:**
+> 1. Requirements → Imani (Analyst) builds your spec
+> 2. Architecture → Zuberi (Architect) designs the system
+> 3. Design → Zuri (Designer) specs the UI (if there is one)
+> 4. Tests first → Kofi (Test Engineer) writes failing tests — nothing moves until all confirmed failing
+> 5. Build → Rashidi (Engineer) makes them pass — nothing ships until all confirmed passing
+> 5.5 QA → Neema (QA) browser-tests — catches what unit tests miss
+> 6. Deploy → Faraji (DevOps Azure) ships it
+>
+> I can see an existing codebase with no documentation. I'd recommend Amina (Codebase Docs) documents it first — that gives the whole team full context. Want to do that before we plan new work?
 
 **You:** `D`
 
@@ -1296,20 +1312,30 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 
 **Jabari:**
 
-> 👋 I'm Jabari, your ForgeAI Orchestrator.
+> 👋 I'm **Jabari**, your ForgeAI Orchestrator.
 >
-> Mode: Existing Codebase
-> design.md:  ✓ found
-> tasks.md:   ✗ not found
-> Docs:       ✓ found
+> I coordinate your AI engineering team from requirements all the way to deployment — making sure the right work happens in the right order, and that nothing ships without every quality checkpoint cleared.
 >
-> What would you like to do?
->   W · Full workflow from scratch
->   R · Resume from a specific phase
->   P · Run one phase only
->   D · Document existing codebase first (Amina)
->   S · Show team and workflow status
->   ? · All options
+> **Your team:**
+> - **Imani** (Analyst) — turns your idea into a clear, testable spec
+> - **Zuberi** (Architect) — designs the system and records every decision
+> - **Zuri** (Designer) — specs every screen so engineers have zero guesswork
+> - **Kofi** (Test Engineer) — writes failing tests *before* any code is written
+> - **Rashidi** (Engineer) — makes those tests pass, nothing more
+> - **Neema** (QA) — browser-tests the feature before it ships
+> - **Faraji** (DevOps Azure) — gets it running on Azure
+> - **Amina** (Codebase Docs) — documents your codebase and spots structural problems
+>
+> **The workflow:**
+> 1. Requirements → Imani (Analyst) builds your spec
+> 2. Architecture → Zuberi (Architect) designs the system
+> 3. Design → Zuri (Designer) specs the UI (if there is one)
+> 4. Tests first → Kofi (Test Engineer) writes failing tests — nothing moves until all confirmed failing
+> 5. Build → Rashidi (Engineer) makes them pass — nothing ships until all confirmed passing
+> 5.5 QA → Neema (QA) browser-tests — catches what unit tests miss
+> 6. Deploy → Faraji (DevOps Azure) ships it
+>
+> I can see you've already got a spec. Want to pick up from Architecture (Phase 2), or is there something in the requirements you'd like to revisit first?
 
 **You:** `R`
 
@@ -1338,7 +1364,7 @@ Open VS Code. Open the Copilot Chat panel. Type `@orchestrator`.
 > Will do:
 >   - Read design.md acceptance criteria
 >   - Write failing tests for all FRs (unit + integration + E2E)
->   - Confirm all tests are RED before clearing the gate
+>   - Confirm all tests are failing before proceeding
 > Will NOT touch:
 >   - Implementation code, design.md, or docs
 > Risks:

@@ -80,22 +80,30 @@ No checkpoint can be cleared by assumption. "Should be fine" does not clear a ch
 
 **Jabari:**
 
-> 👋 I'm Jabari, your ForgeAI Orchestrator.
+> 👋 I'm **Jabari**, your ForgeAI Orchestrator.
 >
-> Mode: New Project
-> design.md:  ✗ not found
-> tasks.md:   ✗ not found
-> Docs:       ✗ not found
+> I coordinate your AI engineering team from requirements all the way to deployment — making sure the right work happens in the right order, and that nothing ships without every quality checkpoint cleared.
 >
-> No code yet — we'll start from requirements.
+> **Your team:**
+> - **Imani** (Analyst) — turns your idea into a clear, testable spec
+> - **Zuberi** (Architect) — designs the system and records every decision
+> - **Zuri** (Designer) — specs every screen so engineers have zero guesswork
+> - **Kofi** (Test Engineer) — writes failing tests *before* any code is written
+> - **Rashidi** (Engineer) — makes those tests pass, nothing more
+> - **Neema** (QA) — browser-tests the feature before it ships
+> - **Faraji** (DevOps Azure) — gets it running on Azure
+> - **Amina** (Codebase Docs) — documents your codebase and spots structural problems
 >
-> What would you like to do?
->   W · Full workflow from scratch
->   R · Resume from a specific phase
->   P · Run one phase only
->   D · Document existing codebase first (Amina)
->   S · Show team and workflow status
->   ? · All options
+> **The workflow:**
+> 1. Requirements → Imani (Analyst) builds your spec
+> 2. Architecture → Zuberi (Architect) designs the system
+> 3. Design → Zuri (Designer) specs the UI (if there is one)
+> 4. Tests first → Kofi (Test Engineer) writes failing tests — nothing moves until all confirmed failing
+> 5. Build → Rashidi (Engineer) makes them pass — nothing ships until all confirmed passing
+> 5.5 QA → Neema (QA) browser-tests — catches what unit tests miss
+> 6. Deploy → Faraji (DevOps Azure) ships it
+>
+> Looks like a fresh start. What are we building?
 
 *Jabari is waiting. Nothing will happen until you respond.*
 
@@ -697,7 +705,7 @@ No checkpoint can be cleared by assumption. "Should be fine" does not clear a ch
 
 **Rashidi:**
 
-> 👋 I'm Rashidi, your ForgeAI Engineer. I turn failing tests green with the smallest diff possible.
+> 👋 I'm Rashidi, your ForgeAI Engineer. Tests confirmed — I'll make them pass.
 >
 > What would you like to do?
 >   I · Implement (TDD — requires confirmed failing tests)
@@ -1076,22 +1084,30 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **Jabari:**
 
-> 👋 I'm Jabari, your ForgeAI Orchestrator.
+> 👋 I'm **Jabari**, your ForgeAI Orchestrator.
 >
-> Mode: Existing Codebase
-> design.md:  ✗ not found
-> tasks.md:   ✗ not found
-> Docs:       ✗ not found
+> I coordinate your AI engineering team from requirements all the way to deployment — making sure the right work happens in the right order, and that nothing ships without every quality checkpoint cleared.
 >
-> I can see an existing project with no documentation. Amina should document it first — that gives every agent the full picture.
+> **Your team:**
+> - **Imani** (Analyst) — turns your idea into a clear, testable spec
+> - **Zuberi** (Architect) — designs the system and records every decision
+> - **Zuri** (Designer) — specs every screen so engineers have zero guesswork
+> - **Kofi** (Test Engineer) — writes failing tests *before* any code is written
+> - **Rashidi** (Engineer) — makes those tests pass, nothing more
+> - **Neema** (QA) — browser-tests the feature before it ships
+> - **Faraji** (DevOps Azure) — gets it running on Azure
+> - **Amina** (Codebase Docs) — documents your codebase and spots structural problems
 >
-> What would you like to do?
->   W · Full workflow from scratch
->   R · Resume from a specific phase
->   P · Run one phase only
->   D · Document existing codebase first (Amina)
->   S · Show team and workflow status
->   ? · All options
+> **The workflow:**
+> 1. Requirements → Imani (Analyst) builds your spec
+> 2. Architecture → Zuberi (Architect) designs the system
+> 3. Design → Zuri (Designer) specs the UI (if there is one)
+> 4. Tests first → Kofi (Test Engineer) writes failing tests — nothing moves until all confirmed failing
+> 5. Build → Rashidi (Engineer) makes them pass — nothing ships until all confirmed passing
+> 5.5 QA → Neema (QA) browser-tests — catches what unit tests miss
+> 6. Deploy → Faraji (DevOps Azure) ships it
+>
+> I can see an existing codebase with no documentation. I'd recommend Amina (Codebase Docs) documents it first — that gives the whole team full context. Want to do that before we plan new work?
 
 **You:** `D`
 
@@ -1228,7 +1244,7 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 > - docs/components/projects.md
 > - docs/components/auth.md
 >
-> DOCS COMPLETE
+> ✅ Documentation complete
 >
 > Recommended next steps:
 > - Add these docs to your PR template checklist
@@ -1302,20 +1318,30 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 
 **Jabari:**
 
-> 👋 I'm Jabari, your ForgeAI Orchestrator.
+> 👋 I'm **Jabari**, your ForgeAI Orchestrator.
 >
-> Mode: Existing Codebase
-> design.md:  ✓ found
-> tasks.md:   ✗ not found
-> Docs:       ✓ found (docs/architecture.md, 2 ADRs)
+> I coordinate your AI engineering team from requirements all the way to deployment — making sure the right work happens in the right order, and that nothing ships without every quality checkpoint cleared.
 >
-> What would you like to do?
->   W · Full workflow from scratch
->   R · Resume from a specific phase
->   P · Run one phase only
->   D · Document existing codebase first (Amina)
->   S · Show team and workflow status
->   ? · All options
+> **Your team:**
+> - **Imani** (Analyst) — turns your idea into a clear, testable spec
+> - **Zuberi** (Architect) — designs the system and records every decision
+> - **Zuri** (Designer) — specs every screen so engineers have zero guesswork
+> - **Kofi** (Test Engineer) — writes failing tests *before* any code is written
+> - **Rashidi** (Engineer) — makes those tests pass, nothing more
+> - **Neema** (QA) — browser-tests the feature before it ships
+> - **Faraji** (DevOps Azure) — gets it running on Azure
+> - **Amina** (Codebase Docs) — documents your codebase and spots structural problems
+>
+> **The workflow:**
+> 1. Requirements → Imani (Analyst) builds your spec
+> 2. Architecture → Zuberi (Architect) designs the system
+> 3. Design → Zuri (Designer) specs the UI (if there is one)
+> 4. Tests first → Kofi (Test Engineer) writes failing tests — nothing moves until all confirmed failing
+> 5. Build → Rashidi (Engineer) makes them pass — nothing ships until all confirmed passing
+> 5.5 QA → Neema (QA) browser-tests — catches what unit tests miss
+> 6. Deploy → Faraji (DevOps Azure) ships it
+>
+> I can see you've already got a spec. Want to pick up from Architecture (Phase 2), or is there something in the requirements you'd like to revisit first?
 
 **You:** `R`
 
@@ -1521,7 +1547,7 @@ ForgeAI installed. Open Claude Code and type @orchestrator to begin.
 > - docs/components/resolvers.md
 > - docs/components/auth.md
 >
-> DOCS COMPLETE
+> ✅ Documentation complete
 >
 > Recommended next steps:
 > - Add these docs to your PR template checklist
